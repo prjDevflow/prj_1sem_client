@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projeto ABP</title>
-        <link rel="icon" type="image/png" href="./Imagens/LogoAbaCPS.png">
+    <link rel="icon" type="image/png" href="./Imagens/LogoAbaCPS.png" />
 
     <!-- USAMOS PARA IMPORTAR O ARQUIVO CSS -->
     <link rel="stylesheet" href="./styles/main.css" />
@@ -24,70 +24,113 @@
     <header>
       <div class="header-left">
         <a href="https://fatecjacarei.cps.sp.gov.br">
-          <img src="/client/Imagens/LogoFatec.png" alt="Fatec Jacareí" />
+          <img src="Imagens/LogoFatec.png" alt="Fatec Jacareí" />
         </a>
       </div>
-    
+
       <!-- Menu desktop (visível apenas >700px) -->
       <nav class="header-center desktop-menu">
         <div class="dropdown">
           <button class="dropbtn">Mapa Interativo</button>
           <div class="dropdown-content">
-            <a onclick="loadContentPages(event, 'pages/mapGround.html')" href="#">Térreo</a>
-            <a onclick="loadContentPages(event, 'pages/mapOne.html')" href="#">1º Andar</a>
-            <a onclick="loadContentPages(event, 'pages/mapTwo.html')" href="#">2º Andar</a>
+            <a
+              onclick="loadContentPages(event, 'pages/mapGround.html')"
+              href="#"
+              >Térreo</a
+            >
+            <a onclick="loadContentPages(event, 'pages/mapOne.html')" href="#"
+              >1º Andar</a
+            >
+            <a onclick="loadContentPages(event, 'pages/mapTwo.html')" href="#"
+              >2º Andar</a
+            >
           </div>
         </div>
-    
+
         <div class="dropdown">
           <button class="dropbtn">Cursos</button>
           <div class="dropdown-content">
-            <a onclick="loadContentPages(event, 'pages/dsm.html')" href="#">DSM</a>
-            <a onclick="loadContentPages(event, 'pages/geo.html')" href="#">GEO</a>
-            <a onclick="loadContentPages(event, 'pages/rh.html')" href="#">MAR</a>
+            <a onclick="loadContentPages(event, 'pages/dsm.html')" href="#"
+              >DSM</a
+            >
+            <a onclick="loadContentPages(event, 'pages/geo.html')" href="#"
+              >GEO</a
+            >
+            <a onclick="loadContentPages(event, 'pages/rh.html')" href="#"
+              >MAR</a
+            >
           </div>
         </div>
       </nav>
-    
+
       <div class="header-right desktop-menu">
-        <a href="#" class="area-restrita" onclick="loadContentPages(event, 'pages/login.html')">
+        <a
+          href="#"
+          class="area-restrita"
+          onclick="loadContentPages(event, 'pages/login.html')"
+        >
           <i class="fa fa-user"></i> Área Restrita
         </a>
       </div>
-    
+
       <div class="hamburger-menu mobile-menu">
         <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
-      
+
         <div class="hamburger-dropdown" id="hamburgerDropdown">
           <!-- Área Restrita -->
-          <a class="menu-link" href="#" onclick="loadContentPages(event, 'pages/login.html')">Área Restrita</a>
-          
+          <a
+            class="menu-link"
+            href="#"
+            onclick="loadContentPages(event, 'pages/login.html')"
+            >Área Restrita</a
+          >
+
           <!-- Submenu Mapa Interativo -->
           <div class="hamburger-submenu">
-            <button class="submenu-toggle" onclick="toggleSubmenu('mapaSubmenu')">Mapa Interativo ▾</button>
+            <button
+              class="submenu-toggle"
+              onclick="toggleSubmenu('mapaSubmenu')"
+            >
+              Mapa Interativo ▾
+            </button>
             <div class="submenu-items" id="mapaSubmenu">
-              <a href="#" onclick="loadContentPages(event, 'pages/mapGround.html')">Térreo</a>
-              <a href="#" onclick="loadContentPages(event, 'pages/mapOne.html')">1º Andar</a>
-              <a href="#" onclick="loadContentPages(event, 'pages/mapTwo.html')">2º Andar</a>
+              <a
+                href="#"
+                onclick="loadContentPages(event, 'pages/mapGround.html')"
+                >Térreo</a
+              >
+              <a href="#" onclick="loadContentPages(event, 'pages/mapOne.html')"
+                >1º Andar</a
+              >
+              <a href="#" onclick="loadContentPages(event, 'pages/mapTwo.html')"
+                >2º Andar</a
+              >
             </div>
           </div>
-      
+
           <!-- Submenu Cursos -->
           <div class="hamburger-submenu">
-            <button class="submenu-toggle" onclick="toggleSubmenu('cursosSubmenu')">Cursos ▾</button>
+            <button
+              class="submenu-toggle"
+              onclick="toggleSubmenu('cursosSubmenu')"
+            >
+              Cursos ▾
+            </button>
             <div class="submenu-items" id="cursosSubmenu">
-              <a href="#" onclick="loadContentPages(event, 'pages/dsm.html')">DSM</a>
-              <a href="#" onclick="loadContentPages(event, 'pages/geo.html')">GEO</a>
-              <a href="#" onclick="loadContentPages(event, 'pages/rh.html')">MAR</a>
+              <a href="#" onclick="loadContentPages(event, 'pages/dsm.html')"
+                >DSM</a
+              >
+              <a href="#" onclick="loadContentPages(event, 'pages/geo.html')"
+                >GEO</a
+              >
+              <a href="#" onclick="loadContentPages(event, 'pages/rh.html')"
+                >MAR</a
+              >
             </div>
           </div>
-      
         </div>
       </div>
-      
-      
     </header>
-    
 
     <!-- CONTEUDO PRINCIPAL -->
     <main id="mainContent"></main>
@@ -100,14 +143,14 @@
         <div style="display: flex; flex-direction: column; align-items: center">
           <a href="https://sp.gov.br/sp"
             ><img
-              src="/client/Imagens/LogoSaoPaulo.png"
+              src="Imagens/LogoSaoPaulo.png"
               alt="Governo de São Paulo"
               width="250"
               height="80"
           /></a>
           <a href="https://www.cps.sp.gov.br"
             ><img
-              src="/client/Imagens/LogoCentroPauloSouza.png"
+              src="Imagens/LogoCentroPauloSouza.png"
               alt="Centro Paulo Souza"
               width="135"
               height="90"
@@ -175,21 +218,21 @@
         <div class="social-icons">
           <a href="https://www.facebook.com/jacareifatec/?locale=pt_BR"
             ><img
-              src="/client/Imagens/LogoFace.png"
+              src="Imagens/LogoFace.png"
               alt="Facebook Fatec"
               width="45"
               height="45"
           /></a>
           <a href="https://www.instagram.com/fatec_jacarei/"
             ><img
-              src="/client/Imagens/LogoInsta.png"
+              src="Imagens/LogoInsta.png"
               alt="Instagram Fatec"
               width="40"
               height="40"
           /></a>
           <a href="https://br.linkedin.com/in/fatec-jacareí"
             ><img
-              src="/client/Imagens/LogoLinke.png"
+              src="Imagens/LogoLinke.png"
               alt="Linkedin Fatec"
               width="35"
               height="35"
@@ -197,7 +240,5 @@
         </div>
       </div>
     </footer>
-
-    
   </body>
 </html>

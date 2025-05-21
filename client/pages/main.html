@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <div class="contMain">
+      <div class="section-header">
+        <h2>Horário de Aulas</h2>
+      </div>
+      <section class="container">
+        <!-- Card 1 -->
+        <div class="cardCurso">
+          <img
+            src="Imagens/imgMarh.png"
+            alt="Meio Ambiente e Recursos Hídricos"
+          />
+          <div class="texto-simples">Meio Ambiente e Recursos Hídricos</div>
+          <button
+            class="btnPrimary widthBtn"
+            onclick="loadContentPages(event, 'pages/rh.html')"
+          >
+            Consultar grade <span class="seta">→</span>
+          </button>
+        </div>
 
-<body>
-  <div class="contMain">
-    <div class="section-header">
-      <h2>Horário de Aulas</h2>
+        <!-- Card 2 -->
+        <div class="cardCurso">
+          <img
+            src="Imagens/imgDsm.png"
+            alt="Desenvolvimento de Softwares Multiplataformas"
+          />
+          <div class="texto-simples">
+            Desenvolvimento de Softawares Multiplataformas
+          </div>
+          <button
+            class="btnPrimary widthBtn"
+            onclick="loadContentPages(event, 'pages/dsm.html')"
+          >
+            Consultar grade <span class="seta">→</span>
+          </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="cardCurso">
+          <img src="Imagens/imgGeo.png" alt="Geoprocessamento" />
+          <div class="texto-simples">
+            <div class="text-false">asasasasasasasasasasaasa</div>
+            Geoprocessamento
+          </div>
+          <button
+            class="btnPrimary widthBtn"
+            onclick="loadContentPages(event, 'pages/geo.html')"
+          >
+            Consultar grade <span class="seta">→</span>
+          </button>
+        </div>
+      </section>
     </div>
-    <section class="container">
-      <!-- Card 1 -->
-      <div class="cardCurso">
-        <img src="/client/Imagens/imgMarh.png" alt="Meio Ambiente e Recursos Hídricos" />
-        <div class="texto-simples">Meio Ambiente e Recursos Hídricos</div>  
-        <button class="btnPrimary widthBtn" onclick="loadContentPages(event, 'pages/rh.html')">
-          Consultar grade <span class="seta">→</span>
-        </button>
-      </div>
-  
-      <!-- Card 2 -->
-      <div class="cardCurso">
-        <img src="/client/Imagens/imgDsm.png" alt="Desenvolvimento de Softwares Multiplataformas" />
-        <div class="texto-simples">Desenvolvimento de Softawares Multiplataformas</div> 
-        <button class="btnPrimary widthBtn" onclick="loadContentPages(event, 'pages/dsm.html')">
-          Consultar grade <span class="seta">→</span>
-        </button>
-      </div>
-  
-      <!-- Card 3 -->
-      <div class="cardCurso">
-        <img src="/client/Imagens/imgGeo.png" alt="Geoprocessamento" />
-        <div class="texto-simples"><div class="text-false"> asasasasasasasasasasaasa </div>Geoprocessamento</div> 
-        <button class="btnPrimary widthBtn" onclick="loadContentPages(event, 'pages/geo.html')">
-          Consultar grade <span class="seta">→</span>
-        </button>
-      </div>
-    </section>
-  </div>
-</body>
-
+  </body>
 </html>

@@ -33,7 +33,7 @@ function loadContentPages(event, urlPage) {
       const scriptsToLoad = [
         "scripts/dialog.js",
         "scripts/accordion.js",
-        "scripts/login.js",
+        // "scripts/login.js",
         "scripts/btnFiltro.js",
         "scripts/renderAulaSala.js",
         "scripts/renderDisciplinas.js",
@@ -138,64 +138,40 @@ function initLoginPage() {
     }
   });
   // Dados dos submenus do dropdown "Mapa Interativo"
-const mapaItens = [
-  { label: "Térreo", url: "pages/mapGround.html" },
-  { label: "1º Andar", url: "pages/mapOne.html" },
-  { label: "2º Andar", url: "pages/mapTwo.html" },
-];
+  const mapaItens = [
+    { label: "Térreo", url: "pages/mapGround.html" },
+    { label: "1º Andar", url: "pages/mapOne.html" },
+    { label: "2º Andar", url: "pages/mapTwo.html" },
+  ];
 
-window.addEventListener("DOMContentLoaded", () => {
-  const submenuContainer = document.getElementById("mapaSubmenu");
+  window.addEventListener("DOMContentLoaded", () => {
+    const submenuContainer = document.getElementById("mapaSubmenu");
 
-  mapaItens.forEach((item) => {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.textContent = item.label;
-    link.onclick = (event) => {
-      event.preventDefault();
-      loadContentPages(event, item.url);
-    };
-    submenuContainer.appendChild(link);
+    mapaItens.forEach((item) => {
+      const link = document.createElement("a");
+      link.href = "#";
+      link.textContent = item.label;
+      link.onclick = (event) => {
+        event.preventDefault();
+        loadContentPages(event, item.url);
+      };
+      submenuContainer.appendChild(link);
+    });
   });
-});
 
-// Função placeholder para carregar conteúdo
-function loadContentPages(event, urlPage) {
-  if (event) {
-    event.preventDefault();
+  // Função placeholder para carregar conteúdo
+  function loadContentPages(event, urlPage) {
+    if (event) {
+      event.preventDefault();
+    }
   }
-  // Aqui você coloca sua lógica de carregar conteúdo, por enquanto só um alerta
-  alert("Carregando a página: " + urlPage);
-  // Substitua isso pelo fetch real do seu projeto
-}
-function toggleMenu() {
-  const dropdown = document.getElementById("hamburgerDropdown");
-  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
-
-// Fecha o menu ao clicar fora
-window.addEventListener("click", function (event) {
-  const dropdown = document.getElementById("hamburgerDropdown");
-  const button = document.querySelector(".hamburger-btn");
-
-  if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-    dropdown.style.display = "none";
-  }
-});
-}
-   // Abre ou fecha o menu hamburguer
-   function toggleMenu() {
+  function toggleMenu() {
     const dropdown = document.getElementById("hamburgerDropdown");
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
   }
 
-  // Abre ou fecha os submenus ao clicar
-  function toggleSubmenu(id) {
-    const submenu = document.getElementById(id);
-    submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
-  }
-
-  // Fecha o menu quando clicar fora dele
+  // Fecha o menu ao clicar fora
   window.addEventListener("click", function (event) {
     const dropdown = document.getElementById("hamburgerDropdown");
     const button = document.querySelector(".hamburger-btn");
@@ -204,19 +180,41 @@ window.addEventListener("click", function (event) {
       dropdown.style.display = "none";
     }
   });
+}
+// Abre ou fecha o menu hamburguer
+function toggleMenu() {
+  const dropdown = document.getElementById("hamburgerDropdown");
+  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+}
 
-  // Fecha o menu dropdown ao clicar em uma opção
-  function closeDropdown() {
-    const dropdown = document.getElementById("hamburgerDropdown");
-    dropdown.style.display = "none"; // Fecha o menu
+// Abre ou fecha os submenus ao clicar
+function toggleSubmenu(id) {
+  const submenu = document.getElementById(id);
+  submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
+}
+
+// Fecha o menu quando clicar fora dele
+window.addEventListener("click", function (event) {
+  const dropdown = document.getElementById("hamburgerDropdown");
+  const button = document.querySelector(".hamburger-btn");
+
+  if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.style.display = "none";
   }
+});
 
-  // Adiciona o fechamento do dropdown ao clicar nas opções do menu
-  document.querySelectorAll('.hamburger-dropdown a').forEach(item => {
-    item.addEventListener('click', closeDropdown);
-  });
+// Fecha o menu dropdown ao clicar em uma opção
+function closeDropdown() {
+  const dropdown = document.getElementById("hamburgerDropdown");
+  dropdown.style.display = "none"; // Fecha o menu
+}
 
-  // Adiciona o fechamento do submenu ao clicar nas opções do submenu
-  document.querySelectorAll('.submenu-items a').forEach(item => {
-    item.addEventListener('click', closeDropdown);
-  });
+// Adiciona o fechamento do dropdown ao clicar nas opções do menu
+document.querySelectorAll(".hamburger-dropdown a").forEach((item) => {
+  item.addEventListener("click", closeDropdown);
+});
+
+// Adiciona o fechamento do submenu ao clicar nas opções do submenu
+document.querySelectorAll(".submenu-items a").forEach((item) => {
+  item.addEventListener("click", closeDropdown);
+});
