@@ -50,3 +50,23 @@ function confirmarExclusao() {
 
   fecharDialogConfirmacao(); // Fecha o modal depois de excluir
 }
+
+// BOTÃO FIXO
+
+const botoes = document.querySelectorAll('.dias-da-semana button');
+
+botoes.forEach(botao => {
+  botao.addEventListener('click', () => {
+    // Se já está ativo, remove e sai
+    if (botao.classList.contains('ativo')) {
+      botao.classList.remove('ativo');
+      return;
+    }
+
+    // Remove 'ativo' de todos os outros
+    botoes.forEach(b => b.classList.remove('ativo'));
+
+    // Adiciona no clicado
+    botao.classList.add('ativo');
+  });
+});
