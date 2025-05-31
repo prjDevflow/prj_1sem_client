@@ -48,6 +48,11 @@ h2 {
   font-size: 1.8rem;
   color: var(--color-rh);
 }
+#grade {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: static !important;
+}
 
 .card-grade {
   display: flex;
