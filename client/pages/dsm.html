@@ -60,34 +60,54 @@
         <!-- FILTRO -->
         <div class="cursoSeparator bcgDsm">
           <div class="dropdown-curso">
-            <button class="btn-menu">
-              FILTRO
-              <i class="fa-solid fa-chevron-down fa-sm" style="margin-left: 12px"></i>
+            <button class="btn-menu" onclick="Filtro('Desenvolvimento de Sistema Multiplataformas')">
+              FILTRO 
+              <i
+                class="fa-solid fa-chevron-down fa-sm"
+                style="margin-left: 12px"
+              ></i>
             </button>
-            <div class="menu-curso bcgDsm">
-              <!-- Período Noturno -->
+            <!-- <div class="menu-curso bcgDsm">
               <div class="sub-menu-curso">
                 <button class="btn-periodo" data-periodo="noturno">
                   NOTURNO
                 </button>
                 <div id="drop_noturno" class="sub-sub-menu-curso">
-                  <button class="button-periodo" onclick="buscaTurma('noturno', '1DSM')">
+                  <button
+                    class="button-periodo"
+                    onclick="buscaTurma('Noturno', '2DSM')"
+                  >
                     1DSM
                   </button>
-                  <button class="button-periodo" onclick="buscaTurma('noturno', '1DSM')">
+                  <button
+                    class="button-periodo"
+                    onclick="buscaTurma('noturno', '1DSM')"
+                  >
                     2DSM
                   </button>
-                  <button class="button-periodo" onclick="buscaTurma('noturno', '1DSM')">
+                  <button
+                    class="button-periodo"
+                    onclick="buscaTurma('noturno', '1DSM')"
+                  >
                     3DSM
                   </button>
-                  <button class="button-periodo" onclick="buscaTurma('noturno', '1DSM')">
+                  <button
+                    class="button-periodo"
+                    onclick="buscaTurma('noturno', '1DSM')"
+                  >
                     4DSM
                   </button>
-                  <button class="button-periodo" onclick="buscaTurma('noturno', '1DSM')">
+                  <button
+                    class="button-periodo"
+                    onclick="buscaTurma('noturno', '1DSM')"
+                  >
                     5DSM
                   </button>
                 </div>
               </div>
+            </div> -->
+            <div class="menu-curso bcgDsm" id="menuCursos">
+              <!-- Turnos e turmas serão inseridos aqui -->
             </div>
           </div>
         </div>
@@ -106,7 +126,7 @@
               <table class="table">
                 <thead>
                   <tr class="bcgDsm" id="theadTabela">
-                    <th class="bcgDsm">Horário</th>
+                    <!-- <th class="bcgDsm">Horário</th> -->
                     <!-- horarios -->
                   </tr>
                 </thead>
@@ -133,6 +153,10 @@
               </button>
             </div>
           </section>
+        </section>
+
+        <section id="mensagemErro" class="card-grade hidden ">
+          <h1 id="mensagemTexto">Nenhuma aula encontrada.</h1>
         </section>
       </section>
     </section>
