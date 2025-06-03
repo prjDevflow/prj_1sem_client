@@ -9,12 +9,11 @@
 
 <body>
   <section class="andarContainer">
-    <div class="btnHome">
-      <button onclick="loadContentPages(event, 'pages/main.html')">
-        <i class="fa-solid fa-chevron-left fa-sm"></i>
-        Voltar
-      </button>
-    </div>
+          <div class="btnHome">
+            <button onclick="loadContentPages(event, 'pages/main.html')">
+              Voltar
+            </button>
+          </div>
     <!-- NAVEGAÇÃO ENTRE AS PÁGINAS -->
     <nav>
       <button onclick="loadContentPages(event, 'pages/mapGround.html')">
@@ -32,43 +31,25 @@
 
       <!-- BOTEOS PARA INTERATIVIDADE COM SALAS -->
       <button class="sala sala102" onclick="openDialog('dialogSala', 'idTitleSala', '102 - Sala de Aula'), buscaAulaSala(102, 'Segunda-feira')">
-        Sala de Aula
-        <br> 102
       </button>
       <button class="sala sala104" onclick="openDialog('dialogSala', 'idTitleSala', '104 - Sala de Aula'), buscaAulaSala(104, 'Segunda-feira')">
-        Sala de Aula
-        <br> 104
       </button>
       <button class="sala sala106" onclick="openDialog('dialogSala', 'idTitleSala', '106 - Sala de Aula'), buscaAulaSala(106, 'Segunda-feira')">
-        Sala de Aula
-        <br> 106
       </button>
 
       <button class="sala sala101" onclick="openDialog('dialogSala', 'idTitleSala', '101 - Lab. de Informática'), buscaAulaSala(101, 'Segunda-feira')">
-        Lab. de Informática
-        <br> 101
       </button>
       <button class="sala sala103" onclick="openDialog('dialogSala', 'idTitleSala', '103 - Lab. de Informática'), buscaAulaSala(103, 'Segunda-feira')">
-        Lab. de Informática
-        <br> 103
       </button>
       <button class="sala sala105" onclick="openDialog('dialogSala', 'idTitleSala', '105 - Lab. de Informática'), buscaAulaSala(105, 'Segunda-feira')">
-        Lab. de Informática
-        <br> 105
       </button>
       <button class="sala sala107" onclick="openDialog('dialogSala', 'idTitleSala', '107 - Lab. de Informática'), buscaAulaSala(107, 'Segunda-feira')">
-        Lab. de Informática
-        <br> 107
       </button>
 
       <button class="sala sala108" onclick="openDialog('dialogSala', 'idTitleSala', '108 - Lab. de Informática'), buscaAulaSala(108, 'Segunda-feira')">
-        Lab. de Informática
-        <br> 108
       </button>
 
       <button class="sala sala110" onclick="openDialog('dialogSala', 'idTitleSala', '110 - Sala Maker'), buscaAulaSala(110, 'Segunda-feira')">
-        Sala Maker
-        <br> 110
       </button>
     </section>
     <script src="../scripts/renderAulaSala.js"></script>

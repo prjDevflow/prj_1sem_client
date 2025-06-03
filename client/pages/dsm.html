@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <style>
+    .button-periodo {
+      background-color: blueviolet;
+    }
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-</head>
-<style>
-  .button-periodo {
-    background-color: blueviolet;
-  }
+    .cursoTitle h2 {
+      color: blueviolet;
+    }
 
-  .cursoTitle h2 {
-    color: blueviolet;
-  }
+    .cursoDivider {
+      background-color: blueviolet;
+    }
 
-  .cursoDivider {
-    background-color: blueviolet;
-  }
+    .table th {
+      background-color: blueviolet;
+    }
 
-  .table th {
-    background-color: blueviolet;
-  }
+    .professores h3 {
+      color: blueviolet;
+    }
+  </style>
 
-  .professores h3 {
-    color: blueviolet;
-  }
-</style>
-
-<body>
-  <section class="contCursos">
-    <section class="cursoSection">
-      <!-- INFO CURSO -->
-      <section class="card-grade">
-        <div class="btnHome">
-          <button onclick="loadContentPages(event, 'pages/main.html')">
-            <i class="fa-solid fa-chevron-left fa-sm"></i>
-            Voltar
-          </button>
-        </div>
-        <div class="cursoTitle">
-          <img class="imgCurso" src="Imagens/imgDsm.png" />
-          <h2>Desenvolvimento de Software Multiplaforma</h2>
-        </div>
-        <div class="cursoDivider bcgDsm"></div>
-        <p class="cursoText">
-          O egresso do Curso Superior de Tecnologia em Desenvolvimento de
-          Software Multiplataforma tem como perfil o profissional que projeta,
-          desenvolve e testa software para múltiplas plataformas, aplicações
-          em Nuvem e Internet das Coisas. Seleciona e aplica conceitos,
-          métodos e tecnologias de Linguagens de Programação, Banco de Dados,
-          Engenharia de Software, Segurança da Informação e Inteligência
-          Artificial, propondo soluções tecnológicas. Realiza análise
-          estatística de dados para apoiar a tomada de decisão. Coordena
-          projetos e equipes de desenvolvimento de software.
-        </p>
-        <!-- FILTRO -->
-        <div class="cursoSeparator bcgDsm">
-          <div class="dropdown-curso">
-            <button class="btn-menu" onclick="Filtro('Desenvolvimento de Sistema Multiplataformas')">
-              FILTRO 
-              <i
-                class="fa-solid fa-chevron-down fa-sm"
-                style="margin-left: 12px"
-              ></i>
+  <body>
+    <section class="contCursos">
+      <section class="cursoSection">
+        <!-- INFO CURSO -->
+        <section class="card-grade">
+          <div class="btnHome">
+            <button onclick="loadContentPages(event, 'pages/main.html')">
+              <i class="fa-solid fa-chevron-left fa-sm"></i>
+              Voltar
             </button>
-            <!-- <div class="menu-curso bcgDsm">
+          </div>
+          <div class="cursoTitle">
+            <img class="imgCurso" src="Imagens/imgDsm.png" />
+            <h2>Desenvolvimento de Software Multiplaforma</h2>
+          </div>
+          <div class="cursoDivider bcgDsm"></div>
+          <p class="cursoText">
+            O egresso do Curso Superior de Tecnologia em Desenvolvimento de
+            Software Multiplataforma tem como perfil o profissional que projeta,
+            desenvolve e testa software para múltiplas plataformas, aplicações
+            em Nuvem e Internet das Coisas. Seleciona e aplica conceitos,
+            métodos e tecnologias de Linguagens de Programação, Banco de Dados,
+            Engenharia de Software, Segurança da Informação e Inteligência
+            Artificial, propondo soluções tecnológicas. Realiza análise
+            estatística de dados para apoiar a tomada de decisão. Coordena
+            projetos e equipes de desenvolvimento de software.
+          </p>
+          <!-- FILTRO -->
+          <div class="cursoSeparator bcgDsm">
+            <div class="dropdown-curso">
+              <button
+                class="btn-menu"
+                onclick="Filtro('Desenvolvimento de Sistema Multiplataformas')"
+              >
+                FILTRO
+                <i
+                  class="fa-solid fa-chevron-down fa-sm"
+                  style="margin-left: 12px"
+                ></i>
+              </button>
+              <!-- <div class="menu-curso bcgDsm">
               <div class="sub-menu-curso">
                 <button class="btn-periodo" data-periodo="noturno">
                   NOTURNO
@@ -106,14 +108,14 @@
                 </div>
               </div>
             </div> -->
-            <div class="menu-curso bcgDsm" id="menuCursos">
-              <!-- Turnos e turmas serão inseridos aqui -->
+              <div class="menu-curso bcgDsm" id="menuCursos">
+                <!-- Turnos e turmas serão inseridos aqui -->
+              </div>
             </div>
           </div>
-        </div>
-        <script src="../scripts/renderDisciplinas.js"></script>
-      </section>
-      <!-- GRADE HORARIOS -->
+          <script src="../scripts/renderDisciplinas.js"></script>
+        </section>
+        <!-- GRADE HORARIOS -->
         <section id="grade" class="card-grade hidden">
           <section class="contTable">
             <!-- TURMA -->
@@ -146,21 +148,27 @@
                 <div>Algoritmo e Lógica a de Programação: Arley</div>
                 <div>Desenvolvimento Web: Henrique Louro</div>
               </section>
-            <div class="btnDiv">
-              <button id="btnBaixarPDF" onclick="baixarPDF()" class="download-btn">
-                Baixar PDF
-                <i class="fa-solid fa-arrow-down" style="margin-left: 5px"></i>
-              </button>
-            </div>
+              <div class="btnDiv">
+                <button
+                  id="btnBaixarPDF"
+                  onclick="baixarPDF()"
+                  class="download-btn"
+                >
+                  Baixar PDF
+                  <i
+                    class="fa-solid fa-arrow-down"
+                    style="margin-left: 5px"
+                  ></i>
+                </button>
+              </div>
+            </section>
           </section>
-        </section>
 
-        <section id="mensagemErro" class="card-grade hidden ">
-          <h1 id="mensagemTexto">Nenhuma aula encontrada.</h1>
+          <section id="mensagemErro" class="card-grade hidden">
+            <h1 id="mensagemTexto">Nenhuma aula encontrada.</h1>
+          </section>
         </section>
       </section>
     </section>
-  </section>
-</body>
-
+  </body>
 </html>
