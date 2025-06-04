@@ -62,7 +62,7 @@ input[type="password"] {
   padding: 8px;
 }
  
-button {
+.button-enviar {
   width: 100%;
   padding: 12px;
   background: var(--secondary-color);
@@ -74,7 +74,7 @@ button {
   transition: 0.3s;
 }
  
-button:hover {
+.button-.button-enviar {
   background: var(--hover-color);
 }
  
