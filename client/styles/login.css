@@ -62,7 +62,7 @@ input[type="password"] {
   padding: 8px;
 }
  
-button {
+/* button {
   width: 100%;
   padding: 12px;
   background: var(--secondary-color);
@@ -76,7 +76,7 @@ button {
  
 button:hover {
   background: var(--hover-color);
-}
+} */
  
 .obs {
   margin-top: 20px;

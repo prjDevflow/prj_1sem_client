@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Curso DSM</title>
+
+    <!-- Libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Seu script com defer para garantir que Filtro() exista ao clicar -->
+    <script src="../scripts/renderGrade.js" defer></script>
+
+    <style>
+      .button-periodo {
+        background-color: blueviolet;
+      }
+
+      .cursoTitle h2 {
+        color: blueviolet;
+      }
+
+      .cursoDivider {
+        background-color: blueviolet;
+      }
+
+      .table th {
+        background-color: blueviolet;
+      }
+
+      .professores h3 {
+        color: blueviolet;
+      }
+    </style>
   </head>
-  <style>
-    .button-periodo {
-      background-color: blueviolet;
-    }
-
-    .cursoTitle h2 {
-      color: blueviolet;
-    }
-
-    .cursoDivider {
-      background-color: blueviolet;
-    }
-
-    .table th {
-      background-color: blueviolet;
-    }
-
-    .professores h3 {
-      color: blueviolet;
-    }
-  </style>
 
   <body>
     <section class="contCursos">
@@ -40,11 +45,14 @@
               Voltar
             </button>
           </div>
+
           <div class="cursoTitle">
             <img class="imgCurso" src="Imagens/imgDsm.png" />
-            <h2>Desenvolvimento de Software Multiplaforma</h2>
+            <h2>Desenvolvimento de Software Multiplataforma</h2>
           </div>
+
           <div class="cursoDivider bcgDsm"></div>
+
           <p class="cursoText">
             O egresso do Curso Superior de Tecnologia em Desenvolvimento de
             Software Multiplataforma tem como perfil o profissional que projeta,
@@ -56,12 +64,13 @@
             estatística de dados para apoiar a tomada de decisão. Coordena
             projetos e equipes de desenvolvimento de software.
           </p>
+
           <!-- FILTRO -->
           <div class="cursoSeparator bcgDsm">
             <div class="dropdown-curso">
               <button
                 class="btn-menu"
-                onclick="Filtro('Desenvolvimento de Sistema Multiplataformas')"
+                onclick="Filtro('Desenvolvimento de Software Multiplataforma')"
               >
                 FILTRO
                 <i
@@ -69,52 +78,14 @@
                   style="margin-left: 12px"
                 ></i>
               </button>
-              <!-- <div class="menu-curso bcgDsm">
-              <div class="sub-menu-curso">
-                <button class="btn-periodo" data-periodo="noturno">
-                  NOTURNO
-                </button>
-                <div id="drop_noturno" class="sub-sub-menu-curso">
-                  <button
-                    class="button-periodo"
-                    onclick="buscaTurma('Noturno', '2DSM')"
-                  >
-                    1DSM
-                  </button>
-                  <button
-                    class="button-periodo"
-                    onclick="buscaTurma('noturno', '1DSM')"
-                  >
-                    2DSM
-                  </button>
-                  <button
-                    class="button-periodo"
-                    onclick="buscaTurma('noturno', '1DSM')"
-                  >
-                    3DSM
-                  </button>
-                  <button
-                    class="button-periodo"
-                    onclick="buscaTurma('noturno', '1DSM')"
-                  >
-                    4DSM
-                  </button>
-                  <button
-                    class="button-periodo"
-                    onclick="buscaTurma('noturno', '1DSM')"
-                  >
-                    5DSM
-                  </button>
-                </div>
-              </div>
-            </div> -->
+
               <div class="menu-curso bcgDsm" id="menuCursos">
                 <!-- Turnos e turmas serão inseridos aqui -->
               </div>
             </div>
           </div>
-          <script src="../scripts/renderDisciplinas.js"></script>
         </section>
+ 
         <!-- GRADE HORARIOS -->
         <section id="grade" class="card-grade hidden">
           <section class="contTable">
@@ -123,20 +94,17 @@
               <h1>1 Dsm</h1>
               <p>Turno: Diurno</p>
             </section>
+
             <!-- TABELA -->
             <div class="table-container">
               <table class="table">
                 <thead>
-                  <tr class="bcgDsm" id="theadTabela">
-                    <!-- <th class="bcgDsm">Horário</th> -->
-                    <!-- horarios -->
-                  </tr>
+                  <tr class="bcgDsm" id="theadTabela"></tr>
                 </thead>
-                <tbody id="tbodyDisciplinas">
-                  <!-- disciplinas -->
-                </tbody>
+                <tbody id="tbodyDisciplinas"></tbody>
               </table>
             </div>
+
             <!-- PROFESSORES -->
             <section class="info">
               <section class="professores">
@@ -145,7 +113,7 @@
                 <div>Sistemas Operacionais e Redes - Egydio</div>
                 <div>Modelagem de Banco de Dados - Marcelo Sudo</div>
                 <div>Design Digital - Marcelo Sudo</div>
-                <div>Algoritmo e Lógica a de Programação: Arley</div>
+                <div>Algoritmo e Lógica de Programação: Arley</div>
                 <div>Desenvolvimento Web: Henrique Louro</div>
               </section>
               <div class="btnDiv">
@@ -172,5 +140,3 @@
     </section>
   </body>
 </html>
-
-          <!-- TESTE -->

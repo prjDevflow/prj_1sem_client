@@ -36,7 +36,7 @@ function loadContentPages(event, urlPage) {
         // "scripts/login.js",
         "scripts/btnFiltro.js",
         "scripts/renderAulaSala.js",
-        "scripts/renderDisciplinas.js",
+        "scripts/renderGrade.js",
         "scripts/loadSubMenus.js"
       ];
 
