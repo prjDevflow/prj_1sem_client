@@ -54,6 +54,7 @@ header {
 .header-left img {
   height: 50px;
   width: auto;
+  margin-top: 15px;
 }
 
 /* ===== MENU CENTRAL (DROPDOWNS) ===== */
@@ -111,6 +112,7 @@ header {
   display: block;
   text-decoration: none;
   transition: background-color 0.2s;
+  margin-bottom: 0px;
 }
 
 .dropdown-content a:hover {
@@ -124,6 +126,7 @@ header {
 /* ===== ÁREA RESTRITA (DIREITA) ===== */
 .header-right {
   font-size: 0.95rem;
+  margin-top: 20px;
 }
 
 .area-restrita {

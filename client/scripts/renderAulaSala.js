@@ -1,11 +1,11 @@
 async function buscaAulaSala(sala, diaSemana) {
   try {
-    const res = await fetch('https://6823c8c065ba05803397e110.mockapi.io/api/buscaSala', {
+    const res = await fetch('http://localhost:3333/mapa', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ sala, dia: diaSemana }),
+      body: JSON.stringify({salaNumero: sala, diaSemana }),
     });
 
     if (!res.ok) {
@@ -13,6 +13,7 @@ async function buscaAulaSala(sala, diaSemana) {
     }
     const dados = await res.json();
     
+    console.log(diaSemana);
     console.log(dados);
     RenderTabelaSala(dados);
   } catch (erro) {
@@ -35,7 +36,7 @@ async function RenderTabelaSala(dados) {
           <td>${aula.turma}</td>
           <td>${aula.turno}</td>
           <td>${aula.disciplina}</td>
-          <td>${aula.horario}</td>
+          <td>${aula.horafinal}</td>
         `;
     tbody.appendChild(tr);
   });
