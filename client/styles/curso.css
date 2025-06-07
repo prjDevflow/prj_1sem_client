@@ -60,7 +60,6 @@ h2 {
   font-size: 1.8rem;
   color: var(--color-rh);
 }
- 
 .btnHome {
   display: flex;
   justify-content: flex-start;
@@ -241,7 +240,10 @@ h2 {
 .info {
   display: flex;
   justify-content: space-between;
+<<<<<<< HEAD
   flex-wrap: wrap;
+=======
+>>>>>>> 5054637faf383c1c3e682a6f93fef5ddf005fde1
   gap: 2rem;
   padding-bottom: 25px;
 }
@@ -253,10 +255,6 @@ h2 {
 .professores div {
   margin-bottom: 0.4rem;
   font-size: 0.95rem;
-}
-.btnDiv {
-  display: flex;
-  align-items: center;
 }
 .download-btn {
   background-color: var(--color-rh);
