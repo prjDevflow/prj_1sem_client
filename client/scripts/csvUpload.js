@@ -34,6 +34,8 @@ function handleCSVUpload(tipo, event) {
       status.innerHTML = `</i> Arquivo carregado!`;
       status.classList.remove("error");
       status.classList.add("success");
+      input.disabled = true;
+      input.parentElement.classList.add("disabled");
 
       // Atualiza o badge
       badge.classList.remove("initial");
