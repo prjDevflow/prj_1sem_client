@@ -242,4 +242,8 @@ _**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
    Ajustar as estimativas no planejamento com mais margem para tarefas que envolvem aprendizado de novas tecnologias.
 
 
+   ![Preview-Screens](https://github.com/prjDevflow/prj_1sem_client/blob/main/Documentation/images/Bourndown_Sprint3.png)
+
+
+
 
