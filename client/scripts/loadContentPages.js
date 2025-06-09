@@ -37,7 +37,8 @@ function loadContentPages(event, urlPage) {
         "scripts/btnFiltro.js",
         "scripts/renderAulaSala.js",
         "scripts/renderGrade.js",
-        "scripts/loadSubMenus.js"
+        "scripts/loadSubMenus.js",
+        "scripts/csvUpload.js"
       ];
 
       loadScriptsSequentially(scriptsToLoad, () => {
