@@ -1,4 +1,4 @@
-async function buscaAulaSala(sala, diaSemana) {
+async function buscaAulaSala(turma, turno) {
   try {
     const res = await fetch('http://localhost:3333/mapa', {
       method: 'POST',
@@ -20,13 +20,12 @@ async function buscaAulaSala(sala, diaSemana) {
     console.error("Erro ao buscar os dados da API:", erro);
   }
 }
-
-async function RenderTabelaSala(dados) {
+function RenderTabelaSala(dados) {
   const tbody = document.getElementById("tbodyAulas");
-  tbody.innerHTML = ""; // Limpa o conteúdo anterior da tabela
+  tbody.innerHTML = "";
 
   if (dados.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4">Nenhuma aula encontrada.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5">Nenhuma aula encontrada.</td></tr>`;
     return;
   }
 
