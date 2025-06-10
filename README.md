@@ -241,5 +241,105 @@ _**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
 
    Ajustar as estimativas no planejamento com mais margem para tarefas que envolvem aprendizado de novas tecnologias.
 
+   PAROU AQUI --------------------------------------------------------------------------------------------------------
+
+## Sprint 03
+
+Na terceira sprint, o foco esteve na integração entre cliente e servidor por meio do consumo das APIs desenvolvidas. Também realizamos o deploy da aplicação, garantindo seu funcionamento em ambiente de produção. Além disso, fizemos ajustes pontuais de responsividade e aplicamos pequenas melhorias visuais e funcionais, contribuindo para uma experiência de uso mais estável e eficiente.
+### Sprint Backlog
+
+**1. Atualizar aula ( - 5 pts)**
+✔️ Implementada a rota que permite a atualização dos dados de uma aula previamente cadastrada.
+
+_Responsável:_
+
+**2. Excluir aula( - 5 pts)**
+✔️ Implementada a rota que realiza a exclusão de uma aula cadastrada no sistema.
+
+_Responsável:_
+
+**3. Alterar aula da turma ( - 5 pts)**
+✔️ Implementada a rota que permite modificar os dados das aulas associadas a uma turma.
+
+_Responsável:_
+
+**4. Buscar turnos do curso ( - 3 pts)**
+✔️ Desenvolvida a rota que retorna os turnos disponíveis para o curso.
+
+_Responsável:_
+
+**5. Buscar turmas do curso ( - 3 pts)**
+✔️ Desenvolvida a rota que retorna as turmas vinculadas ao curso selecionado.
+
+_Responsável:_
+
+**6. Buscar disciplinas por dia da semana ( - 3 pts)**
+✔️ Criada a rota que retorna as disciplinas conforme o dia da semana selecionado.
+
+_Responsável:_
+
+**7. Criar uma nova aula ( - 5 pts)**
+✔️ Desenvolvida a rota responsável pela criação de uma nova aula no sistema.
+
+_Responsável:_
+
+**8. Adicionar matéria ( - 3 pts)**
+✔️ Criado um card funcional para a adição de novas matérias à grade.
+
+_Responsável:_
+
+**9. Responsividade geral da aplicação ( - 3 pts)**
+✔️ Finalizada a adaptação da interface para garantir responsividade em todas as páginas.
+
+_Responsável:_
+
+**10. Renderização da grade com turma/professores e horários ( - 8 pts)**
+✔️ Integrada a API para exibir a grade de horários com informações completas de turmas e professores.
+
+_Responsável:_
+
+**11. Renderização das turmas (Secretaria) ( - 8 pts)**
+✔️ Implementado o consumo da API para exibir as turmas na interface da secretaria.
+
+_Responsável:_
+
+ PAROU AQUI --------------------------------------------------------------------------------------------------------
+
+**12. Rota para buscar aulas de uma sala por dia da semana (RNF01 - 11 pts)**
+
+✔️ Desenvolvida rota que retorna as aulas de uma sala específica, com filtro por dia da semana.
+
+_Responsável:_ Matheus Soldesi, Lucas Cauã
+
+### Burndown
+
+![Preview-Screens](https://github.com/prjDevflow/Index/blob/main/Documentation/images/BourndownSprint2.png)
+
+### Sprint Retrospective
+
+_**1. O que funcionou bem durante o sprint?**_
+   
+   A equipe demonstrou comprometimento em aprender e superar os desafios técnicos, especialmente na parte do backend, mesmo com a limitação de conhecimento prévio.
+
+   A colaboração entre os membros foi essencial para compartilhar descobertas e ajudar uns aos outros durante o processo de aprendizagem.
+   
+_**2. O que não funcionou tão bem durante o sprint?**_
+
+   A falta de familiaridade da maioria do time com o desenvolvimento backend resultou em atrasos nas entregas e dificuldade para seguir o planejamento inicial.
+
+   Além disso, o tempo necessário para entender novas tecnologias acabou sendo subestimado no planejamento.
+      
+_**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
+
+   Incluir um tempo de "imersão técnica" no início da sprint para estudo coletivo dos temas mais desafiadores.
+
+   Ajustar as estimativas no planejamento com mais margem para tarefas que envolvem aprendizado de novas tecnologias.
+
+   
+
+
+   ![Preview-Screens](https://github.com/prjDevflow/prj_1sem_client/blob/main/Documentation/images/Bourndown_Sprint3.png)
+
+
 
 
