@@ -150,69 +150,70 @@ async function buscarAulasPorDia(curso, turno, dia, turmaFiltrada) {
 
 // Renderiza as aulas no painel com o layout solicitado
 function exibirAulasNaTurma(aulas, painel) {
-  // Mantém os botões de dias e limpa o resto
+  // Garante que os botões de dias fiquem no topo
   const botoesDias = painel.querySelector(".dias-da-semana");
-  painel.innerHTML = "";
-  painel.appendChild(botoesDias);
 
-  // Cria a seção para matérias
+  // Remove qualquer conteúdo anterior de aulas (mas mantém os botões de dias)
+  const antigaSection = painel.querySelector(".materiasTurma");
+  if (antigaSection) antigaSection.remove();
+
+  // Cria uma nova seção para exibir as aulas
   const sectionMaterias = document.createElement("section");
   sectionMaterias.className = "materiasTurma";
 
   if (aulas.length === 0) {
     const aviso = document.createElement("p");
     aviso.textContent = "Nenhuma aula para esse dia.";
-    painel.appendChild(aviso);
-    return;
+    sectionMaterias.appendChild(aviso);
+  } else {
+    aulas.forEach((aula) => {
+      const divMateria = document.createElement("div");
+      divMateria.className = "materia";
+
+      // Título e botões de ação
+      const divTitle = document.createElement("div");
+      divTitle.className = "title";
+
+      const h2 = document.createElement("h2");
+      h2.textContent = aula.nomedisciplina;
+
+      const divBotoes = document.createElement("div");
+      divBotoes.className = "botoes-acoes";
+
+      const btnEditar = document.createElement("button");
+      btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.nomedisciplina}')`);
+      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
+
+      const btnExcluir = document.createElement("button");
+      btnExcluir.setAttribute("onclick", "pedirConfirmarExclusao(this)");
+      btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+
+      divBotoes.appendChild(btnEditar);
+      divBotoes.appendChild(btnExcluir);
+
+      divTitle.appendChild(h2);
+      divTitle.appendChild(divBotoes);
+
+      // Horário
+      const pHorario = document.createElement("p");
+      pHorario.textContent = `${aula.horainicial.slice(0, 5)} - ${aula.horafinal.slice(0, 5)}`;
+
+      // Professor
+      const pProfessor = document.createElement("p");
+      pProfessor.textContent = `Professor: ${aula.nomeprofessor}`;
+
+      // Sala
+      const pSala = document.createElement("p");
+      pSala.textContent = `Sala ${aula.nomesala}`;
+
+      divMateria.appendChild(divTitle);
+      divMateria.appendChild(pHorario);
+      divMateria.appendChild(pProfessor);
+      divMateria.appendChild(pSala);
+
+      sectionMaterias.appendChild(divMateria);
+    });
   }
-
-  aulas.forEach((aula) => {
-    const divMateria = document.createElement("div");
-    divMateria.className = "materia";
-
-    // Título e botões de ação
-    const divTitle = document.createElement("div");
-    divTitle.className = "title";
-
-    const h2 = document.createElement("h2");
-    h2.textContent = aula.nomedisciplina;
-
-    const divBotoes = document.createElement("div");
-    divBotoes.className = "botoes-acoes";
-
-    const btnEditar = document.createElement("button");
-    btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.nomedisciplina}')`);
-    btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
-
-    const btnExcluir = document.createElement("button");
-    btnExcluir.setAttribute("onclick", "pedirConfirmarExclusao(this)");
-    btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-
-    divBotoes.appendChild(btnEditar);
-    divBotoes.appendChild(btnExcluir);
-
-    divTitle.appendChild(h2);
-    divTitle.appendChild(divBotoes);
-
-    // Horário
-    const pHorario = document.createElement("p");
-    pHorario.textContent = `${aula.horainicial.slice(0,5)} - ${aula.horafinal.slice(0,5)}`;
-
-    // Professor
-    const pProfessor = document.createElement("p");
-    pProfessor.textContent = `Professor: ${aula.nomeprofessor}`;
-
-    // Sala
-    const pSala = document.createElement("p");
-    pSala.textContent = `Sala ${aula.nomesala}`;
-
-    divMateria.appendChild(divTitle);
-    divMateria.appendChild(pHorario);
-    divMateria.appendChild(pProfessor);
-    divMateria.appendChild(pSala);
-
-    sectionMaterias.appendChild(divMateria);
-  });
 
   // Card para adicionar nova aula
   const divAddCard = document.createElement("div");
@@ -222,8 +223,10 @@ function exibirAulasNaTurma(aulas, painel) {
 
   sectionMaterias.appendChild(divAddCard);
 
+  // Adiciona a nova seção ao painel (abaixo dos botões de dias)
   painel.appendChild(sectionMaterias);
 }
+
 
 
 
