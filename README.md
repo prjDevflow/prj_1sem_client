@@ -301,13 +301,17 @@ _Responsável:_
 
 _Responsável:_
 
- PAROU AQUI --------------------------------------------------------------------------------------------------------
+**12. Atualização e Exclusão de aula ( - 5 pts)**
 
-**12. Rota para buscar aulas de uma sala por dia da semana (RNF01 - 11 pts)**
+✔️ Implementado o consumo da API para atualizar e excluir as aulas na interface da secretaria.
 
-✔️ Desenvolvida rota que retorna as aulas de uma sala específica, com filtro por dia da semana.
+_Responsável:_ 
 
-_Responsável:_ Matheus Soldesi, Lucas Cauã
+**13. Deploy ( - 8 pts)**
+
+✔️ Deploy finalizado, tornando a aplicação acessível para os usuários.
+
+_Responsável:_ 
 
 ### Burndown
 
