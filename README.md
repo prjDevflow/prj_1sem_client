@@ -241,8 +241,6 @@ _**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
 
    Ajustar as estimativas no planejamento com mais margem para tarefas que envolvem aprendizado de novas tecnologias.
 
-   PAROU AQUI --------------------------------------------------------------------------------------------------------
-
 ## Sprint 03
 
 Na terceira sprint, o foco esteve na integração entre cliente e servidor por meio do consumo das APIs desenvolvidas. Também realizamos o deploy da aplicação, garantindo seu funcionamento em ambiente de produção. Além disso, fizemos ajustes pontuais de responsividade e aplicamos pequenas melhorias visuais e funcionais, contribuindo para uma experiência de uso mais estável e eficiente.
@@ -313,7 +311,7 @@ _Responsável:_ Matheus Soldesi, Lucas Cauã
 
 ### Burndown
 
-![Preview-Screens](https://github.com/prjDevflow/Index/blob/main/Documentation/images/BourndownSprint2.png)
+![Preview-Screens](https://github.com/prjDevflow/prj_1sem_client/blob/main/Documentation/images/Bourndown_Sprint3.png)
 
 ### Sprint Retrospective
 
@@ -338,7 +336,6 @@ _**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
    
 
 
-   ![Preview-Screens](https://github.com/prjDevflow/prj_1sem_client/blob/main/Documentation/images/Bourndown_Sprint3.png)
 
 
 
