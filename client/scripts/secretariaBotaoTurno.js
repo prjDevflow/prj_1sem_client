@@ -223,8 +223,9 @@ function exibirAulasNaTurma(aulas, painel) {
 
   sectionMaterias.appendChild(divAddCard);
 
-  // Adiciona a nova seção ao painel (abaixo dos botões de dias)
-  painel.appendChild(sectionMaterias);
+// Adiciona a nova seção ao painel (abaixo dos botões de dias)
+painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
+
 }
 
 
