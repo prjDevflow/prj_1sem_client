@@ -29,7 +29,6 @@
         <section class="card-grade">
           <div class="btnHome">
             <button onclick="loadContentPages(event, 'pages/main.html')">
-              <i class="fa-solid fa-chevron-left fa-sm"></i>
               Voltar
             </button>
           </div>
@@ -133,13 +132,10 @@
                 <div>Desenvolvimento Web: Henrique Louro</div>
               </section>
               <div class="btnDiv">
-                <a href="" class="download-btn" download>
+                <button id="btnBaixarPDF" onclick="baixarPDF()" class="download-btn">
                   Baixar PDF
-                  <i
-                    class="fa-solid fa-arrow-down"
-                    style="margin-left: 5px"
-                  ></i>
-                </a>
+                  <i class="fa-solid fa-arrow-down" style="margin-left: 5px"></i>
+                </button>
               </div>
             </section>
           </section>

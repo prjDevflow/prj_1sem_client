@@ -7,57 +7,72 @@
   width: 140px;
 }
 .sala01 {
-  top: 70%;
-  right: 24.5%;
+  top:55%;
+  right: 22.5%;
 }
 .sala02 {
-  top: 12%;
-  right: 24.5%;
+  top: 0%;
+  right: 22.5%;
 }
 .sala03 {
-  top: 68%;
-  right: 1%;
+  top: 55%;
+  right: 0%;
 }
 .sala04 {
-  top: 12%;
-  right: 1%;
+  top: 0%;
+  right: 0%;
 }
+
+/* DESIGN BOTÕES */
+
+.sala01,
+.sala02,
+.sala03,
+.sala04 {
+  width: 150px;              /* largura fixa */
+  height: 200px;             /* altura igual para formar o quadrado */
+  background-color: transparent;
+  border: none;              /* sem borda */
+  cursor: pointer;           /* cursor de mãozinha */
+  border-radius: 10px;       /* cantos arredondados (opcional) */
+}
+
+
 
 /* ANDAR PRIMEIRO */
 .sala101,
 .sala103,
 .sala105,
 .sala107 {
-  width: 84px;
-  top: 71%;
+  top: 55%;
 }
+
 .sala101 {
-  right: 90.9%;
+  right: 88.5%;
 }
 .sala103 {
-  right: 81.2%;
+  right: 77.5%;
 }
 .sala105 {
-  right: 71.5%;
+  right: 66%;
 }
 .sala107 {
-  right: 61.5%;
+  right: 54.5%;
 }
 
 .sala102,
 .sala104,
 .sala106 {
-  width: 80px;
-  top: 12.5%;
+  top: 0%;
 }
 .sala102 {
-  right: 90.7%;
+  right: 88.5%;
 }
 .sala104 {
-  right: 81%;
+  right: 77.5%;
 }
 .sala106 {
-  right: 71.3%;
+  right: 66%;
 }
 
 .sala108,
@@ -65,96 +80,148 @@
   width: 140px;
 }
 .sala108 {
-  top: 12.5%;
-  right: 24.5%;
+  top: 0%;
+  right: 22.5%;
 }
 .sala110 {
-  top: 14%;
-  right: 1%;
+  top: 0%;
+  right: 0%;
+}
+
+.sala101,
+.sala102,
+.sala103,
+.sala104,
+.sala105,
+.sala106,
+.sala107 {
+    width: 100px;             
+  height: 200px;            
+  border: none;            
+  cursor: pointer;         
+  border-radius: 10px;     
+}
+
+.sala108,
+.sala110 {
+  width: 150px;           
+  height: 200px;           
+  border: none;           
+  cursor: pointer;          
+  border-radius: 10px;     
 }
 
 /* ANDAR SEGUNDO */
 .sala202,
 .sala204,
 .sala206 {
-  width: 80px;
-  top: 12%;
+  top: 0%;
 }
 .sala202 {
-  right: 90.7%;
+  right: 89%;
 }
 .sala204 {
-  right: 81%;
+  right: 77.5%;
 }
 .sala206 {
-  right: 71.3%;
+  right: 66.5%;
 }
 
 .sala208,
 .sala210 {
-  width: 140px;
+top: 0%;
 }
 .sala208 {
-  top: 15%;
-  right: 24.3%;
+  right: 22%;
 }
 .sala210 {
-  top: 13%;
-  right: 1%;
+  right: 0%;
 }
 
 .sala201,
 .sala203,
 .sala205 {
-  width: 110px;
+  top: 56%;
 }
 .sala201 {
-  top: 70%;
-  right: 87.5%;
-  padding: 10px 0px;
+  right: 83.5%;
 }
 .sala203 {
-  top: 72.5%;
-  right: 74.5%;
+  right: 67.5%;
 }
 .sala205 {
-  top: 70%;
-  right: 61.5%;
+  right: 51%;
 }
 
 .sala207,
 .sala209 {
-  width: 150px;
-  top: 72%;
+  top: 58%;
 }
 .sala207 {
-  right: 22%;
+  right: 20%;
 }
 .sala209 {
-  right: 2%;
+  right: 0%;
 }
+
+.sala201,
+.sala203,
+.sala205,
+.sala208,
+.sala210 {
+    width: 150px;           
+  height: 190px;           
+
+  border: none;           
+  cursor: pointer;          
+  border-radius: 10px;
+}
+
+.sala202,
+.sala204,
+.sala206 {
+      width: 90px;           
+  height: 190px;           
+  border: none;           
+  cursor: pointer;          
+  border-radius: 10px;
+}
+
+.sala207,
+.sala209 {
+  width: 175px;           
+  height: 180px;           
+  border: none;           
+  cursor: pointer;          
+  border-radius: 10px;     
+}
+
 @media screen and (max-width: 450px) {
     /* BOTOES DE REDIRECIONAMENTO */
     /* ANDAR TERREO */
     .sala01 {
       width: 140px;
-      top: 27%;
+      height: 100px;
+      top: 23.5%;
       right: 1.5%;
     }
     .sala02 {
       width: 140px;
-      top: 27%;
-      right: 60%;
+      height: 100px;
+      top: 23.5%;
+      right: 58%;
     }
     .sala03 {
       width: 140px;
-      top: 2%;
+      height: 100px;
+      top: 1%;
       right: 1.5%;
     }
     .sala04 {
       width: 140px;
-      top: 3.5%;
-      right: 60%;
+      height: 100px;
+      top: 1%;
+      right: 58%;
     }
   
     /* ANDAR PRIMEIRO */
@@ -162,107 +229,1077 @@
     .sala103,
     .sala105,
     .sala107 {
-      width: 130px;
-      padding: 2px 0px;
-      right: 3%;
+      width: 140px;
+      height: 80px;
+      right: 2%;
     }
     .sala101 {
-      top: 90.8%;
+      top: 88%;
     }
     .sala103 {
-      top: 81%;
+      top: 76.5%;
     }
     .sala105 {
-      top: 71.3%;
+      top: 65.5%;
     }
     .sala107 {
-      top: 61.4%;
+      top: 54.2%;
     }
   
     .sala102,
     .sala104,
     .sala106 {
-      width: 120px;
-      right: 62.5%;
+      width: 140px;
+      height: 80px;
+      right: 57.5%;
     }
     .sala102 {
-      top: 91%;
+      top: 88%;
     }
     .sala104 {
-      top: 81.3%;
+      top: 76.5%;
     }
     .sala106 {
-      top: 71.5%;
+      top: 65.5%;
     }
   
     .sala108,
     .sala110 {
       width: 140px;
+      height: 105px;
     }
     .sala108 {
-      top: 27%;
-      right: 60%;
+      top: 23.5%;
+      right: 57.5%;
     }
     .sala110 {
-      top: 5%;
-      right: 60%;
+      top: 1%;
+      right: 57.5%;
     }
   
     /* ANDAR SEGUNDO */
     .sala202,
     .sala204,
     .sala206 {
-      width: 100px;
-      right: 65.5%;
+      width: 160px;
+      height: 88px;
+      right: 55.5%;
     }
     .sala202 {
-      top: 91%;
+      top: 88%;
     }
     .sala204 {
-      top: 81.5%;
+      top: 77%;
     }
     .sala206 {
-      top: 71.7%;
+      top: 65.5%;
     }
   
     .sala208,
     .sala210 {
-      width: 140px;
+      width: 160px;
+      height: 125px;
+      right: 55%;
     }
     .sala208 {
-      top: 28.5%;
-      right: 60%;
+      top: 22.5%;
     }
     .sala210 {
-      top: 3.5%;
-      right: 60%;
+      top: 0%;
     }
   
     .sala207,
     .sala209 {
-      width: 120px;
-      right: 4.5%;
+      width: 160px;
+      height: 145px;
+      right: 0%;
     }
     .sala207 {
-      top: 25.2%;
+      top: 19.8%;
     }
     .sala209 {
-      top: 5.2%;
+      top: 0%;
     }
   
     .sala201,
     .sala203,
     .sala205 {
-      width: 110px;
-      right: 6%;
+      width: 160px;
+      height: 125px;
+      right: 0%;
     }
     .sala201 {
-      top: 88.3%;
+      top: 83.5%;
     }
     .sala203 {
-      top: 76.8%;
+      top: 67%;
     }
     .sala205 {
-      top: 62.5%;
+      top: 51%;
+    }
+  }
+  @media screen and (max-width: 500px) and (min-width: 450px) {
+
+        .sala01 {
+      width: 160px;
+      height: 120px;
+      top: 23.5%;
+      right: 1.5%;
+    }
+    .sala02 {
+      width: 160px;
+      height: 120px;
+      top: 23.5%;
+      right: 58%;
+    }
+    .sala03 {
+      width: 160px;
+      height: 120px;
+      top: 1%;
+      right: 1.5%;
+    }
+    .sala04 {
+      width: 160px;
+      height: 120px;
+      top: 1%;
+      right: 58%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 160px;
+      height: 100px;
+      right: 2%;
+    }
+    .sala101 {
+      top: 88%;
+    }
+    .sala103 {
+      top: 76.5%;
+    }
+    .sala105 {
+      top: 65.5%;
+    }
+    .sala107 {
+      top: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 160px;
+      height: 100px;
+      right: 57.5%;
+    }
+    .sala102 {
+      top: 88%;
+    }
+    .sala104 {
+      top: 76.5%;
+    }
+    .sala106 {
+      top: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 160px;
+      height: 125px;
+    }
+    .sala108 {
+      top: 23.5%;
+      right: 57.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 57.5%;
+    }
+        /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 175px;
+      height: 95px;
+      right: 55.5%;
+    }
+    .sala202 {
+      top: 88%;
+    }
+    .sala204 {
+      top: 77%;
+    }
+    .sala206 {
+      top: 65.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 170px;
+      height: 135px;
+      right: 57%;
+    }
+    .sala208 {
+      top: 22.5%;
+    }
+    .sala210 {
+      top: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 170px;
+      height: 155px;
+      right: 0%;
+    }
+    .sala207 {
+      top: 19.8%;
+    }
+    .sala209 {
+      top: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 175px;
+      height: 135px;
+      right: 0%;
+    }
+    .sala201 {
+      top: 84.5%;
+    }
+    .sala203 {
+      top: 68%;
+    }
+    .sala205 {
+      top: 52%;
+    }
+  }
+
+    @media screen and (max-width: 600px) and (min-width: 500px) {
+        .sala01 {
+      width: 190px;
+      height: 150px;
+      top: 23.5%;
+      right: 1.5%;
+    }
+    .sala02 {
+      width: 190px;
+      height: 150px;
+      top: 23.5%;
+      right: 58%;
+    }
+    .sala03 {
+      width: 190px;
+      height: 150px;
+      top: 1%;
+      right: 1.5%;
+    }
+    .sala04 {
+      width: 190px;
+      height: 150px;
+      top: 1%;
+      right: 58%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 180px;
+      height: 120px;
+      right: 3%;
+    }
+    .sala101 {
+      top: 88%;
+    }
+    .sala103 {
+      top: 76.5%;
+    }
+    .sala105 {
+      top: 65.5%;
+    }
+    .sala107 {
+      top: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 180px;
+      height: 120px;
+      right: 58.5%;
+    }
+    .sala102 {
+      top: 88%;
+    }
+    .sala104 {
+      top: 76.5%;
+    }
+    .sala106 {
+      top: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 185px;
+      height: 150px;
+    }
+    .sala108 {
+      top: 23.5%;
+      right: 57.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 57.5%;
+    }
+
+    /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 200px;
+      height: 110px;
+      right: 57%;
+    }
+    .sala202 {
+      top: 88%;
+    }
+    .sala204 {
+      top: 77%;
+    }
+    .sala206 {
+      top: 65.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 200px;
+      height: 160px;
+      right: 56.5%;
+    }
+    .sala208 {
+      top: 22.5%;
+    }
+    .sala210 {
+      top: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 200px;
+      height: 185px;
+      right: 0%;
+    }
+    .sala207 {
+      top: 19.8%;
+    }
+    .sala209 {
+      top: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 200px;
+      height: 150px;
+      right: 0%;
+    }
+    .sala201 {
+      top: 84%;
+    }
+    .sala203 {
+      top: 68%;
+    }
+    .sala205 {
+      top: 52%;
+    }
+  }
+
+      @media screen and (max-width: 800px) and (min-width: 600px) {
+        .sala01 {
+      width: 230px;
+      height: 190px;
+      top: 23.5%;
+      right: 1.5%;
+    }
+    .sala02 {
+      width: 230px;
+      height: 190px;
+      top: 23.5%;
+      right: 58%;
+    }
+    .sala03 {
+      width: 230px;
+      height: 190px;
+      top: 1%;
+      right: 1.5%;
+    }
+    .sala04 {
+      width: 230px;
+      height: 190px;
+      top: 1%;
+      right: 58%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 240px;
+      height: 140px;
+      right: 3%;
+    }
+    .sala101 {
+      top: 88%;
+    }
+    .sala103 {
+      top: 76.5%;
+    }
+    .sala105 {
+      top: 65.5%;
+    }
+    .sala107 {
+      top: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 240px;
+      height: 140px;
+      right: 58.5%;
+    }
+    .sala102 {
+      top: 88%;
+    }
+    .sala104 {
+      top: 76.5%;
+    }
+    .sala106 {
+      top: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 235px;
+      height: 200px;
+    }
+    .sala108 {
+      top: 23.5%;
+      right: 57.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 57.5%;
+    }
+    /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 250px;
+      height: 145px;
+      right: 57%;
+    }
+    .sala202 {
+      top: 88%;
+    }
+    .sala204 {
+      top: 77%;
+    }
+    .sala206 {
+      top: 65.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 250px;
+      height: 200px;
+      right: 56.5%;
+    }
+    .sala208 {
+      top: 22.5%;
+    }
+    .sala210 {
+      top: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 250px;
+      height: 240px;
+      right: 0%;
+    }
+    .sala207 {
+      top: 19.8%;
+    }
+    .sala209 {
+      top: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 250px;
+      height: 190px;
+      right: 0%;
+    }
+    .sala201 {
+      top: 84%;
+    }
+    .sala203 {
+      top: 68%;
+    }
+    .sala205 {
+      top: 52%;
+    }
+  }
+        @media screen and (max-width: 1000px) and (min-width: 800px) {
+        .sala01 {
+      width: 75px;
+      height: 100px;
+      top: 50%;
+      right: 23.5%;
+    }
+    .sala02 {
+      width: 75px;
+      height: 100px;
+      top: 1%;
+      right: 23.5%;
+    }
+    .sala03 {
+      width: 75px;
+      height: 100px;
+      top: 1%;
+      right: 0%;
+    }
+    .sala04 {
+      width: 75px;
+      height: 100px;
+      top: 50%;
+      right: 0%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 55px;
+      height: 100px;
+      top: 55%;
+    }
+    .sala101 {
+      right: 88%;
+    }
+    .sala103 {
+      right: 76.5%;
+    }
+    .sala105 {
+      right: 65.5%;
+    }
+    .sala107 {
+      right: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 55px;
+      height: 100px;
+      top: 1%;
+    }
+    .sala102 {
+      right: 88%;
+    }
+    .sala104 {
+      right: 76.5%;
+    }
+    .sala106 {
+      right: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 80px;
+      height: 100px;
+    }
+    .sala108 {
+      top: 1%;
+      right: 22.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 0%;
+    }
+        /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 45px;
+      height: 95px;
+      top: 0%;
+    }
+    .sala202 {
+      right: 89%;
+    }
+    .sala204 {
+      right: 77.7%;
+    }
+    .sala206 {
+      right: 66.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 78px;
+      height: 95px;
+      top: 0%;
+    }
+    .sala208 {
+      right: 22.5%;
+    }
+    .sala210 {
+      right: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 85px;
+      height: 95px;
+      top: 55%
+    }
+    .sala207 {
+      right: 19.8%;
+    }
+    .sala209 {
+      right: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 70px;
+      height: 95px;
+      top: 55%;
+    }
+    .sala201 {
+      right: 84%;
+    }
+    .sala203 {
+      right: 68%;
+    }
+    .sala205 {
+      right: 52%;
+    }
+  }
+
+          @media screen and (max-width: 1200px) and (min-width: 1000px) {
+        .sala01 {
+      width: 85px;
+      height: 110px;
+      top: 55%;
+      right: 23.5%;
+    }
+    .sala02 {
+      width: 85px;
+      height: 110px;
+      top: 1%;
+      right: 23.5%;
+    }
+    .sala03 {
+      width: 85px;
+      height: 110px;
+      top: 1%;
+      right: 0%;
+    }
+    .sala04 {
+      width: 85px;
+      height: 110px;
+      top: 55%;
+      right: 0%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 65px;
+      height: 110px;
+      top: 57%;
+    }
+    .sala101 {
+      right: 88%;
+    }
+    .sala103 {
+      right: 76.5%;
+    }
+    .sala105 {
+      right: 65.5%;
+    }
+    .sala107 {
+      right: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 65px;
+      height: 110px;
+      top: 1%;
+    }
+    .sala102 {
+      right: 88%;
+    }
+    .sala104 {
+      right: 76.5%;
+    }
+    .sala106 {
+      right: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 90px;
+      height: 110px;
+    }
+    .sala108 {
+      top: 1%;
+      right: 22.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 0%;
+    }
+            /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 55px;
+      height: 115px;
+      top: 0%;
+    }
+    .sala202 {
+      right: 89%;
+    }
+    .sala204 {
+      right: 77.7%;
+    }
+    .sala206 {
+      right: 66.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 87.5px;
+      height: 115px;
+      top: 0%;
+    }
+    .sala208 {
+      right: 22.5%;
+    }
+    .sala210 {
+      right: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 105px;
+      height: 115px;
+      top: 55%
+    }
+    .sala207 {
+      right: 19.8%;
+    }
+    .sala209 {
+      right: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 82.5px;
+      height: 115px;
+      top: 55%;
+    }
+    .sala201 {
+      right: 84%;
+    }
+    .sala203 {
+      right: 68%;
+    }
+    .sala205 {
+      right: 52%;
+    }
+  }
+
+            @media screen and (max-width: 1400px) and (min-width: 1200px) {
+        .sala01 {
+      width: 100px;
+      height: 125px;
+      top: 55%;
+      right: 23.5%;
+    }
+    .sala02 {
+      width: 100px;
+      height: 125px;
+      top: 1%;
+      right: 23.5%;
+    }
+    .sala03 {
+      width: 100px;
+      height: 125px;
+      top: 1%;
+      right: 0%;
+    }
+    .sala04 {
+      width: 100px;
+      height: 125px;
+      top: 55%;
+      right: 0%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 75px;
+      height: 130px;
+      top: 57%;
+    }
+    .sala101 {
+      right: 88%;
+    }
+    .sala103 {
+      right: 76.5%;
+    }
+    .sala105 {
+      right: 65.5%;
+    }
+    .sala107 {
+      right: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 75px;
+      height: 130px;
+      top: 1%;
+    }
+    .sala102 {
+      right: 88%;
+    }
+    .sala104 {
+      right: 76.5%;
+    }
+    .sala106 {
+      right: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 105px;
+      height: 130px;
+    }
+    .sala108 {
+      top: 1%;
+      right: 22.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 0%;
+    }
+                /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 65px;
+      height: 140px;
+      top: 0%;
+    }
+    .sala202 {
+      right: 89%;
+    }
+    .sala204 {
+      right: 77.7%;
+    }
+    .sala206 {
+      right: 66.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 105px;
+      height: 140px;
+      top: 0%;
+    }
+    .sala208 {
+      right: 22.5%;
+    }
+    .sala210 {
+      right: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 125px;
+      height: 140px;
+      top: 55%
+    }
+    .sala207 {
+      right: 19.8%;
+    }
+    .sala209 {
+      right: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 100px;
+      height: 140px;
+      top: 55%;
+    }
+    .sala201 {
+      right: 84%;
+    }
+    .sala203 {
+      right: 68%;
+    }
+    .sala205 {
+      right: 52%;
+    }
+  }
+              @media screen and (max-width: 1600px) and (min-width: 1400px) {
+        .sala01 {
+      width: 120px;
+      height: 145px;
+      top: 55%;
+      right: 23.5%;
+    }
+    .sala02 {
+      width: 120px;
+      height: 145px;
+      top: 1%;
+      right: 23.5%;
+    }
+    .sala03 {
+      width: 120px;
+      height: 145px;
+      top: 1%;
+      right: 0%;
+    }
+    .sala04 {
+      width: 120px;
+      height: 145px;
+      top: 55%;
+      right: 0%;
+    }
+    .sala101,
+    .sala103,
+    .sala105,
+    .sala107 {
+      width: 85px;
+      height: 150px;
+      top: 57%;
+    }
+    .sala101 {
+      right: 88%;
+    }
+    .sala103 {
+      right: 76.5%;
+    }
+    .sala105 {
+      right: 65.5%;
+    }
+    .sala107 {
+      right: 54.2%;
+    }
+  
+    .sala102,
+    .sala104,
+    .sala106 {
+      width: 85px;
+      height: 150px;
+      top: 1%;
+    }
+    .sala102 {
+      right: 88%;
+    }
+    .sala104 {
+      right: 76.5%;
+    }
+    .sala106 {
+      right: 65.5%;
+    }
+  
+    .sala108,
+    .sala110 {
+      width: 120px;
+      height: 150px;
+    }
+    .sala108 {
+      top: 1%;
+      right: 22.5%;
+    }
+    .sala110 {
+      top: 1%;
+      right: 0%;
+    }
+                    /* ANDAR SEGUNDO */
+    .sala202,
+    .sala204,
+    .sala206 {
+      width: 75px;
+      height: 160px;
+      top: 0%;
+    }
+    .sala202 {
+      right: 89%;
+    }
+    .sala204 {
+      right: 77.7%;
+    }
+    .sala206 {
+      right: 66.5%;
+    }
+  
+    .sala208,
+    .sala210 {
+      width: 125px;
+      height: 160px;
+      top: 0%;
+    }
+    .sala208 {
+      right: 22.5%;
+    }
+    .sala210 {
+      right: 0%;
+    }
+  
+    .sala207,
+    .sala209 {
+      width: 140px;
+      height: 160px;
+      top: 55%
+    }
+    .sala207 {
+      right: 19.8%;
+    }
+    .sala209 {
+      right: 0%;
+    }
+  
+    .sala201,
+    .sala203,
+    .sala205 {
+      width: 115px;
+      height: 160px;
+      top: 55%;
+    }
+    .sala201 {
+      right: 84%;
+    }
+    .sala203 {
+      right: 68%;
+    }
+    .sala205 {
+      right: 52%;
     }
   }

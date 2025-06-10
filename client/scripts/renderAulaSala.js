@@ -1,18 +1,20 @@
 async function buscaAulaSala(turma, turno) {
   try {
-    const res = await fetch('https://6823c8c065ba05803397e110.mockapi.io/api/agenda', {
+    const res = await fetch('http://localhost:3333/mapa', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ turma, turno }),
+      body: JSON.stringify({salaNumero: sala, diaSemana }),
     });
 
     if (!res.ok) {
       throw new Error(`Erro na requisição: ${res.status}`);
     }
-
     const dados = await res.json();
+    
+    console.log(diaSemana);
+    console.log(dados);
     RenderTabelaSala(dados);
   } catch (erro) {
     console.error("Erro ao buscar os dados da API:", erro);
@@ -30,12 +32,11 @@ function RenderTabelaSala(dados) {
   dados.forEach((aula) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${aula.diaSemana}</td>
-      <td>${aula.turma}</td>
-      <td>${aula.turno}</td>
-      <td>${aula.disciplina}</td>
-      <td>${aula.horario}</td>
-    `;
+          <td>${aula.turma}</td>
+          <td>${aula.turno}</td>
+          <td>${aula.disciplina}</td>
+          <td>${aula.horafinal}</td>
+        `;
     tbody.appendChild(tr);
   });
 }
