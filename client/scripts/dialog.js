@@ -1,9 +1,30 @@
+// Mapeamento de dias abreviados para nomes por extenso
+const nomesDiasPorExtenso = {
+  "Seg": "Segunda-feira",
+  "Ter": "Terça-feira",
+  "Qua": "Quarta-feira",
+  "Qui": "Quinta-feira",
+  "Sex": "Sexta-feira",
+  "Sáb": "Sábado",
+  "Dom": "Domingo"
+};
+
+let diaSelecionado = ''; // Guarda o dia da semana selecionado
+
+// Função para abrir o modal e colocar o título com o dia
 function openDialog(idDialog, idTitle, title) {
   const dialog = document.getElementById(idDialog);
   dialog.showModal();
 
+  // Define título principal
   const titleElement = document.getElementById(idTitle);
   if (titleElement) titleElement.innerHTML = title;
+
+  // Mostra o dia por extenso abaixo do título
+  const diaElement = document.getElementById('diaSemanaSelecionado');
+  if (diaElement) {
+    diaElement.textContent = diaSelecionado ? `(${diaSelecionado})` : '';
+  }
 
   dialog.addEventListener(
     "click",
@@ -23,50 +44,50 @@ function openDialog(idDialog, idTitle, title) {
   );
 }
 
+// Fecha o modal
 function closeDialog(idDialog) {
   const dialog = document.getElementById(idDialog);
   dialog.close();
 }
 
-// EXCLUSÃO 
+// --- EXCLUSÃO ---
+let elementoParaExcluir = null;
 
 function pedirConfirmarExclusao(botao) {
   elementoParaExcluir = botao.closest('.materia');
   const dialog = document.getElementById('dialogConfirmarExclusao');
-  dialog.showModal(); // Em vez de classList.add('open')
+  dialog.showModal();
 }
 
 function fecharDialogConfirmacao() {
   const dialog = document.getElementById('dialogConfirmarExclusao');
-  dialog.close(); // Em vez de classList.remove('open')
+  dialog.close();
 }
-
 
 function confirmarExclusao() {
   if (elementoParaExcluir) {
-    elementoParaExcluir.remove(); // Remove a matéria
+    elementoParaExcluir.remove();
     elementoParaExcluir = null;
   }
 
-  fecharDialogConfirmacao(); // Fecha o modal depois de excluir
+  fecharDialogConfirmacao();
 }
 
-// BOTÃO FIXO
-
+// --- SELEÇÃO DOS DIAS DA SEMANA ---
 const botoes = document.querySelectorAll('.dias-da-semana button');
 
 botoes.forEach(botao => {
   botao.addEventListener('click', () => {
-    // Se já está ativo, remove e sai
     if (botao.classList.contains('ativo')) {
       botao.classList.remove('ativo');
+      diaSelecionado = '';
       return;
     }
 
-    // Remove 'ativo' de todos os outros
     botoes.forEach(b => b.classList.remove('ativo'));
-
-    // Adiciona no clicado
     botao.classList.add('ativo');
+
+    const textoBotao = botao.textContent.trim();
+    diaSelecionado = nomesDiasPorExtenso[textoBotao] || textoBotao;
   });
 });
