@@ -468,6 +468,7 @@ footer hr {
     text-align: left;
     width: 100%;
     cursor: pointer;
+    margin-bottom: 0px;
   }
   
   .hamburger-dropdown a:hover,
@@ -558,6 +559,7 @@ footer hr {
  
   .dropdown-content {
     width: 110px;
+    margin-bottom: 0px;
   }
  
   .dropdown {

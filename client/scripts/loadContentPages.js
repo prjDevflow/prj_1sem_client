@@ -39,7 +39,8 @@ function loadContentPages(event, urlPage) {
         "scripts/renderAulaSala.js",
         "scripts/renderGrade.js",
         "scripts/loadSubMenus.js",
-        "scripts/csvUpload.js"
+        "scripts/csvUpload.js",
+        "scripts/secretariaAulas.js",
       ];
 
       loadScriptsSequentially(scriptsToLoad, () => {
