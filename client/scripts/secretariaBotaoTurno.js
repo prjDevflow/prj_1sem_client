@@ -1,4 +1,5 @@
 async function buscaTurno(curso) {
+    document.getElementById("botoes-turmas").innerHTML = "";
   try {
     const res = await fetch("http://localhost:3333/secretary/busca-turno", {
       method: "POST",
@@ -103,10 +104,31 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
         const botaoDia = document.createElement("button");
         botaoDia.textContent = abreviado;
 
-        botaoDia.addEventListener("click", async () => {
-          const aulas = await buscarAulasPorDia(curso, turno, nome, turmaNome);
-          exibirAulasNaTurma(aulas, painel);
-        });
+botaoDia.addEventListener("click", async () => {
+  // Verifica se já existe uma seção de aulas aberta para este dia
+  const sectionExistente = painel.querySelector(".materiasTurma");
+  
+  // Se já existe e o usuário clicou no mesmo dia novamente, REMOVE as aulas
+  if (sectionExistente && botaoDia.dataset.lastClicked === "true") {
+    sectionExistente.remove();
+    botaoDia.dataset.lastClicked = "false";
+    return; // Sai da função
+  }
+
+  // Se não existe ou é outro dia, BUSCA as aulas
+  const aulas = await buscarAulasPorDia(curso, turno, nome, turmaNome);
+  exibirAulasNaTurma(aulas, painel);
+  
+  // Marca que este botão foi clicado
+  botaoDia.dataset.lastClicked = "true";
+  
+  // Remove a marcação dos outros botões (opcional)
+  painel.querySelectorAll(".dias-da-semana button").forEach(btn => {
+    if (btn !== botaoDia) {
+      btn.dataset.lastClicked = "false";
+    }
+  });
+});
 
         divDias.appendChild(botaoDia);
       });
@@ -114,9 +136,20 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
       painel.appendChild(divDias);
 
       // Toggle painel ao clicar no botão da turma
-      botaoTurma.addEventListener("click", () => {
-        painel.style.display = painel.style.display === "none" ? "block" : "none";
-      });
+botaoTurma.addEventListener("click", () => {
+  // PASSO 1: Fecha todos os outros painéis
+  document.querySelectorAll(".accordion").forEach(outroBotao => {
+    if (outroBotao !== botaoTurma) {
+      outroBotao.classList.remove("active"); // Remove a classe 'active'
+      outroBotao.nextElementSibling.style.display = "none"; // Fecha o painel
+    }
+  });
+
+  // PASSO 2: Abre/fecha o painel clicado
+  const estaAberto = painel.style.display === "block";
+  painel.style.display = estaAberto ? "none" : "block";
+  botaoTurma.classList.toggle("active", !estaAberto);
+});
 
       container.appendChild(botaoTurma);
       container.appendChild(painel);
