@@ -50,11 +50,14 @@ function closeDialog(idDialog) {
   dialog.close();
 }
 
-// --- EXCLUSÃO ---
+// --- EXCLUSÃO DINÂMICA ---
 let elementoParaExcluir = null;
+let idAulaParaExcluir = null;
 
-function pedirConfirmarExclusao(botao) {
+function pedirConfirmarExclusao(botao, idAula) {
   elementoParaExcluir = botao.closest('.materia');
+  idAulaParaExcluir = idAula;
+
   const dialog = document.getElementById('dialogConfirmarExclusao');
   dialog.showModal();
 }
@@ -64,30 +67,27 @@ function fecharDialogConfirmacao() {
   dialog.close();
 }
 
-function confirmarExclusao() {
-  if (elementoParaExcluir) {
+async function confirmarExclusao() {
+  if (!elementoParaExcluir || !idAulaParaExcluir) return;
+
+  try {
+    // Remove visualmente
     elementoParaExcluir.remove();
-    elementoParaExcluir = null;
-  }
 
-  fecharDialogConfirmacao();
-}
+    // Envia exclusão ao backend (ID na URL)
+    const res = await fetch(`http://localhost:3333/secretary/excluir-aula/${idAulaParaExcluir}`, {
+      method: "DELETE"
+    });
 
-// --- SELEÇÃO DOS DIAS DA SEMANA ---
-const botoes = document.querySelectorAll('.dias-da-semana button');
-
-botoes.forEach(botao => {
-  botao.addEventListener('click', () => {
-    if (botao.classList.contains('ativo')) {
-      botao.classList.remove('ativo');
-      diaSelecionado = '';
-      return;
+    if (!res.ok) {
+      console.error("Erro ao excluir aula no servidor.");
     }
-
-    botoes.forEach(b => b.classList.remove('ativo'));
-    botao.classList.add('ativo');
-
-    const textoBotao = botao.textContent.trim();
-    diaSelecionado = nomesDiasPorExtenso[textoBotao] || textoBotao;
-  });
-});
+    console.log(idAulaParaExcluir)
+  } catch (error) {
+    console.error("Erro ao excluir aula:", error);
+  } finally {
+    elementoParaExcluir = null;
+    idAulaParaExcluir = null;
+    fecharDialogConfirmacao();
+  }
+}

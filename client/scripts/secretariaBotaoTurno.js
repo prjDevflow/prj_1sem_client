@@ -13,8 +13,7 @@ async function buscaTurno(curso) {
 
     const dados = await res.json();
     botaoTurno(dados);
-    console.log(dados)
-
+    console.log(dados);
   } catch (error) {
     console.log("Erro no catch:", error);
   }
@@ -115,13 +114,13 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
 
       // Toggle painel ao clicar no botão da turma
       botaoTurma.addEventListener("click", () => {
-        painel.style.display = painel.style.display === "none" ? "block" : "none";
+        painel.style.display =
+          painel.style.display === "none" ? "block" : "none";
       });
 
       container.appendChild(botaoTurma);
       container.appendChild(painel);
     });
-
   } catch (error) {
     console.error("Erro ao carregar turmas com botões de dias:", error);
   }
@@ -181,11 +180,17 @@ function exibirAulasNaTurma(aulas, painel) {
       divBotoes.className = "botoes-acoes";
 
       const btnEditar = document.createElement("button");
-      btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.nomedisciplina}')`);
+      btnEditar.setAttribute(
+        "onclick",
+        `openDialog('dialogAula', 'idTitleAula', '${aula.nomedisciplina}')`
+      );
       btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
 
       const btnExcluir = document.createElement("button");
-      btnExcluir.setAttribute("onclick", "pedirConfirmarExclusao(this)");
+      btnExcluir.setAttribute(
+        "onclick",
+        `pedirConfirmarExclusao(this, '${aula.idaula}')`
+      );
       btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
 
       divBotoes.appendChild(btnEditar);
@@ -196,7 +201,10 @@ function exibirAulasNaTurma(aulas, painel) {
 
       // Horário
       const pHorario = document.createElement("p");
-      pHorario.textContent = `${aula.horainicial.slice(0, 5)} - ${aula.horafinal.slice(0, 5)}`;
+      pHorario.textContent = `${aula.horainicial.slice(
+        0,
+        5
+      )} - ${aula.horafinal.slice(0, 5)}`;
 
       // Professor
       const pProfessor = document.createElement("p");
@@ -218,17 +226,14 @@ function exibirAulasNaTurma(aulas, painel) {
   // Card para adicionar nova aula
   const divAddCard = document.createElement("div");
   divAddCard.className = "materia add-card";
-  divAddCard.setAttribute("onclick", "openDialog('dialogAula', 'idTitleAula', 'Nova Aula')");
+  divAddCard.setAttribute(
+    "onclick",
+    "openDialog('dialogAula', 'idTitleAula', 'Nova Aula')"
+  );
   divAddCard.innerHTML = `<i class="fa-solid fa-plus"></i>`;
 
   sectionMaterias.appendChild(divAddCard);
 
-// Adiciona a nova seção ao painel (abaixo dos botões de dias)
-painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
-
+  // Adiciona a nova seção ao painel (abaixo dos botões de dias)
+  painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 }
-
-
-
-
-
