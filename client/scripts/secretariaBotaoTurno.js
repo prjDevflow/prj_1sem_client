@@ -181,8 +181,8 @@ function exibirAulasNaTurma(aulas, painel) {
       divBotoes.className = "botoes-acoes";
 
       const btnEditar = document.createElement("button");
-      btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.nomedisciplina}')`);
-      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
+      btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.idaula}')`);
+      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;      
 
       const btnExcluir = document.createElement("button");
       btnExcluir.setAttribute("onclick", "pedirConfirmarExclusao(this)");
@@ -226,6 +226,65 @@ function exibirAulasNaTurma(aulas, painel) {
   // Adiciona a nova seção ao painel (abaixo dos botões de dias)
   painel.appendChild(sectionMaterias);
 }
+// let aulaAtualId = null;
+
+function openDialog(idDialog, idTitle, idAula) {
+  aulaAtualId = idAula; // guarda o ID da aula que será atualizada
+  document.getElementById(idTitle).innerText = `Editando aula #${idAula}`;
+  document.getElementById(idDialog).showModal();
+}
+
+// Conecta Botão Update
+document.getElementById("formAula").addEventListener("submit", async function (e) {
+  e.preventDefault(); // Evita recarregar a página
+
+  // Captura os valores do formulário
+  const disciplina = document.getElementById("disciplinaSelect").value;
+  const horario = document.getElementById("horarioSelect").value;
+  const professor = document.getElementById("professorSelect").value;
+  const sala = document.getElementById("salaSelect").value;
+
+
+  // Separar horário inicial e final
+  const [horarioInicial, horarioFinal] = horario.split(" - ");
+
+  // // Exemplo fixo de turma e dia da semana (você pode pegar dinâmico depois)
+  // const turma = "1 DSM";
+  const diaSemana = "Segunda-feira";
+
+  // Envia os dados via POST para a rota do back-end
+  try {
+    const response = await fetch("http://localhost:3333/secretary/update-aula", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idAula: aulaAtualId, // -- ajustar
+        turma, // -- ajustar
+        disciplina,
+        professor,
+        horarioInicial,
+        horarioFinal,
+        sala,
+        diaSemana
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("✅ Aula atualizada com sucesso!");
+      closeDialog("dialogAula");
+      // Aqui você pode recarregar a tabela ou os cards, se quiser
+    } else {
+      alert("Erro ao atualizar aula: " + result.message);
+    }
+  } catch (error) {
+    console.error("Erro de rede:", error);
+    alert("Erro ao enviar os dados.");
+  }
+});
 
 
 
