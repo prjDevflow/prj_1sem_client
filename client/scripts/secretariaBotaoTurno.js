@@ -66,7 +66,7 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
           body: JSON.stringify({ curso, turno, dia: nome }),
         });
 
-        if (!res.ok) return [];
+        if (!res.ok) return console.log(res);
 
         const dados = await res.json();
         return Array.isArray(dados) ? dados : [dados];

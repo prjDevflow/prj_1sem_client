@@ -2,26 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meio Ambiente e Recursos Hídricos</title>
+
+    <style>
+      .button-periodo {
+        background-color: #72af5f;
+      }
+      .cursoTitle h2 {
+        color: #72af5f;
+      }
+      .cursoDivider {
+        background-color: #72af5f;
+      }
+      .table th {
+        background-color: #72af5f;
+      }
+      .professores h3 {
+        color: #72af5f;
+      }
+    </style>
+
+    <!-- Inclua aqui seu script, use defer para garantir que a função Filtro() exista -->
+    <script src="../scripts/renderDisciplinas.js" defer></script>
   </head>
-  <style>
-    .button-periodo {
-      background-color: #72af5f;
-    }
-    .cursoTitle h2 {
-      color: #72af5f;
-    }
-    .cursoDivider {
-      background-color: #72af5f;
-    }
-    .table th {
-      background-color: #72af5f;
-    }
-    .professores h3 {
-      color: #72af5f;
-    }
-  </style>
 
   <body>
     <section class="contCursos">
@@ -35,115 +39,52 @@
           </div>
 
           <div class="cursoTitle">
-            <img class="imgCurso" src="Imagens/imgMarh.png" />
+            <img class="imgCurso" src="Imagens/imgMarh.png" alt="Meio Ambiente e Recursos Hídricos" />
             <h2>Meio Ambiente e Recursos Hídricos</h2>
           </div>
 
           <div class="cursoDivider bcgRh"></div>
 
           <p class="cursoText">
-            O Tecnólogo em Meio Ambiente e Recursos Hídricos está apto a
-            planejar e gerenciar os aspectos ambientais de organizações dos mais
-            diversos setores e segmentos; identificar, caracterizar e solucionar
-            problemas ambientais; realizar a gestão racional e responsável dos
-            recursos hídricos; promover a recuperação ambiental de áreas
-            degradadas, rios e bacias hidrográficas.
+            O Tecnólogo em Meio Ambiente e Recursos Hídricos está apto a planejar e gerenciar os aspectos ambientais de organizações dos mais diversos setores e segmentos; identificar, caracterizar e solucionar problemas ambientais; realizar a gestão racional e responsável dos recursos hídricos; promover a recuperação ambiental de áreas degradadas, rios e bacias hidrográficas.
           </p>
 
+          <!-- FILTRO -->
           <div class="cursoSeparator bcgRh">
             <div class="dropdown-curso">
-              <button class="btn-menu">
+              <button class="btn-menu" onclick="Filtro('Meio Ambiente e Recursos Hídricos')">
                 FILTRO
-                <i
-                  class="fa-solid fa-chevron-down fa-sm"
-                  style="margin-left: 12px"
-                ></i>
+                <i class="fa-solid fa-chevron-down fa-sm" style="margin-left: 12px"></i>
               </button>
-              <div class="menu-curso bcgRh">
-                <!-- Período Diurno -->
-                <div class="sub-menu-curso">
-                  <button class="btn-periodo" data-periodo="diurno">
-                    DIURNO
-                  </button>
-                </div>
-                
-                <!-- Período Noturno -->
-                <div class="sub-menu-curso">
-                  <button class="btn-periodo" data-periodo="noturno">
-                    NOTURNO
-                  </button>
-                  <div id="drop_diurno" class="sub-sub-menu-curso">
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '5RH')"
-                    >
-                      5RH
-                    </button>
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '6RH')"
-                    >
-                      6RH
-                    </button>
-                    </div>
-                  
-                  <div id="drop_noturno" class="sub-sub-menu-curso">
-                    <button
-                    class="button-periodo"
-                    onclick="buscaTurma('noturno', '1RH')"
-                    >
-                    1RH
-                  </button>
-                  <button
-                  class="button-periodo"
-                  onclick="buscaTurma('noturno', '2RH')"
-                  >
-                  2RH
-                </button>
-                <button
-                class="button-periodo"
-                onclick="buscaTurma('noturno', '3RH')"
-                >
-                3RH
-              </button>
+
+              <div class="menu-curso bcgRh" id="menuCursos">
+                <!-- Turnos e turmas serão inseridos aqui dinamicamente -->
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <script src="../scripts/renderDisciplinas.js"></script>
         </section>
+
         <!-- GRADE HORARIOS -->
         <section id="grade" class="card-grade hidden">
           <section class="contTable">
+            <!-- TURMA E TURNO -->
             <section class="title">
-              <h1>1 RH</h1>
-              <p>Turno: Noturno</p>
+              <h1></h1>
+              <p></p>
             </section>
 
+            <!-- TABELA -->
             <div class="table-container">
               <table class="table">
                 <thead>
-                  <tr class="bcgRh" id="theadTabela">
-                    <th class="bcgRh">Horário</th>
-                    <!-- horarios -->
-                  </tr>
+                  <tr class="bcgRh" id="theadTabela"></tr>
                 </thead>
-                <tbody id="tbodyDisciplinas">
-                  <!-- disciplinas -->
-                </tbody>
+                <tbody id="tbodyDisciplinas"></tbody>
               </table>
             </div>
 
+            <!-- PROFESSORES -->
             <section class="info">
-              <section class="professores">
-                <h3>Professores</h3>
-                <div>Engenharia de Software I - Egydio</div>
-                <div>Sistemas Operacionais e Redes - Egydio</div>
-                <div>Modelagem de Banco de Dados - Marcelo Sudo</div>
-                <div>Design Digital - Marcelo Sudo</div>
-                <div>Algoritmo e Lógica de Programação - Arley</div>
-                <div>Desenvolvimento Web - Henrique Louro</div>
-              </section>
               <div class="btnDiv">
                 <button id="btnBaixarPDF" onclick="baixarPDF()" class="download-btn">
                   Baixar PDF
@@ -152,6 +93,10 @@
               </div>
             </section>
           </section>
+        </section>
+
+        <section id="mensagemErro" class="card-grade hidden">
+          <h1 id="mensagemTexto">Nenhuma aula encontrada.</h1>
         </section>
       </section>
     </section>

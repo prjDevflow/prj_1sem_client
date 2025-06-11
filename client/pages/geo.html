@@ -52,93 +52,67 @@
             gerenciamento ambiental, de sistemas de transporte, de processos
             agrícolas, entre outras.
           </p>
+          <!-- FILTRO -->
           <div class="cursoSeparator bcgGeo">
             <div class="dropdown-curso">
-              <button class="btn-menu">
+              <button
+                class="btn-menu"
+                onclick="Filtro('Geoprocessamento')"
+              >
                 FILTRO
                 <i
                   class="fa-solid fa-chevron-down fa-sm"
                   style="margin-left: 12px"
                 ></i>
               </button>
-              <script src="../scripts/renderDisciplinas.js"></script>
-              <div class="menu-curso bcgDsm">
-                <!-- Período Noturno -->
-                <div class="sub-menu-curso">
-                  <button class="btn-periodo" data-periodo="noturno">
-                    NOTURNO
-                  </button>
-                  <div id="drop_noturno" class="sub-sub-menu-curso">
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '1GEO')"
-                    >
-                      1GEO
-                    </button>
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '3GEO')"
-                    >
-                      3GEO
-                    </button>
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '5GEO')"
-                    >
-                      5GEO
-                    </button>
-                    <button
-                      class="button-periodo"
-                      onclick="buscaTurma('noturno', '6GEO')"
-                    >
-                      6GEO
-                    </button>
-                   
-                </div>
+
+              <div class="menu-curso bcgGeo" id="menuCursos">
+                <!-- Turnos e turmas serão inseridos aqui -->
               </div>
             </div>
           </div>
         </section>
+ 
         <!-- GRADE HORARIOS -->
         <section id="grade" class="card-grade hidden">
           <section class="contTable">
+            <!-- TURMA -->
             <section class="title">
-              <h1>1 GEO</h1>
-              <p>Turno: Diurno</p>
+              <h1></h1>
+              <p></p>
             </section>
 
+            <!-- TABELA -->
             <div class="table-container">
               <table class="table">
                 <thead>
-                  <tr class="bcgDsm" id="theadTabela">
-                    <th class="bcgDsm">Horário</th>
-                    <!-- horarios -->
-                  </tr>
+                  <tr class="bcgGeo" id="theadTabela"></tr>
                 </thead>
-                <tbody id="tbodyDisciplinas">
-                  <!-- disciplinas -->
-                </tbody>
+                <tbody id="tbodyDisciplinas"></tbody>
               </table>
             </div>
 
+            <!-- PROFESSORES -->
             <section class="info">
-              <section class="professores">
-                <h3>Professores</h3>
-                <div>Engenharia de Software I - Egydio</div>
-                <div>Sistemas Operacionais e Redes - Egydio</div>
-                <div>Modelagem de Banco de Dados - Marcelo Sudo</div>
-                <div>Design Digital - Marcelo Sudo</div>
-                <div>Algoritmo e Lógica a de Programação: Arley</div>
-                <div>Desenvolvimento Web: Henrique Louro</div>
-              </section>
               <div class="btnDiv">
-                <button id="btnBaixarPDF" onclick="baixarPDF()" class="download-btn">
+                <button
+                  id="btnBaixarPDF"
+                  onclick="baixarPDF()"
+                  class="download-btn"
+                >
                   Baixar PDF
-                  <i class="fa-solid fa-arrow-down" style="margin-left: 5px"></i>
+                  <i
+                    class="fa-solid fa-arrow-down"
+                    style="margin-left: 5px"
+                  ></i>
                 </button>
               </div>
             </section>
           </section>
+        </section>
+
+        <section id="mensagemErro" class="card-grade hidden">
+          <h1 id="mensagemTexto">Nenhuma aula encontrada.</h1>
         </section>
       </section>
     </section>
