@@ -32,6 +32,7 @@ function loadContentPages(event, urlPage) {
       // Carrega os scripts necessários
       const scriptsToLoad = [
         "scripts/secretariaBotaoTurno.js",
+        "scripts/secretariaBuscaDados.js",
         "scripts/dialog.js",
         "scripts/accordion.js",
         // "scripts/login.js",

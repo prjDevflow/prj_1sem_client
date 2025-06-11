@@ -218,7 +218,7 @@ function exibirAulasNaTurma(aulas, painel) {
   // Card para adicionar nova aula
   const divAddCard = document.createElement("div");
   divAddCard.className = "materia add-card";
-  divAddCard.setAttribute("onclick", "openDialog('dialogAula', 'idTitleAula', 'Nova Aula')");
+  divAddCard.setAttribute("onclick", "abrirDialogNovaAula()");
   divAddCard.innerHTML = `<i class="fa-solid fa-plus"></i>`;
 
   sectionMaterias.appendChild(divAddCard);
@@ -228,7 +228,119 @@ painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 
 }
 
+// Função para carregar dados do banco de dados para o formulário
+async function carregarDadosFormulario() {
+  console.log("carregarDadosFormulario: Iniciando carregamento de dados...");
+  try {
+    // Carregar dados usando as funções específicas
+    const dadosDisciplinas = await buscarDisciplinas();
+    console.log("carregarDadosFormulario: Disciplinas carregadas.", dadosDisciplinas);
+    const dadosProfessores = await buscarProfessores();
+    console.log("carregarDadosFormulario: Professores carregados.", dadosProfessores);
+    const dadosSalas = await buscarSalas();
+    console.log("carregarDadosFormulario: Salas carregadas.", dadosSalas);
+    const dadosHorarios = await buscarHorarios();
+    console.log("carregarDadosFormulario: Horários carregados.", dadosHorarios);
+    const dadosTurmas = await buscarTurmas();
+    console.log("carregarDadosFormulario: Turmas carregadas.", dadosTurmas);
 
+    // Preencher selects
+    preencherSelect('selectDisciplina', dadosDisciplinas, 'nome', 'nome');
+    preencherSelect('selectProfessor', dadosProfessores, 'nome', 'nome');
+    preencherSelect('selectSala', dadosSalas, 'numero', 'numero');
+    preencherSelect('selectHorario', dadosHorarios, 'horainicial', 'horainicial', (item) => `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`);
+    preencherSelect('selectTurma', dadosTurmas, 'nome', 'nome');
+    console.log("carregarDadosFormulario: Selects preenchidos.");
 
+  } catch (error) {
+    console.error("Erro ao carregar dados do formulário:", error);
+  }
+}
+
+// Função auxiliar para preencher selects
+function preencherSelect(selectId, dados, valueField, textField, formatFunction = null) {
+  console.log(`preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`);
+  const select = document.getElementById(selectId);
+  if (!select) {
+    console.error(`preencherSelect: Elemento com ID ${selectId} não encontrado.`);
+    return;
+  }
+  
+  // Limpar opções existentes (exceto a primeira)
+  while (select.children.length > 1) {
+    select.removeChild(select.lastChild);
+  }
+  
+  // Adicionar novas opções
+  dados.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item[valueField];
+    option.textContent = formatFunction ? formatFunction(item) : item[textField];
+    select.appendChild(option);
+  });
+  console.log(`preencherSelect: ${selectId} preenchido.`);
+}
+
+// Função para abrir o dialog e carregar dados
+async function abrirDialogNovaAula() {
+  console.log("abrirDialogNovaAula: Chamado.");
+  await carregarDadosFormulario();
+  openDialog('dialogAula', 'idTitleAula', 'Nova Aula');
+  console.log("abrirDialogNovaAula: Dialog aberto.");
+}
+
+// Função para submeter o formulário de nova aula
+async function submeterNovaAula(event) {
+  event.preventDefault();
+  console.log("submeterNovaAula: Formulário submetido.");
+  
+  const form = document.getElementById('formNovaAula');
+  const formData = new FormData(form);
+  
+  const dadosAula = {
+    Disciplina_idDisciplina: formData.get('disciplina'),
+    Professor_idProfessor: formData.get('professor'),
+    Sala_Numero: formData.get('sala'),
+    Horario_idHorario: formData.get('horario'),
+    Turma_idTurma: formData.get('turma'),
+    Semana_idSemana: formData.get('dia')
+  };
+
+  try {
+    console.log("submeterNovaAula: Enviando dados para a API...", dadosAula);
+    const response = await fetch("http://localhost:3333/secretary/cria-aula", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dadosAula)
+    });
+
+    if (response.ok) {
+      const resultado = await response.json();
+      console.log("submeterNovaAula: Aula criada com sucesso!", resultado);
+      alert("Aula criada com sucesso!");
+      closeDialog('dialogAula');
+      form.reset();
+      // Recarregar a página ou atualizar a lista de aulas
+      location.reload();
+    } else {
+      const erro = await response.json();
+      console.error("submeterNovaAula: Erro ao criar aula:", erro);
+      alert("Erro ao criar aula: " + erro.message);
+    }
+  } catch (error) {
+    console.error("submeterNovaAula: Erro ao submeter nova aula:", error);
+    alert("Erro ao criar aula. Verifique a conexão.");
+  }
+}
+
+// Adicionar event listener ao formulário quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded: Evento disparado.");
+  const form = document.getElementById('formNovaAula');
+  if (form) {
+    form.addEventListener('submit', submeterNovaAula);
+    console.log("DOMContentLoaded: Event listener para formNovaAula adicionado.");
+  }
+});
 
 
