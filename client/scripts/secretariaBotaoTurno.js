@@ -230,7 +230,6 @@ painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 
 // Função para carregar dados do banco de dados para o formulário
 async function carregarDadosFormulario() {
-  console.log("carregarDadosFormulario: Iniciando carregamento de dados...");
   try {
     // Carregar dados usando as funções específicas
     const dadosDisciplinas = await buscarDisciplinas();
@@ -238,31 +237,26 @@ async function carregarDadosFormulario() {
     const dadosProfessores = await buscarProfessores();
     console.log("carregarDadosFormulario: Professores carregados.", dadosProfessores);
     const dadosSalas = await buscarSalas();
-    console.log("carregarDadosFormulario: Salas carregadas.", dadosSalas);
     const dadosHorarios = await buscarHorarios();
-    console.log("carregarDadosFormulario: Horários carregados.", dadosHorarios);
     const dadosTurmas = await buscarTurmas();
-    console.log("carregarDadosFormulario: Turmas carregadas.", dadosTurmas);
 
     // Preencher selects
-    preencherSelect('selectDisciplina', dadosDisciplinas, 'nome', 'nome');
-    preencherSelect('selectProfessor', dadosProfessores, 'nome', 'nome');
+    preencherSelect('selectDisciplina', dadosDisciplinas, 'iddisciplina', 'nome');
+    preencherSelect('selectProfessor', dadosProfessores, 'idprofessor', 'nome');
     preencherSelect('selectSala', dadosSalas, 'numero', 'numero');
     preencherSelect('selectHorario', dadosHorarios, 'horainicial', 'horainicial', (item) => `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`);
     preencherSelect('selectTurma', dadosTurmas, 'nome', 'nome');
-    console.log("carregarDadosFormulario: Selects preenchidos.");
 
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
   }
 }
 
-// Função auxiliar para preencher selects
 function preencherSelect(selectId, dados, valueField, textField, formatFunction = null) {
   console.log(`preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`);
   const select = document.getElementById(selectId);
   if (!select) {
-    console.error(`preencherSelect: Elemento com ID ${selectId} não encontrado.`);
+    console.error(`Elemento com ID ${selectId} não encontrado.`);
     return;
   }
   
@@ -274,40 +268,43 @@ function preencherSelect(selectId, dados, valueField, textField, formatFunction 
   // Adicionar novas opções
   dados.forEach(item => {
     const option = document.createElement('option');
-    option.value = item[valueField];
+    option.value = item.id || item[valueField]; // Usar ID quando disponível
     option.textContent = formatFunction ? formatFunction(item) : item[textField];
     select.appendChild(option);
   });
-  console.log(`preencherSelect: ${selectId} preenchido.`);
 }
 
 // Função para abrir o dialog e carregar dados
 async function abrirDialogNovaAula() {
-  console.log("abrirDialogNovaAula: Chamado.");
   await carregarDadosFormulario();
   openDialog('dialogAula', 'idTitleAula', 'Nova Aula');
-  console.log("abrirDialogNovaAula: Dialog aberto.");
 }
 
-// Função para submeter o formulário de nova aula
 async function submeterNovaAula(event) {
   event.preventDefault();
-  console.log("submeterNovaAula: Formulário submetido.");
-  
+
   const form = document.getElementById('formNovaAula');
   const formData = new FormData(form);
-  
+
+  // Obter valores diretamente dos selects
   const dadosAula = {
-    Disciplina_idDisciplina: formData.get('disciplina'),
-    Professor_idProfessor: formData.get('professor'),
-    Sala_Numero: formData.get('sala'),
-    Horario_idHorario: formData.get('horario'),
-    Turma_idTurma: formData.get('turma'),
-    Semana_idSemana: formData.get('dia')
+    Disciplina_idDisciplina: parseInt(document.getElementById('selectDisciplina').value),
+    Professor_idProfessor: parseInt(document.getElementById('selectProfessor').value),
+    Sala_Numero: parseInt(document.getElementById('selectSala').value),
+    Horario_idHorario: parseInt(document.getElementById('selectHorario').value),
+    Turma_idTurma: parseInt(document.getElementById('selectTurma').value),
+    Semana_idSemana: parseInt(document.getElementById('selectDia').value)
   };
 
+  console.log("Dados preparados para envio:", dadosAula);
+
+  // Validar se todos os campos têm valores numéricos válidos
+  if (Object.values(dadosAula).some(isNaN)) {
+    alert("Por favor, preencha todos os campos corretamente.");
+    return;
+  }
+
   try {
-    console.log("submeterNovaAula: Enviando dados para a API...", dadosAula);
     const response = await fetch("http://localhost:3333/secretary/cria-aula", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -316,31 +313,45 @@ async function submeterNovaAula(event) {
 
     if (response.ok) {
       const resultado = await response.json();
-      console.log("submeterNovaAula: Aula criada com sucesso!", resultado);
+      console.log("Aula criada com sucesso!", resultado);
       alert("Aula criada com sucesso!");
       closeDialog('dialogAula');
       form.reset();
-      // Recarregar a página ou atualizar a lista de aulas
       location.reload();
     } else {
-      const erro = await response.json();
-      console.error("submeterNovaAula: Erro ao criar aula:", erro);
-      alert("Erro ao criar aula: " + erro.message);
+      const erro = await response.text();
+      console.error("Erro ao criar aula:", erro);
+      alert(`Erro ao criar aula: ${erro}`);
     }
   } catch (error) {
-    console.error("submeterNovaAula: Erro ao submeter nova aula:", error);
-    alert("Erro ao criar aula. Verifique a conexão.");
+    console.error("Erro na requisição:", error);
+    alert("Erro ao conectar com o servidor.");
   }
 }
 
-// Adicionar event listener ao formulário quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOMContentLoaded: Evento disparado.");
+// Garante que o formulário receba o event listener após o DOM carregar
+document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('formNovaAula');
   if (form) {
     form.addEventListener('submit', submeterNovaAula);
-    console.log("DOMContentLoaded: Event listener para formNovaAula adicionado.");
+    console.log("DOMContentLoaded: Listener de submit adicionado ao formNovaAula.");
+  } else {
+    console.warn("DOMContentLoaded: formNovaAula não encontrado no DOM.");
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('formNovaAula');
+
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      console.log("Listener FUNCIONOU: o submit foi interceptado.");
+    });
+  } else {
+    console.warn("Formulário NÃO encontrado no DOM.");
+  }
+});
+
+
 
 
