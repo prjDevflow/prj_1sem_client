@@ -1,9 +1,30 @@
+// Mapeamento de dias abreviados para nomes por extenso
+const nomesDiasPorExtenso = {
+  "Seg": "Segunda-feira",
+  "Ter": "Terça-feira",
+  "Qua": "Quarta-feira",
+  "Qui": "Quinta-feira",
+  "Sex": "Sexta-feira",
+  "Sáb": "Sábado",
+  "Dom": "Domingo"
+};
+
+let diaSelecionado = ''; // Guarda o dia da semana selecionado
+
+// Função para abrir o modal e colocar o título com o dia
 function openDialog(idDialog, idTitle, title) {
   const dialog = document.getElementById(idDialog);
   dialog.showModal();
 
+  // Define título principal
   const titleElement = document.getElementById(idTitle);
   if (titleElement) titleElement.innerHTML = title;
+
+  // Mostra o dia por extenso abaixo do título
+  const diaElement = document.getElementById('diaSemanaSelecionado');
+  if (diaElement) {
+    diaElement.textContent = diaSelecionado ? `(${diaSelecionado})` : '';
+  }
 
   dialog.addEventListener(
     "click",
@@ -23,50 +44,50 @@ function openDialog(idDialog, idTitle, title) {
   );
 }
 
+// Fecha o modal
 function closeDialog(idDialog) {
   const dialog = document.getElementById(idDialog);
   dialog.close();
 }
 
-// EXCLUSÃO 
+// --- EXCLUSÃO DINÂMICA ---
+let elementoParaExcluir = null;
+let idAulaParaExcluir = null;
 
-function pedirConfirmarExclusao(botao) {
+function pedirConfirmarExclusao(botao, idAula) {
   elementoParaExcluir = botao.closest('.materia');
+  idAulaParaExcluir = idAula;
+
   const dialog = document.getElementById('dialogConfirmarExclusao');
-  dialog.showModal(); // Em vez de classList.add('open')
+  dialog.showModal();
 }
 
 function fecharDialogConfirmacao() {
   const dialog = document.getElementById('dialogConfirmarExclusao');
-  dialog.close(); // Em vez de classList.remove('open')
+  dialog.close();
 }
 
+async function confirmarExclusao() {
+  if (!elementoParaExcluir || !idAulaParaExcluir) return;
 
-function confirmarExclusao() {
-  if (elementoParaExcluir) {
-    elementoParaExcluir.remove(); // Remove a matéria
-    elementoParaExcluir = null;
-  }
+  try {
+    // Remove visualmente
+    elementoParaExcluir.remove();
 
-  fecharDialogConfirmacao(); // Fecha o modal depois de excluir
-}
+    // Envia exclusão ao backend (ID na URL)
+    const res = await fetch(`http://localhost:3333/secretary/excluir-aula/${idAulaParaExcluir}`, {
+      method: "DELETE"
+    });
 
-// BOTÃO FIXO
-
-const botoes = document.querySelectorAll('.dias-da-semana button');
-
-botoes.forEach(botao => {
-  botao.addEventListener('click', () => {
-    // Se já está ativo, remove e sai
-    if (botao.classList.contains('ativo')) {
-      botao.classList.remove('ativo');
-      return;
+    if (!res.ok) {
+      console.error("Erro ao excluir aula no servidor.");
     }
-
-    // Remove 'ativo' de todos os outros
-    botoes.forEach(b => b.classList.remove('ativo'));
-
-    // Adiciona no clicado
-    botao.classList.add('ativo');
-  });
-});
+    console.log(idAulaParaExcluir)
+  } catch (error) {
+    console.error("Erro ao excluir aula:", error);
+  } finally {
+    elementoParaExcluir = null;
+    idAulaParaExcluir = null;
+    fecharDialogConfirmacao();
+  }
+}
