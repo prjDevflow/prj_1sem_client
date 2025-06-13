@@ -31,7 +31,7 @@ function handleCSVUpload(tipo, event) {
   formData.append('file', file);
 
   // Faz o upload para a API
-  fetch(`${serverURL}${tipo}`, {
+  fetch(`${serverURL}`, {
     method: 'POST',
     body: formData
   })
