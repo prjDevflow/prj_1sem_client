@@ -19,7 +19,10 @@
   --sombra: 0 4px 12px rgba(198, 40, 40, 0.1);
   --transicao: none; /* Transições desativadas */
 }
- 
+#mensagemTexto {
+  margin-bottom: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -231,6 +234,15 @@ h2 {
   font-size: 0.9rem;
   margin-bottom: 6px;
 }
+
+.sub-sub-menu-curso {
+  display: none;
+  margin-left: 20px;
+}
+.sub-sub-menu-curso.active {
+  display: block;
+}
+
  
 .button-periodo:hover {
   background-color: #d8d8d8;
@@ -240,10 +252,6 @@ h2 {
 .info {
   display: flex;
   justify-content: space-between;
-<<<<<<< HEAD
-  flex-wrap: wrap;
-=======
->>>>>>> 5054637faf383c1c3e682a6f93fef5ddf005fde1
   gap: 2rem;
   padding-bottom: 25px;
 }

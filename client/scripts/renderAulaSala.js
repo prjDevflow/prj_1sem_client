@@ -1,11 +1,20 @@
-async function buscaAulaSala(turma, turno) {
+let salaSelecionada = "";
+
+function abrirSala(nomeSala) {
+  salaSelecionada = nomeSala; // guarda a sala clicada
+  openDialog('dialogSala', 'idTitleSala', nomeSala); // abre modal e atualiza título
+  const select = document.querySelector("select");
+  buscaAulaSala(nomeSala, select.value); // busca aula com dia atual do select
+}
+
+async function buscaAulaSala(salaNome, diaSemana) {
   try {
     const res = await fetch('http://localhost:3333/mapa', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({salaNumero: sala, diaSemana }),
+      body: JSON.stringify({salaNome, diaSemana }),
     });
 
     if (!res.ok) {
@@ -13,8 +22,6 @@ async function buscaAulaSala(turma, turno) {
     }
     const dados = await res.json();
     
-    console.log(diaSemana);
-    console.log(dados);
     RenderTabelaSala(dados);
   } catch (erro) {
     console.error("Erro ao buscar os dados da API:", erro);
