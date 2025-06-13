@@ -1,3 +1,4 @@
+
 function togglePeriodoDropdown(periodo) {
   const dropdown = document.getElementById(`drop_${periodo}`);
   const isCurrentlyVisible = dropdown && dropdown.style.display === 'block';

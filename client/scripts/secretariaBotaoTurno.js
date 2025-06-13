@@ -1,4 +1,5 @@
 async function buscaTurno(curso) {
+  document.getElementById("botoes-turmas").innerHTML = "";
   try {
     const res = await fetch("http://localhost:3333/secretary/busca-turno", {
       method: "POST",
@@ -103,8 +104,29 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
         botaoDia.textContent = abreviado;
 
         botaoDia.addEventListener("click", async () => {
+          // Verifica se já existe uma seção de aulas aberta para este dia
+          const sectionExistente = painel.querySelector(".materiasTurma");
+
+          // Se já existe e o usuário clicou no mesmo dia novamente, REMOVE as aulas
+          if (sectionExistente && botaoDia.dataset.lastClicked === "true") {
+            sectionExistente.remove();
+            botaoDia.dataset.lastClicked = "false";
+            return; // Sai da função
+          }
+
+          // Se não existe ou é outro dia, BUSCA as aulas
           const aulas = await buscarAulasPorDia(curso, turno, nome, turmaNome);
           exibirAulasNaTurma(aulas, painel);
+
+          // Marca que este botão foi clicado
+          botaoDia.dataset.lastClicked = "true";
+
+          // Remove a marcação dos outros botões (opcional)
+          painel.querySelectorAll(".dias-da-semana button").forEach((btn) => {
+            if (btn !== botaoDia) {
+              btn.dataset.lastClicked = "false";
+            }
+          });
         });
 
         divDias.appendChild(botaoDia);
@@ -114,8 +136,18 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
 
       // Toggle painel ao clicar no botão da turma
       botaoTurma.addEventListener("click", () => {
-        painel.style.display =
-          painel.style.display === "none" ? "block" : "none";
+        // PASSO 1: Fecha todos os outros painéis
+        document.querySelectorAll(".accordion").forEach((outroBotao) => {
+          if (outroBotao !== botaoTurma) {
+            outroBotao.classList.remove("active"); // Remove a classe 'active'
+            outroBotao.nextElementSibling.style.display = "none"; // Fecha o painel
+          }
+        });
+
+        // PASSO 2: Abre/fecha o painel clicado
+        const estaAberto = painel.style.display === "block";
+        painel.style.display = estaAberto ? "none" : "block";
+        botaoTurma.classList.toggle("active", !estaAberto);
       });
 
       container.appendChild(botaoTurma);
@@ -180,8 +212,11 @@ function exibirAulasNaTurma(aulas, painel) {
       divBotoes.className = "botoes-acoes";
 
       const btnEditar = document.createElement("button");
-      btnEditar.setAttribute("onclick", `openDialog('dialogAula', 'idTitleAula', '${aula.idaula}')`);
-      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;      
+      btnEditar.setAttribute(
+        "onclick",
+        `openDialog('dialogAula', 'idTitleAula', '${aula.idaula}')`
+      );
+      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
 
       const btnExcluir = document.createElement("button");
       btnExcluir.setAttribute(
@@ -228,9 +263,8 @@ function exibirAulasNaTurma(aulas, painel) {
 
   sectionMaterias.appendChild(divAddCard);
 
-// Adiciona a nova seção ao painel (abaixo dos botões de dias)
-painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
-
+  // Adiciona a nova seção ao painel (abaixo dos botões de dias)
+  painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 }
 
 // Função para carregar dados do banco de dados para o formulário
@@ -238,43 +272,70 @@ async function carregarDadosFormulario() {
   try {
     // Carregar dados usando as funções específicas
     const dadosDisciplinas = await buscarDisciplinas();
-    console.log("carregarDadosFormulario: Disciplinas carregadas.", dadosDisciplinas);
+    console.log(
+      "carregarDadosFormulario: Disciplinas carregadas.",
+      dadosDisciplinas
+    );
     const dadosProfessores = await buscarProfessores();
-    console.log("carregarDadosFormulario: Professores carregados.", dadosProfessores);
+    console.log(
+      "carregarDadosFormulario: Professores carregados.",
+      dadosProfessores
+    );
     const dadosSalas = await buscarSalas();
     const dadosHorarios = await buscarHorarios();
     const dadosTurmas = await buscarTurmas();
 
     // Preencher selects
-    preencherSelect('selectDisciplina', dadosDisciplinas, 'iddisciplina', 'nome');
-    preencherSelect('selectProfessor', dadosProfessores, 'idprofessor', 'nome');
-    preencherSelect('selectSala', dadosSalas, 'numero', 'numero');
-    preencherSelect('selectHorario', dadosHorarios, 'horainicial', 'horainicial', (item) => `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`);
-    preencherSelect('selectTurma', dadosTurmas, 'nome', 'nome');
-
+    preencherSelect(
+      "selectDisciplina",
+      dadosDisciplinas,
+      "iddisciplina",
+      "nome"
+    );
+    preencherSelect("selectProfessor", dadosProfessores, "idprofessor", "nome");
+    preencherSelect("selectSala", dadosSalas, "numero", "numero");
+    preencherSelect(
+      "selectHorario",
+      dadosHorarios,
+      "horainicial",
+      "horainicial",
+      (item) =>
+        `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`
+    );
+    preencherSelect("selectTurma", dadosTurmas, "nome", "nome");
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
   }
 }
 
-function preencherSelect(selectId, dados, valueField, textField, formatFunction = null) {
-  console.log(`preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`);
+function preencherSelect(
+  selectId,
+  dados,
+  valueField,
+  textField,
+  formatFunction = null
+) {
+  console.log(
+    `preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`
+  );
   const select = document.getElementById(selectId);
   if (!select) {
     console.error(`Elemento com ID ${selectId} não encontrado.`);
     return;
   }
-  
+
   // Limpar opções existentes (exceto a primeira)
   while (select.children.length > 1) {
     select.removeChild(select.lastChild);
   }
-  
+
   // Adicionar novas opções
-  dados.forEach(item => {
-    const option = document.createElement('option');
+  dados.forEach((item) => {
+    const option = document.createElement("option");
     option.value = item.id || item[valueField]; // Usar ID quando disponível
-    option.textContent = formatFunction ? formatFunction(item) : item[textField];
+    option.textContent = formatFunction
+      ? formatFunction(item)
+      : item[textField];
     select.appendChild(option);
   });
 }
@@ -282,23 +343,27 @@ function preencherSelect(selectId, dados, valueField, textField, formatFunction 
 // Função para abrir o dialog e carregar dados
 async function abrirDialogNovaAula() {
   await carregarDadosFormulario();
-  openDialog('dialogAula', 'idTitleAula', 'Nova Aula');
+  openDialog("dialogAula", "idTitleAula", "Nova Aula");
 }
 
 async function submeterNovaAula(event) {
   event.preventDefault();
 
-  const form = document.getElementById('formNovaAula');
+  const form = document.getElementById("formNovaAula");
   const formData = new FormData(form);
 
   // Obter valores diretamente dos selects
   const dadosAula = {
-    Disciplina_idDisciplina: parseInt(document.getElementById('selectDisciplina').value),
-    Professor_idProfessor: parseInt(document.getElementById('selectProfessor').value),
-    Sala_Numero: parseInt(document.getElementById('selectSala').value),
-    Horario_idHorario: parseInt(document.getElementById('selectHorario').value),
-    Turma_idTurma: parseInt(document.getElementById('selectTurma').value),
-    Semana_idSemana: parseInt(document.getElementById('selectDia').value)
+    Disciplina_idDisciplina: parseInt(
+      document.getElementById("selectDisciplina").value
+    ),
+    Professor_idProfessor: parseInt(
+      document.getElementById("selectProfessor").value
+    ),
+    Sala_Numero: parseInt(document.getElementById("selectSala").value),
+    Horario_idHorario: parseInt(document.getElementById("selectHorario").value),
+    Turma_idTurma: parseInt(document.getElementById("selectTurma").value),
+    Semana_idSemana: parseInt(document.getElementById("selectDia").value),
   };
 
   console.log("Dados preparados para envio:", dadosAula);
@@ -313,14 +378,14 @@ async function submeterNovaAula(event) {
     const response = await fetch("http://localhost:3333/secretary/cria-aula", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dadosAula)
+      body: JSON.stringify(dadosAula),
     });
 
     if (response.ok) {
       const resultado = await response.json();
       console.log("Aula criada com sucesso!", resultado);
       alert("Aula criada com sucesso!");
-      closeDialog('dialogAula');
+      closeDialog("dialogAula");
       form.reset();
       location.reload();
     } else {
@@ -335,20 +400,22 @@ async function submeterNovaAula(event) {
 }
 
 // Garante que o formulário receba o event listener após o DOM carregar
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('formNovaAula');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formNovaAula");
   if (form) {
-    form.addEventListener('submit', submeterNovaAula);
-    console.log("DOMContentLoaded: Listener de submit adicionado ao formNovaAula.");
+    form.addEventListener("submit", submeterNovaAula);
+    console.log(
+      "DOMContentLoaded: Listener de submit adicionado ao formNovaAula."
+    );
   } else {
     console.warn("DOMContentLoaded: formNovaAula não encontrado no DOM.");
   }
 });
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('formNovaAula');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formNovaAula");
 
   if (form) {
-    form.addEventListener('submit', function (event) {
+    form.addEventListener("submit", function (event) {
       event.preventDefault();
       console.log("Listener FUNCIONOU: o submit foi interceptado.");
     });
@@ -356,7 +423,3 @@ document.addEventListener('DOMContentLoaded', function () {
     console.warn("Formulário NÃO encontrado no DOM.");
   }
 });
-
-
-
-

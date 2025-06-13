@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/csv/"
+
 function handleCSVUpload(tipo, event) {
   const status = document.getElementById(`upload-status-${tipo.toLowerCase()}`);
   const badge = document.getElementById(`badge-${tipo.toLowerCase()}`);
@@ -29,7 +31,7 @@ function handleCSVUpload(tipo, event) {
   formData.append('file', file);
 
   // Faz o upload para a API
-  fetch(`http://localhost:3333/csv/${tipo}`, {
+  fetch(`${serverURL}${tipo}`, {
     method: 'POST',
     body: formData
   })

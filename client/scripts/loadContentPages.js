@@ -42,6 +42,7 @@ function loadContentPages(event, urlPage) {
         "scripts/loadSubMenus.js",
         "scripts/csvUpload.js",
         "scripts/secretariaAulas.js",
+        "scripts/dropdown-busca.js"
       ];
 
 loadScriptsSequentially(scriptsToLoad, () => {
