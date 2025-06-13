@@ -223,77 +223,139 @@ function exibirAulasNaTurma(aulas, painel) {
   // Card para adicionar nova aula
   const divAddCard = document.createElement("div");
   divAddCard.className = "materia add-card";
-  divAddCard.setAttribute(
-    "onclick",
-    "openDialog('dialogAula', 'idTitleAula', 'Nova Aula')"
-  );
+  divAddCard.setAttribute("onclick", "abrirDialogNovaAula()");
   divAddCard.innerHTML = `<i class="fa-solid fa-plus"></i>`;
 
   sectionMaterias.appendChild(divAddCard);
 
-  // Adiciona a nova seção ao painel (abaixo dos botões de dias)
-  painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
-}
-// let aulaAtualId = null;
+// Adiciona a nova seção ao painel (abaixo dos botões de dias)
+painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 
-function openDialog(idDialog, idTitle, idAula) {
-  aulaAtualId = idAula; // guarda o ID da aula que será atualizada
-  document.getElementById(idTitle).innerText = `Editando aula #${idAula}`;
-  document.getElementById(idDialog).showModal();
 }
 
-// Conecta Botão Update
-document.getElementById("formAula").addEventListener("submit", async function (e) {
-  e.preventDefault(); // Evita recarregar a página
-
-  // Captura os valores do formulário
-  const disciplina = document.getElementById("disciplinaSelect").value;
-  const horario = document.getElementById("horarioSelect").value;
-  const professor = document.getElementById("professorSelect").value;
-  const sala = document.getElementById("salaSelect").value;
-
-
-  // Separar horário inicial e final
-  const [horarioInicial, horarioFinal] = horario.split(" - ");
-
-  // // Exemplo fixo de turma e dia da semana (você pode pegar dinâmico depois)
-  // const turma = "1 DSM";
-  const diaSemana = "Segunda-feira";
-
-  // Envia os dados via POST para a rota do back-end
+// Função para carregar dados do banco de dados para o formulário
+async function carregarDadosFormulario() {
   try {
-    const response = await fetch("http://localhost:3333/secretary/update-aula", {
+    // Carregar dados usando as funções específicas
+    const dadosDisciplinas = await buscarDisciplinas();
+    console.log("carregarDadosFormulario: Disciplinas carregadas.", dadosDisciplinas);
+    const dadosProfessores = await buscarProfessores();
+    console.log("carregarDadosFormulario: Professores carregados.", dadosProfessores);
+    const dadosSalas = await buscarSalas();
+    const dadosHorarios = await buscarHorarios();
+    const dadosTurmas = await buscarTurmas();
+
+    // Preencher selects
+    preencherSelect('selectDisciplina', dadosDisciplinas, 'iddisciplina', 'nome');
+    preencherSelect('selectProfessor', dadosProfessores, 'idprofessor', 'nome');
+    preencherSelect('selectSala', dadosSalas, 'numero', 'numero');
+    preencherSelect('selectHorario', dadosHorarios, 'horainicial', 'horainicial', (item) => `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`);
+    preencherSelect('selectTurma', dadosTurmas, 'nome', 'nome');
+
+  } catch (error) {
+    console.error("Erro ao carregar dados do formulário:", error);
+  }
+}
+
+function preencherSelect(selectId, dados, valueField, textField, formatFunction = null) {
+  console.log(`preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`);
+  const select = document.getElementById(selectId);
+  if (!select) {
+    console.error(`Elemento com ID ${selectId} não encontrado.`);
+    return;
+  }
+  
+  // Limpar opções existentes (exceto a primeira)
+  while (select.children.length > 1) {
+    select.removeChild(select.lastChild);
+  }
+  
+  // Adicionar novas opções
+  dados.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item.id || item[valueField]; // Usar ID quando disponível
+    option.textContent = formatFunction ? formatFunction(item) : item[textField];
+    select.appendChild(option);
+  });
+}
+
+// Função para abrir o dialog e carregar dados
+async function abrirDialogNovaAula() {
+  await carregarDadosFormulario();
+  openDialog('dialogAula', 'idTitleAula', 'Nova Aula');
+}
+
+async function submeterNovaAula(event) {
+  event.preventDefault();
+
+  const form = document.getElementById('formNovaAula');
+  const formData = new FormData(form);
+
+  // Obter valores diretamente dos selects
+  const dadosAula = {
+    Disciplina_idDisciplina: parseInt(document.getElementById('selectDisciplina').value),
+    Professor_idProfessor: parseInt(document.getElementById('selectProfessor').value),
+    Sala_Numero: parseInt(document.getElementById('selectSala').value),
+    Horario_idHorario: parseInt(document.getElementById('selectHorario').value),
+    Turma_idTurma: parseInt(document.getElementById('selectTurma').value),
+    Semana_idSemana: parseInt(document.getElementById('selectDia').value)
+  };
+
+  console.log("Dados preparados para envio:", dadosAula);
+
+  // Validar se todos os campos têm valores numéricos válidos
+  if (Object.values(dadosAula).some(isNaN)) {
+    alert("Por favor, preencha todos os campos corretamente.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3333/secretary/cria-aula", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        idAula: aulaAtualId, // -- ajustar
-        turma, // -- ajustar
-        disciplina,
-        professor,
-        horarioInicial,
-        horarioFinal,
-        sala,
-        diaSemana
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dadosAula)
     });
 
-    const result = await response.json();
-
     if (response.ok) {
-      alert("✅ Aula atualizada com sucesso!");
-      closeDialog("dialogAula");
-      // Aqui você pode recarregar a tabela ou os cards, se quiser
+      const resultado = await response.json();
+      console.log("Aula criada com sucesso!", resultado);
+      alert("Aula criada com sucesso!");
+      closeDialog('dialogAula');
+      form.reset();
+      location.reload();
     } else {
-      alert("Erro ao atualizar aula: " + result.message);
+      const erro = await response.text();
+      console.error("Erro ao criar aula:", erro);
+      alert(`Erro ao criar aula: ${erro}`);
     }
   } catch (error) {
-    console.error("Erro de rede:", error);
-    alert("Erro ao enviar os dados.");
+    console.error("Erro na requisição:", error);
+    alert("Erro ao conectar com o servidor.");
+  }
+}
+
+// Garante que o formulário receba o event listener após o DOM carregar
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('formNovaAula');
+  if (form) {
+    form.addEventListener('submit', submeterNovaAula);
+    console.log("DOMContentLoaded: Listener de submit adicionado ao formNovaAula.");
+  } else {
+    console.warn("DOMContentLoaded: formNovaAula não encontrado no DOM.");
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('formNovaAula');
 
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      console.log("Listener FUNCIONOU: o submit foi interceptado.");
+    });
+  } else {
+    console.warn("Formulário NÃO encontrado no DOM.");
+  }
+});
 
 
 

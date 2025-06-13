@@ -32,6 +32,7 @@ function loadContentPages(event, urlPage) {
       // Carrega os scripts necessários
       const scriptsToLoad = [
         "scripts/secretariaBotaoTurno.js",
+        "scripts/secretariaBuscaDados.js",
         "scripts/dialog.js",
         "scripts/accordion.js",
         // "scripts/login.js",
@@ -43,12 +44,28 @@ function loadContentPages(event, urlPage) {
         "scripts/secretariaAulas.js",
       ];
 
-      loadScriptsSequentially(scriptsToLoad, () => {
-        // Após carregar os scripts, inicializa os eventos específicos da página
-        if (urlPage.includes("dsm.html")) {
-          initCursoFilter();
-        }
-      });
+loadScriptsSequentially(scriptsToLoad, () => {
+  // Reanexar o listener do formulário se estiver na página da secretaria
+  if (urlPage.includes("secretary.html")) {
+    const form = document.getElementById("formNovaAula");
+    if (form) {
+      form.addEventListener("submit", submeterNovaAula);
+      console.log("Listener reconectado ao formNovaAula.");
+    } else {
+      console.warn("formNovaAula não encontrado após carregar a página.");
+    }
+  }
+
+  // Inicializa filtros se for uma das páginas de curso
+  if (
+    urlPage.includes("dsm.html") ||
+    urlPage.includes("rh.html") ||
+    urlPage.includes("geo.html")
+  ) {
+    initCursoFilter();
+  }
+});
+
       loadScriptsSequentially(scriptsToLoad, () => {
         // Após carregar os scripts, inicializa os eventos específicos da página
         if (urlPage.includes("rh.html")) {
