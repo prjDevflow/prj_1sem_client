@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/"
+
 let salaSelecionada = "";
 
 function abrirSala(nomeSala) {
@@ -9,7 +11,7 @@ function abrirSala(nomeSala) {
 
 async function buscaAulaSala(salaNome, diaSemana) {
   try {
-    const res = await fetch('http://localhost:3333/mapa', {
+    const res = await fetch(`${serverURL}mapa`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

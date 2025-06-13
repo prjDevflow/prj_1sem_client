@@ -1,6 +1,9 @@
+const serverURL = "https://devflow-1sem.up.railway.app/api/buscaSala"
+
 async function buscaTurma(salaNumero, diaSemana) {
   try {
-    const res = await fetch('https://6823c8c065ba05803397e110.mockapi.io/api/buscaSala', {
+    //const res = await fetch('https://6823c8c065ba05803397e110.mockapi.io/api/buscaSala', {
+    const res = await fetch(`${serverURL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

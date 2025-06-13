@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/"
+
 function handleCSVUpload(type) {
   const input = event.target;
   const file = input.files[0];
@@ -12,7 +14,7 @@ async function uploadCsv(type, file) {
   formData.append("file", file);
 
   try {
-    const res = await fetch(`http://localhost:3333/csv/${type}`, {
+    const res = await fetch(`${serverURL}csv/${type}`, {
       method: "POST",
       body: formData,
     });

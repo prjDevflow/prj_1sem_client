@@ -1,6 +1,8 @@
+
+const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
 async function excluirAula(id) {
     try {
-      const response = await fetch(`http://localhost:3333/secretary/remove-aula/${id}`, {
+      const response = await fetch(`${serverURL}remove-aula/${id}`, {
         method: "DELETE",
       });
   

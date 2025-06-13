@@ -1,7 +1,9 @@
+const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
+
 async function buscaTurno(curso) {
   document.getElementById("botoes-turmas").innerHTML = "";
   try {
-    const res = await fetch("http://localhost:3333/secretary/busca-turno", {
+    const res = await fetch(`${serverURL}busca-turno`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ curso }),
@@ -60,7 +62,7 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
     // Carregar todas as aulas da semana (para saber quais turmas existem)
     const resultadosPorDia = await Promise.all(
       diasSemana.map(async ({ nome }) => {
-        const res = await fetch("http://localhost:3333/secretary/busca-turma", {
+        const res = await fetch(`${serverURL}busca-turma`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ curso, turno, dia: nome }),
@@ -161,7 +163,7 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
 // Busca as aulas por curso, turno, dia e turma específica
 async function buscarAulasPorDia(curso, turno, dia, turmaFiltrada) {
   try {
-    const res = await fetch("http://localhost:3333/secretary/busca-turma", {
+    const res = await fetch(`${serverURL}busca-turma`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ curso, turno, dia }),
@@ -375,7 +377,7 @@ async function submeterNovaAula(event) {
   }
 
   try {
-    const response = await fetch("http://localhost:3333/secretary/cria-aula", {
+    const response = await fetch(`${serverURL}cria-aula`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dadosAula),

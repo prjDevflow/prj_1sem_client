@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/"
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const toggleSenha = document.getElementById("toggleSenha");
@@ -22,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3333/login", {
+      const response = await fetch(`${serverURL}login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),

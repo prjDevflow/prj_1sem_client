@@ -1,6 +1,8 @@
+  const serverURL = "https://devflow-1sem.up.railway.app/"
+  
   async function buscaTurma(turno, turma) {
     try {
-      const res = await fetch("http://localhost:3333/agenda", {
+      const res = await fetch(`${serverURL}agenda`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +98,7 @@
 
   async function Filtro(curso) {
     try {
-      const res = await fetch("http://localhost:3333/busca-turma", {
+      const res = await fetch(`${serverURL}busca-turma`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/"
+
 function loadContentPages(event, urlPage) {
   if (event) {
     event.preventDefault();
@@ -138,7 +140,7 @@ function initLoginPage() {
     erroGeral.textContent = "";
 
     try {
-      const response = await fetch("http://localhost:3333/login", {
+      const response = await fetch(`${serverURL}login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usuario, senha }),

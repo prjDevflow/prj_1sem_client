@@ -1,3 +1,5 @@
+const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
+
 console.log("secretariaBuscaDados.js carregado.");
 
 // Arquivo para funções de busca de dados do banco para preencher formulários
@@ -6,7 +8,7 @@ console.log("secretariaBuscaDados.js carregado.");
 window.buscarDisciplinas = async function() {
   try {
     console.log("Buscando disciplinas...");
-    const response = await fetch("http://localhost:3333/secretary/busca-disciplinas", {
+    const response = await fetch(`${serverURL}busca-disciplinas`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -29,7 +31,7 @@ window.buscarDisciplinas = async function() {
 window.buscarProfessores = async function() {
   try {
     console.log("Buscando professores...");
-    const response = await fetch("http://localhost:3333/secretary/busca-professores", {
+    const response = await fetch(`${serverURL}busca-professores`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -52,7 +54,7 @@ window.buscarProfessores = async function() {
 window.buscarSalas = async function() {
   try {
     console.log("Buscando salas...");
-    const response = await fetch("http://localhost:3333/secretary/busca-salas", {
+    const response = await fetch(`${serverURL}busca-salas`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -75,7 +77,7 @@ window.buscarSalas = async function() {
 window.buscarHorarios = async function() {
   try {
     console.log("Buscando horários...");
-    const response = await fetch("http://localhost:3333/secretary/busca-horarios", {
+    const response = await fetch(`${serverURL}busca-horarios`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -98,7 +100,7 @@ window.buscarHorarios = async function() {
 window.buscarTurmas = async function() {
   try {
     console.log("Buscando turmas...");
-    const response = await fetch("http://localhost:3333/secretary/busca-turmas", {
+    const response = await fetch(`${serverURL}busca-turmas`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -116,5 +118,3 @@ window.buscarTurmas = async function() {
     return [];
   }
 };
-
-

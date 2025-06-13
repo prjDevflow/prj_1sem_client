@@ -1,3 +1,4 @@
+const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
 // Mapeamento de dias abreviados para nomes por extenso
 const nomesDiasPorExtenso = {
   "Seg": "Segunda-feira",
@@ -75,7 +76,7 @@ async function confirmarExclusao() {
     elementoParaExcluir.remove();
 
     // Envia exclusão ao backend (ID na URL)
-    const res = await fetch(`http://localhost:3333/secretary/excluir-aula/${idAulaParaExcluir}`, {
+    const res = await fetch(`${serverURL}excluir-aula/${idAulaParaExcluir}`, {
       method: "DELETE"
     });
 
