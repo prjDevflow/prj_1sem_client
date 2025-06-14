@@ -33,17 +33,18 @@ function loadContentPages(event, urlPage) {
 
       // Carrega os scripts necessários
       const scriptsToLoad = [
-        "scripts/secretariaBotaoTurno.js",
-        "scripts/secretariaBuscaDados.js",
-        "scripts/dialog.js",
         "scripts/accordion.js",
+        "scripts/baixarpdf.js",
         "scripts/btnFiltro.js",
+        "scripts/csvUpload.js",
+        "scripts/deleteAula.js",
+        "scripts/dialog.js",
+        "scripts/dropdown-busca.js",
+        "scripts/loadSubMenus.js",
         "scripts/renderAulaSala.js",
         "scripts/renderGrade.js",
-        "scripts/loadSubMenus.js",
-        "scripts/csvUpload.js",
-        "scripts/secretariaAulas.js",
-        "scripts/dropdown-busca.js",
+        "scripts/secretariaBotaoTurno.js",
+        "scripts/secretariaBuscaDados.js",
       ];
 
       loadScriptsSequentially(scriptsToLoad, () => {

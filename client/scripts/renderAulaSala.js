@@ -9,8 +9,6 @@ function abrirSala(nomeSala) {
 
 async function buscaAulaSala(salaNome, diaSemana) {
   try {
-    console.log(salaNome);
-    console.log(diaSemana);
     const res = await fetch(`https://devflow-1sem.up.railway.app/mapa`, {
       method: "POST",
       headers: {

@@ -1,13 +1,13 @@
 // Mapeamento de dias abreviados para nomes por extenso
-const nomesDiasPorExtenso = {
-  Seg: "Segunda-feira",
-  Ter: "Terça-feira",
-  Qua: "Quarta-feira",
-  Qui: "Quinta-feira",
-  Sex: "Sexta-feira",
-  Sáb: "Sábado",
-  Dom: "Domingo",
-};
+// const nomesDiasPorExtenso = {
+//   Seg: "Segunda-feira",
+//   Ter: "Terça-feira",
+//   Qua: "Quarta-feira",
+//   Qui: "Quinta-feira",
+//   Sex: "Sexta-feira",
+//   Sáb: "Sábado",
+//   Dom: "Domingo",
+// };
 
 let diaSelecionado = ""; // Guarda o dia da semana selecionado
 

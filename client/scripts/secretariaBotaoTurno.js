@@ -264,14 +264,6 @@ function exibirAulasNaTurma(aulas, painel) {
     });
   }
 
-  // Card para adicionar nova aula
-  const divAddCard = document.createElement("div");
-  divAddCard.className = "materia add-card";
-  divAddCard.setAttribute("onclick", "abrirDialogNovaAula()");
-  divAddCard.innerHTML = `<i class="fa-solid fa-plus"></i>`;
-
-  sectionMaterias.appendChild(divAddCard);
-
   // Adiciona a nova seção ao painel (abaixo dos botões de dias)
   painel.insertBefore(sectionMaterias, botoesDias.nextSibling);
 }
@@ -411,27 +403,18 @@ async function submeterNovaAula(event) {
   }
 }
 
-// Garante que o formulário receba o event listener após o DOM carregar
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("carregado"); // Teste básico
+
+  // Carrega dados dos selects do formulário
+  carregarDadosFormulario();
+
+  // Adiciona o listener do formulário se ele estiver presente
   const form = document.getElementById("formNovaAula");
   if (form) {
     form.addEventListener("submit", submeterNovaAula);
-    console.log(
-      "DOMContentLoaded: Listener de submit adicionado ao formNovaAula."
-    );
+    console.log("Listener de submit adicionado ao formNovaAula.");
   } else {
-    console.warn("DOMContentLoaded: formNovaAula não encontrado no DOM.");
-  }
-});
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("formNovaAula");
-
-  if (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      console.log("Listener FUNCIONOU: o submit foi interceptado.");
-    });
-  } else {
-    console.warn("Formulário NÃO encontrado no DOM.");
+    console.warn("formNovaAula não encontrado no DOM.");
   }
 });

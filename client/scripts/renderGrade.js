@@ -115,9 +115,6 @@ async function Filtro(curso) {
   }
 }
 
-// Torna a função global
-window.Filtro = Filtro;
-
 function carregarTurnos(dados) {
   const menu = document.getElementById("menuCursos");
   menu.innerHTML = "";
