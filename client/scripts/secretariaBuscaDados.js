@@ -1,18 +1,15 @@
-const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
-
-console.log("secretariaBuscaDados.js carregado.");
-
-// Arquivo para funções de busca de dados do banco para preencher formulários
-
 // Função para buscar disciplinas
-window.buscarDisciplinas = async function() {
+window.buscarDisciplinas = async function () {
   try {
     console.log("Buscando disciplinas...");
-    const response = await fetch(`${serverURL}busca-disciplinas`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/busca-disciplinas`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     if (response.ok) {
       const data = await response.json();
       console.log("Disciplinas recebidas:", data);
@@ -28,14 +25,17 @@ window.buscarDisciplinas = async function() {
 };
 
 // Função para buscar professores
-window.buscarProfessores = async function() {
+window.buscarProfessores = async function () {
   try {
     console.log("Buscando professores...");
-    const response = await fetch(`${serverURL}busca-professores`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/busca-professores`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     if (response.ok) {
       const data = await response.json();
       console.log("Professores recebidos:", data);
@@ -51,14 +51,17 @@ window.buscarProfessores = async function() {
 };
 
 // Função para buscar salas
-window.buscarSalas = async function() {
+window.buscarSalas = async function () {
   try {
     console.log("Buscando salas...");
-    const response = await fetch(`${serverURL}busca-salas`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/busca-salas`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     if (response.ok) {
       const data = await response.json();
       console.log("Salas recebidas:", data);
@@ -74,14 +77,17 @@ window.buscarSalas = async function() {
 };
 
 // Função para buscar horários
-window.buscarHorarios = async function() {
+window.buscarHorarios = async function () {
   try {
     console.log("Buscando horários...");
-    const response = await fetch(`${serverURL}busca-horarios`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/busca-horarios`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     if (response.ok) {
       const data = await response.json();
       console.log("Horários recebidos:", data);
@@ -97,14 +103,17 @@ window.buscarHorarios = async function() {
 };
 
 // Função para buscar turmas
-window.buscarTurmas = async function() {
+window.buscarTurmas = async function () {
   try {
     console.log("Buscando turmas...");
-    const response = await fetch(`${serverURL}busca-turmas`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/busca-turmas`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     if (response.ok) {
       const data = await response.json();
       console.log("Turmas recebidas:", data);

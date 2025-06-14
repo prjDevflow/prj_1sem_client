@@ -1,15 +1,15 @@
-const serverURL = "https://devflow-1sem.up.railway.app/api/buscaSala"
-
 async function buscaTurma(salaNumero, diaSemana) {
   try {
-    //const res = await fetch('https://6823c8c065ba05803397e110.mockapi.io/api/buscaSala', {
-    const res = await fetch(`${serverURL}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ salaNumero, diaSemana }),
-    });
+    const res = await fetch(
+      `https://devflow-1sem.up.railway.app/api/buscaSala`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ salaNumero, diaSemana }),
+      }
+    );
 
     if (!res.ok) {
       throw new Error(`Erro na requisição: ${res.status}`);
@@ -23,7 +23,6 @@ async function buscaTurma(salaNumero, diaSemana) {
     }
 
     RenderTabela(dados);
-
   } catch (erro) {
     console.error("Erro ao buscar os dados da API:", erro);
   }

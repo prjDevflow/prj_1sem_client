@@ -1,16 +1,15 @@
-const serverURL = "https://devflow-1sem.up.railway.app/secretary/"
 // Mapeamento de dias abreviados para nomes por extenso
 const nomesDiasPorExtenso = {
-  "Seg": "Segunda-feira",
-  "Ter": "Terça-feira",
-  "Qua": "Quarta-feira",
-  "Qui": "Quinta-feira",
-  "Sex": "Sexta-feira",
-  "Sáb": "Sábado",
-  "Dom": "Domingo"
+  Seg: "Segunda-feira",
+  Ter: "Terça-feira",
+  Qua: "Quarta-feira",
+  Qui: "Quinta-feira",
+  Sex: "Sexta-feira",
+  Sáb: "Sábado",
+  Dom: "Domingo",
 };
 
-let diaSelecionado = ''; // Guarda o dia da semana selecionado
+let diaSelecionado = ""; // Guarda o dia da semana selecionado
 
 // Função para abrir o modal e colocar o título com o dia
 function openDialog(idDialog, idTitle, title) {
@@ -22,9 +21,9 @@ function openDialog(idDialog, idTitle, title) {
   if (titleElement) titleElement.innerHTML = title;
 
   // Mostra o dia por extenso abaixo do título
-  const diaElement = document.getElementById('diaSemanaSelecionado');
+  const diaElement = document.getElementById("diaSemanaSelecionado");
   if (diaElement) {
-    diaElement.textContent = diaSelecionado ? `(${diaSelecionado})` : '';
+    diaElement.textContent = diaSelecionado ? `(${diaSelecionado})` : "";
   }
 
   dialog.addEventListener(
@@ -56,15 +55,15 @@ let elementoParaExcluir = null;
 let idAulaParaExcluir = null;
 
 function pedirConfirmarExclusao(botao, idAula) {
-  elementoParaExcluir = botao.closest('.materia');
+  elementoParaExcluir = botao.closest(".materia");
   idAulaParaExcluir = idAula;
 
-  const dialog = document.getElementById('dialogConfirmarExclusao');
+  const dialog = document.getElementById("dialogConfirmarExclusao");
   dialog.showModal();
 }
 
 function fecharDialogConfirmacao() {
-  const dialog = document.getElementById('dialogConfirmarExclusao');
+  const dialog = document.getElementById("dialogConfirmarExclusao");
   dialog.close();
 }
 
@@ -76,14 +75,17 @@ async function confirmarExclusao() {
     elementoParaExcluir.remove();
 
     // Envia exclusão ao backend (ID na URL)
-    const res = await fetch(`${serverURL}excluir-aula/${idAulaParaExcluir}`, {
-      method: "DELETE"
-    });
+    const res = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/excluir-aula/${idAulaParaExcluir}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!res.ok) {
       console.error("Erro ao excluir aula no servidor.");
     }
-    console.log(idAulaParaExcluir)
+    console.log(idAulaParaExcluir);
   } catch (error) {
     console.error("Erro ao excluir aula:", error);
   } finally {

@@ -40,6 +40,9 @@ nav > button {
 .mapMobile {
   display: none;
 }
+#turma_sala {
+  min-width: 100px;
+}
 .sala {
   position: absolute;
   /* background-color: greenyellow; */

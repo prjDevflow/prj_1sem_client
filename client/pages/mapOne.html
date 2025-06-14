@@ -1,92 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../styles/maps.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/maps.css" />
+  </head>
 
-<body>
-  <section class="andarContainer">
-    <div class="btnHome">
-      <button onclick="loadContentPages(event, 'pages/main.html')">Voltar</button>
-    </div>
-
-    <!-- NAVEGAÇÃO ENTRE AS PÁGINAS -->
-    <nav>
-      <button onclick="loadContentPages(event, 'pages/mapGround.html')">
-        <i class="fa-solid fa-arrow-left-long fa-2xl"></i>
-      </button>
-      <h1>1º Andar</h1>
-      <button onclick="loadContentPages(event, 'pages/mapTwo.html')">
-        <i class="fa-solid fa-arrow-right-long fa-2xl"></i>
-      </button>
-    </nav>
-
-    <section class="map">
-      <img class="mapDesktop" src="Imagens/img_mapUm.png" alt="mapa primeiro andar" />
-      <img class="mapMobile" src="Imagens/img_mapUmMobile.png" alt="mapa primeiro andar" />
-
-      <!-- BOTÕES DAS SALAS -->
-      <button class="sala sala102" onclick="abrirSala('Sala de Aula 102')"></button>
-      <button class="sala sala104" onclick="abrirSala('Sala de Aula 104')"></button>
-      <button class="sala sala106" onclick="abrirSala('Sala de Aula 106')"></button>
-      <button class="sala sala101" onclick="abrirSala('101 - Lab. de Informática')"></button>
-      <button class="sala sala103" onclick="abrirSala('103 - Lab. de Informática')"></button>
-      <button class="sala sala105" onclick="abrirSala('105 - Lab. de Informática')"></button>
-      <button class="sala sala107" onclick="abrirSala('107 - Lab. de Informática')"></button>
-      <button class="sala sala108" onclick="abrirSala('108 - Lab. de Informática')"></button>
-      <button class="sala sala110" onclick="abrirSala('110 - Sala Maker')"></button>
-    </section>
-
-    <!-- MODAL -->
-    <dialog id="dialogSala">
-      <div>
-        <h2 id="idTitleSala"></h2>
-        <button onclick="closeDialog('dialogSala')">
-          <i class="fa-solid fa-xmark"></i>
+  <body>
+    <section class="andarContainer">
+      <div class="btnHome">
+        <button onclick="loadContentPages(event, 'pages/main.html')">
+          Voltar
         </button>
       </div>
 
-      <!-- SELECT DIA -->
-      <select onchange="buscaAulaSala(salaSelecionada, value)">
-        <option value="Segunda-feira" selected>Segunda-feira</option>
-        <option value="Terça-feira">Terça-feira</option>
-        <option value="Quarta-feira">Quarta-feira</option>
-        <option value="Quinta-feira">Quinta-feira</option>
-        <option value="Sexta-feira">Sexta-feira</option>
-      </select>
+      <!-- NAVEGAÇÃO ENTRE AS PÁGINAS -->
+      <nav>
+        <button onclick="loadContentPages(event, 'pages/mapGround.html')">
+          <i class="fa-solid fa-arrow-left-long fa-2xl"></i>
+        </button>
+        <h1>1º Andar</h1>
+        <button onclick="loadContentPages(event, 'pages/mapTwo.html')">
+          <i class="fa-solid fa-arrow-right-long fa-2xl"></i>
+        </button>
+      </nav>
 
-      <!-- TABELA -->
-      <div class="table-container">
-        <table class="tableSala">
-          <thead>
-            <tr class="bcgSecretary">
-              <th class="bcgSecretary">Turma</th>
-              <th>Turno</th>
-              <th>Disciplina</th>
-              <th>Horário</th>
-            </tr>
-          </thead>
-          <tbody id="tbodyAulas"></tbody>
-        </table>
-      </div>
-    </dialog>
+      <section class="map">
+        <img
+          class="mapDesktop"
+          src="Imagens/img_mapUm.png"
+          alt="mapa primeiro andar"
+        />
+        <img
+          class="mapMobile"
+          src="Imagens/img_mapUmMobile.png"
+          alt="mapa primeiro andar"
+        />
 
-    <!-- SCRIPTS -->
-    <script src="../scripts/renderAulaSala.js"></script>
-    <script src="../scripts/dialog.js"></script>
+        <!-- BOTÕES DAS SALAS -->
+        <button
+          class="sala sala102"
+          onclick="abrirSala('Sala de Aula 102')"
+        ></button>
+        <button
+          class="sala sala104"
+          onclick="abrirSala('Sala de Aula 104')"
+        ></button>
+        <button
+          class="sala sala106"
+          onclick="abrirSala('Sala de Aula 106')"
+        ></button>
+        <button
+          class="sala sala101"
+          onclick="abrirSala('Lab. de Informática 101')"
+        ></button>
+        <button
+          class="sala sala103"
+          onclick="abrirSala('Lab. de Informática 103')"
+        ></button>
+        <button
+          class="sala sala105"
+          onclick="abrirSala('Lab. de Informática 105')"
+        ></button>
+        <button
+          class="sala sala107"
+          onclick="abrirSala('Lab. de Informática 107')"
+        ></button>
+        <button
+          class="sala sala108"
+          onclick="abrirSala('Lab. de Informática 108')"
+        ></button>
+        <button
+          class="sala sala110"
+          onclick="abrirSala('Sala Maker 110')"
+        ></button>
+      </section>
 
-    <script>
-      let salaSelecionada = "";
+      <!-- MODAL -->
+      <dialog id="dialogSala">
+        <div>
+          <h2 id="idTitleSala"></h2>
+          <button onclick="closeDialog('dialogSala')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
 
-      function abrirSala(nomeSala) {
-        salaSelecionada = nomeSala;
-        openDialog('dialogSala', 'idTitleSala', nomeSala);
-        const select = document.querySelector("select");
-        buscaAulaSala(nomeSala, select.value);
-      }
-    </script>
-  </section>
-</body>
+        <!-- SELECT DIA -->
+        <select onchange="buscaAulaSala(salaSelecionada, value)">
+          <option value="Segunda-feira" selected>Segunda-feira</option>
+          <option value="Terça-feira">Terça-feira</option>
+          <option value="Quarta-feira">Quarta-feira</option>
+          <option value="Quinta-feira">Quinta-feira</option>
+          <option value="Sexta-feira">Sexta-feira</option>
+        </select>
+
+        <!-- TABELA -->
+        <div class="table-container">
+          <table class="tableSala">
+            <thead>
+              <tr class="bcgSecretary">
+                <th class="bcgSecretary">Turma</th>
+                <th>Turno</th>
+                <th>Disciplina</th>
+                <th>Horário</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyAulas"></tbody>
+          </table>
+        </div>
+      </dialog>
+
+      <!-- SCRIPTS -->
+      <script src="../scripts/renderAulaSala.js"></script>
+      <script src="../scripts/dialog.js"></script>
+
+      <script>
+        let salaSelecionada = "";
+
+        function abrirSala(nomeSala) {
+          salaSelecionada = nomeSala;
+          openDialog("dialogSala", "idTitleSala", nomeSala);
+          const select = document.querySelector("select");
+          buscaAulaSala(nomeSala, select.value);
+        }
+      </script>
+    </section>
+  </body>
 </html>

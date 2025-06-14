@@ -1,4 +1,4 @@
-const serverURL = "https://devflow-1sem.up.railway.app/"
+const serverURL = "";
 
 function loadContentPages(event, urlPage) {
   if (event) {
@@ -37,47 +37,33 @@ function loadContentPages(event, urlPage) {
         "scripts/secretariaBuscaDados.js",
         "scripts/dialog.js",
         "scripts/accordion.js",
-        // "scripts/login.js",
         "scripts/btnFiltro.js",
         "scripts/renderAulaSala.js",
         "scripts/renderGrade.js",
         "scripts/loadSubMenus.js",
         "scripts/csvUpload.js",
         "scripts/secretariaAulas.js",
-        "scripts/dropdown-busca.js"
+        "scripts/dropdown-busca.js",
       ];
 
-loadScriptsSequentially(scriptsToLoad, () => {
-  // Reanexar o listener do formulário se estiver na página da secretaria
-  if (urlPage.includes("secretary.html")) {
-    const form = document.getElementById("formNovaAula");
-    if (form) {
-      form.addEventListener("submit", submeterNovaAula);
-      console.log("Listener reconectado ao formNovaAula.");
-    } else {
-      console.warn("formNovaAula não encontrado após carregar a página.");
-    }
-  }
-
-  // Inicializa filtros se for uma das páginas de curso
-  if (
-    urlPage.includes("dsm.html") ||
-    urlPage.includes("rh.html") ||
-    urlPage.includes("geo.html")
-  ) {
-    initCursoFilter();
-  }
-});
-
       loadScriptsSequentially(scriptsToLoad, () => {
-        // Após carregar os scripts, inicializa os eventos específicos da página
-        if (urlPage.includes("rh.html")) {
-          initCursoFilter();
+        // Reanexar o listener do formulário se estiver na página da secretaria
+        if (urlPage.includes("secretary.html")) {
+          const form = document.getElementById("formNovaAula");
+          if (form) {
+            form.addEventListener("submit", submeterNovaAula);
+            console.log("Listener reconectado ao formNovaAula.");
+          } else {
+            console.warn("formNovaAula não encontrado após carregar a página.");
+          }
         }
-      });
-      loadScriptsSequentially(scriptsToLoad, () => {
-        // Após carregar os scripts, inicializa os eventos específicos da página
-        if (urlPage.includes("geo.html")) {
+
+        // Inicializa filtros se for uma das páginas de curso
+        if (
+          urlPage.includes("dsm.html") ||
+          urlPage.includes("rh.html") ||
+          urlPage.includes("geo.html")
+        ) {
           initCursoFilter();
         }
       });
@@ -140,11 +126,14 @@ function initLoginPage() {
     erroGeral.textContent = "";
 
     try {
-      const response = await fetch(`${serverURL}login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usuario, senha }),
-      });
+      const response = await fetch(
+        `https://devflow-1sem.up.railway.app/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usuario, senha }),
+        }
+      );
 
       const data = await response.json();
 
@@ -162,4 +151,3 @@ function initLoginPage() {
     }
   });
 }
-

@@ -1,5 +1,3 @@
-const serverURL = "https://devflow-1sem.up.railway.app/csv/"
-
 function handleCSVUpload(tipo, event) {
   const status = document.getElementById(`upload-status-${tipo.toLowerCase()}`);
   const badge = document.getElementById(`badge-${tipo.toLowerCase()}`);
@@ -28,12 +26,12 @@ function handleCSVUpload(tipo, event) {
 
   // Prepara FormData
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
 
   // Faz o upload para a API
-  fetch(`${serverURL}`, {
-    method: 'POST',
-    body: formData
+  fetch(`https://devflow-1sem.up.railway.app/csv/${tipo}`, {
+    method: "POST",
+    body: formData,
   })
     .then(async (res) => {
       const resposta = await res.json();
@@ -43,7 +41,9 @@ function handleCSVUpload(tipo, event) {
       }
 
       // Sucesso visual
-      status.innerHTML = ` ${resposta.message || "Arquivo enviado com sucesso."}`;
+      status.innerHTML = ` ${
+        resposta.message || "Arquivo enviado com sucesso."
+      }`;
       status.classList.remove("error");
       status.classList.add("success");
 
@@ -52,7 +52,7 @@ function handleCSVUpload(tipo, event) {
 
       const card = input.closest(".upload-card");
       if (card) {
-        card.classList.add("completed"); 
+        card.classList.add("completed");
       }
 
       badge.classList.remove("initial");
