@@ -223,14 +223,14 @@ function exibirAulasNaTurma(aulas, painel) {
       const btnEditar = document.createElement("button");
       btnEditar.setAttribute(
         "onclick",
-        `openDialog('dialogAula', 'idTitleAula', '${aula.idaula}')`
+        `openDialog(\'dialogAula\', \'idTitleAula\', \'${aula.idaula}\')`
       );
       btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
 
       const btnExcluir = document.createElement("button");
       btnExcluir.setAttribute(
         "onclick",
-        `pedirConfirmarExclusao(this, '${aula.idaula}')`
+        `pedirConfirmarExclusao(this, \'${aula.idaula}\')`
       );
       btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
 
@@ -290,12 +290,13 @@ async function carregarDadosFormulario() {
     preencherSelect(
       "selectHorario",
       dadosHorarios,
-      "horainicial",
+      "idhorario", // Changed from "horainicial" to "idhorario"
       "horainicial",
       (item) =>
         `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`
     );
-    preencherSelect("selectTurma", dadosTurmas, "nome", "nome");
+    // Special handling for Turma to use idturma as value
+    preencherSelect("selectTurma", dadosTurmas, "idturma", "nome");
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
   }
@@ -322,7 +323,7 @@ function preencherSelect(
   // Adicionar novas opções
   dados.forEach((item) => {
     const option = document.createElement("option");
-    option.value = item.id || item[valueField]; // Usar ID quando disponível
+    option.value = item[valueField]; // Use the specified valueField for the option's value
     option.textContent = formatFunction
       ? formatFunction(item)
       : item[textField];
@@ -407,3 +408,5 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("formNovaAula não encontrado no DOM.");
   }
 });
+
+
