@@ -375,17 +375,36 @@ async function submeterNovaAula(event) {
 
     if (response.ok) {
       const resultado = await response.json();
-      alert("Aula criada com sucesso!");
-      closeDialog("dialogAula");
-      form.reset();
-      location.reload();
+exibirMensagem("Aula criada com sucesso!", "sucesso");
+form.reset();
+
+// Desativa o botão "Salvar" enquanto reinicia
+const botaoSalvar = document.getElementById("btnSalvarAula");
+botaoSalvar.disabled = true;
+botaoSalvar.textContent = "Salvando...";
+
+setTimeout(() => {
+  closeDialog("dialogAula");
+  location.reload();
+}, 2500);
+
     } else {
       const erro = await response.text();
       console.error("Erro ao criar aula:", erro);
-      alert(`Erro ao criar aula: ${erro}`);
+      exibirMensagem(`Erro ao criar aula: ${erro}`, "erro");
     }
   } catch (error) {
     console.error("Erro na requisição:", error);
-    alert("Erro ao conectar com o servidor.");
+    exibirMensagem("Erro ao conectar com o servidor.", "erro");
   }
+}
+
+function exibirMensagem(texto, tipo = "sucesso") {
+  const divMensagem = document.getElementById("mensagemStatus");
+  divMensagem.textContent = texto;
+  divMensagem.style.color = tipo === "erro" ? "red" : "green";
+
+  setTimeout(() => {
+    divMensagem.textContent = "";
+  }, 4000); // limpa após 4 segundos
 }
