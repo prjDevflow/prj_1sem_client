@@ -93,7 +93,7 @@ Para visualizar as informações das sprints do projeto, acesse o quadro do Trel
 | RNF02          | 1- A interface do sistema deve se ajustar automaticamente a diferentes resoluções de tela (desktop, tablet e mobile).<br> 2- Os elementos de navegação devem permanecer funcionais e visíveis em qualquer dispositivo. <br> 3- O conteúdo principal (como relatórios, mapas de salas, listas de turmas) deve se reorganizar para manter a legibilidade em telas menores.| 
 
 ## Links
-Link para o server do projeto: https://github.com/prjDevflow/prj_1sem_server
+Link para o server do projeto: https://github.com/prjDevflow/prj_1sem_server <br>
 Link para o Deploy:
  
 ## Sprint 01
