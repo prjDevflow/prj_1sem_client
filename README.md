@@ -37,7 +37,7 @@ curso, ambiente, turno (diurno e noturno) e turma.
 |--------|------------|-------------|--------|
 | 01     | 18/03/2025 | 15/04/2025  | [Link](https://trello.com/b/qOWm2Dro/sprint-1) |
 | 02     | 16/04/2025 | 15/05/2025  | [link](#sprint-02) |
-| 03     | 16/05/2025 | 10/06/2025  | - |
+| 03     | 16/05/2025 | 10/06/2025  | [link](#sprint-03) |
 
 
 Para visualizar as informações das sprints do projeto, acesse o quadro do Trello [aqui](https://trello.com/invite/b/67cf74d4a47f8308a0bd9c9b/ATTI30ae049e04f5319833ecaf3ba7456af94CA286F4/projeto-abp-1-sprint).
@@ -91,6 +91,10 @@ Para visualizar as informações das sprints do projeto, acesse o quadro do Trel
 | RF05          | 1- O sistema deve permitir filtros de busca por pelo menos os seguintes campos: turma, turno.<br>  2- O sistema deve exibir os resultados da consulta de forma clara e organizada, em formato de tabela. <br> 3- O sistema deve permitir exportar os resultados da consulta em PDF. <br> 4- Caso não haja resultados para os filtros aplicados, o sistema deve exibir uma mensagem amigável de "nenhum dado encontrado".| 
 | RNF01          | 1- O sistema deve exibir um mapa (grade ou planta).<br> 2- O usuário deve poder clicar ou passar o mouse sobre uma sala para visualizar detalhes como: turma, horário e professor alocados. <br> 3- A interface deve ser responsiva, funcionando em diferentes tamanhos de tela.        | 
 | RNF02          | 1- A interface do sistema deve se ajustar automaticamente a diferentes resoluções de tela (desktop, tablet e mobile).<br> 2- Os elementos de navegação devem permanecer funcionais e visíveis em qualquer dispositivo. <br> 3- O conteúdo principal (como relatórios, mapas de salas, listas de turmas) deve se reorganizar para manter a legibilidade em telas menores.| 
+
+## Links
+Link para o server do projeto: https://github.com/prjDevflow/prj_1sem_server
+Link para o Deploy:
  
 ## Sprint 01
 
@@ -249,69 +253,75 @@ Na terceira sprint, o foco esteve na integração entre cliente e servidor por m
 **1. Atualizar aula ( - 5 pts)**
 ✔️ Implementada a rota que permite a atualização dos dados de uma aula previamente cadastrada.
 
-_Responsável:_
+_Responsável:_Eduardo Machado, Lucas Cauã
 
 **2. Excluir aula( - 5 pts)**
 ✔️ Implementada a rota que realiza a exclusão de uma aula cadastrada no sistema.
 
-_Responsável:_
+_Responsável:_ Matheus Soldesi
 
 **3. Alterar aula da turma ( - 5 pts)**
 ✔️ Implementada a rota que permite modificar os dados das aulas associadas a uma turma.
 
-_Responsável:_
+_Responsável:_ Eduardo Machado, Lucas Cauã
 
 **4. Buscar turnos do curso ( - 3 pts)**
 ✔️ Desenvolvida a rota que retorna os turnos disponíveis para o curso.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **5. Buscar turmas do curso ( - 3 pts)**
 ✔️ Desenvolvida a rota que retorna as turmas vinculadas ao curso selecionado.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **6. Buscar disciplinas por dia da semana ( - 3 pts)**
 ✔️ Criada a rota que retorna as disciplinas conforme o dia da semana selecionado.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **7. Criar uma nova aula ( - 5 pts)**
 ✔️ Desenvolvida a rota responsável pela criação de uma nova aula no sistema.
 
-_Responsável:_
-
+_Responsável:_ Matheus Venancio
+ 
 **8. Adicionar matéria ( - 3 pts)**
 ✔️ Criado um card funcional para a adição de novas matérias à grade.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **9. Responsividade geral da aplicação ( - 3 pts)**
 ✔️ Finalizada a adaptação da interface para garantir responsividade em todas as páginas.
 
-_Responsável:_
+_Responsável:_ Rafael Costa
 
 **10. Renderização da grade com turma/professores e horários ( - 8 pts)**
 ✔️ Integrada a API para exibir a grade de horários com informações completas de turmas e professores.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **11. Renderização das turmas (Secretaria) ( - 8 pts)**
 ✔️ Implementado o consumo da API para exibir as turmas na interface da secretaria.
 
-_Responsável:_
+_Responsável:_ Matheus Venancio
 
 **12. Atualização e Exclusão de aula ( - 5 pts)**
 
 ✔️ Implementado o consumo da API para atualizar e excluir as aulas na interface da secretaria.
 
-_Responsável:_ 
+_Responsável:_ Eduardo Machado, Matheus Soldesi, Lucas Cauã
 
 **13. Deploy ( - 8 pts)**
 
 ✔️ Deploy finalizado, tornando a aplicação acessível para os usuários.
 
-_Responsável:_ 
+_Responsável:_ Eduardo Machado
+
+**14. Arquivos CSV ( - 8 pts)**
+
+✔️ Arquivos prontos para realizar cadastros no BD.
+
+_Responsável:_ Pedro Henrique
 
 ### Burndown
 
@@ -321,21 +331,15 @@ _Responsável:_
 
 _**1. O que funcionou bem durante o sprint?**_
    
-   A equipe demonstrou comprometimento em aprender e superar os desafios técnicos, especialmente na parte do backend, mesmo com a limitação de conhecimento prévio.
-
-   A colaboração entre os membros foi essencial para compartilhar descobertas e ajudar uns aos outros durante o processo de aprendizagem.
+Todos os integrantes se empenharam para entregar todas as funcionalidades e o projeto completo no prazo
    
 _**2. O que não funcionou tão bem durante o sprint?**_
 
-   A falta de familiaridade da maioria do time com o desenvolvimento backend resultou em atrasos nas entregas e dificuldade para seguir o planejamento inicial.
-
-   Além disso, o tempo necessário para entender novas tecnologias acabou sendo subestimado no planejamento.
+A falta de familiaridade da maioria do time com o desenvolvimento backend, porém, já foi muito melhor do que na sprint anterior.
       
 _**3. Quais ações podemos tomar para melhorar no próximo sprint?**_
 
-   Incluir um tempo de "imersão técnica" no início da sprint para estudo coletivo dos temas mais desafiadores.
-
-   Ajustar as estimativas no planejamento com mais margem para tarefas que envolvem aprendizado de novas tecnologias.
+No próximo projeto, vamos dedicar mais tempo para dividir melhor as atividades e organizar as tarefas de forma mais eficiente.
 
    
 
