@@ -519,3 +519,172 @@ function exibirMensagem(texto, tipo = "sucesso") {
     divMensagem.textContent = "";
   }, 4000); // limpa após 4 segundos
 }
+
+function exibirMensagemUpdate(texto, tipo = "sucesso") {
+  let mensagemDiv = document.querySelector("#dialogAulaUpdate #mensagemStatusUpdate");
+  
+  if (!mensagemDiv) {
+    const form = document.getElementById("formAtualizarAula");
+    mensagemDiv = document.createElement("div");
+    mensagemDiv.id = "mensagemStatusUpdate";
+    mensagemDiv.style.marginTop = "1rem";
+    mensagemDiv.style.padding = "0.5rem";
+    mensagemDiv.style.borderRadius = "4px";
+    mensagemDiv.style.textAlign = "center";
+    form.insertBefore(mensagemDiv, form.lastElementChild);
+  }
+
+  mensagemDiv.textContent = texto;
+  mensagemDiv.style.color = tipo === "erro" ? "red" : "green";
+  mensagemDiv.style.backgroundColor = tipo === "erro" ? "#ffebee" : "#e8f5e9";
+
+  setTimeout(() => {
+    mensagemDiv.textContent = "";
+    mensagemDiv.style.backgroundColor = "transparent";
+  }, 4000);
+}
+
+async function submeterNovaAula(event) {
+  event.preventDefault();
+
+  const form = document.getElementById("formNovaAula");
+  const formData = new FormData(form);
+
+  // Obter valores diretamente dos selects
+  const dadosAula = {
+    Disciplina_idDisciplina: parseInt(
+      document.getElementById("selectDisciplina").value
+    ),
+    Professor_idProfessor: parseInt(
+      document.getElementById("selectProfessor").value
+    ),
+    Sala_Numero: parseInt(document.getElementById("selectSala").value),
+    Horario_idHorario: parseInt(document.getElementById("selectHorario").value),
+    Turma_idTurma: parseInt(document.getElementById("selectTurma").value),
+    Semana_idSemana: parseInt(document.getElementById("selectDia").value),
+  };
+
+  // Validar se todos os campos têm valores numéricos válidos
+  if (Object.values(dadosAula).some(isNaN)) {
+    alert("Por favor, preencha todos os campos corretamente.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/cria-aula`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosAula),
+      }
+    );
+
+    if (response.ok) {
+      const resultado = await response.json();
+      exibirMensagem("Aula criada com sucesso!", "sucesso");
+      form.reset();
+
+      // Desativa o botão "Salvar" enquanto reinicia
+      const botaoSalvar = document.getElementById("btnSalvarAula");
+      botaoSalvar.disabled = true;
+      botaoSalvar.textContent = "Salvando...";
+
+      setTimeout(() => {
+        closeDialog("dialogAula");
+        location.reload();
+      }, 2500);
+    } else {
+      const erro = await response.text();
+      console.error("Erro ao criar aula:", erro);
+      exibirMensagem(`Erro ao criar aula: ${erro}`, "erro");
+    }
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    exibirMensagem("Erro ao conectar com o servidor.", "erro");
+  }
+}
+
+async function submeterAtualizacaoAula(event) {
+  event.preventDefault();
+
+  console.log("Função de atualização foi chamada");
+
+  const form = document.getElementById("formAtualizarAula");
+  
+  // Cria uma div para mensagens no dialog de atualização se não existir
+  let mensagemDiv = document.querySelector("#dialogAulaUpdate #mensagemStatusUpdate");
+  if (!mensagemDiv) {
+    mensagemDiv = document.createElement("div");
+    mensagemDiv.id = "mensagemStatusUpdate";
+    mensagemDiv.style.marginTop = "1rem";
+    form.insertBefore(mensagemDiv, form.lastElementChild);
+  }
+
+  // Pegue o ID da aula pelo título
+  const idTexto = document.getElementById("idTitleAulaUpdate").textContent;
+  const match = idTexto.match(/\((\d+)\)/);
+  const idAula = match ? parseInt(match[1]) : null;
+
+  if (!idAula) {
+    exibirMensagemUpdate("ID da aula não encontrado.", "erro");
+    return;
+  }
+
+  const dadosAtualizados = {
+    turma: document.getElementById("selectTurmaUpdate").value,
+    disciplina: document.getElementById("selectDisciplinaUpdate").value,
+    professor: document.getElementById("selectProfessorUpdate").value,
+    sala: document.getElementById("selectSalaUpdate").value,
+    diaSemana: document.getElementById("selectDiaUpdate").value,
+    horario: document.getElementById("selectHorarioUpdate").value,
+  };
+
+  // Validação
+  if (Object.values(dadosAtualizados).some(isNaN)) {
+    exibirMensagemUpdate("Preencha todos os campos corretamente.", "erro");
+    return;
+  }
+
+  try {
+    // Encontra o botão corretamente - alteração principal aqui
+    const btnAtualizar = document.querySelector("#dialogAulaUpdate button.salvar");
+    if (btnAtualizar) {
+      btnAtualizar.disabled = true;
+      btnAtualizar.textContent = "Salvando...";
+    }
+
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/update-aula/${idAula}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosAtualizados),
+      }
+    );
+
+    if (response.ok) {
+      exibirMensagemUpdate("Aula atualizada com sucesso!", "sucesso");
+      setTimeout(() => {
+        closeDialog("dialogAulaUpdate");
+        location.reload();
+      }, 2000);
+    } else {
+      const erro = await response.text();
+      console.error("Erro ao atualizar aula:", erro);
+      exibirMensagemUpdate(`Erro ao atualizar aula: ${erro}`, "erro");
+      if (btnAtualizar) {
+        btnAtualizar.disabled = false;
+        btnAtualizar.textContent = "Atualizar";
+      }
+    }
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    exibirMensagemUpdate("Erro ao conectar com o servidor.", "erro");
+    const btnAtualizar = document.querySelector("#dialogAulaUpdate button.salvar");
+    if (btnAtualizar) {
+      btnAtualizar.disabled = false;
+      btnAtualizar.textContent = "Atualizar";
+    }
+  }
+}
