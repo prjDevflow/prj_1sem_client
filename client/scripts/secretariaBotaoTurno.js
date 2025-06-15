@@ -75,6 +75,7 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
         if (!res.ok) return console.log(res);
 
         const dados = await res.json();
+        console.log(dados);
         return Array.isArray(dados) ? dados : [dados];
       })
     );
@@ -90,8 +91,15 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
       }
     });
 
+    // Ordenar os nomes das turmas numericamente antes de exibir
+    const turmasOrdenadas = Object.entries(turmasUnicas).sort(([a], [b]) => {
+      const numA = parseInt(a); // extrai número do nome da turma (ex: "1 DSM" -> 1)
+      const numB = parseInt(b);
+      return numA - numB;
+    });
+
     // Criar UI para cada turma
-    Object.entries(turmasUnicas).forEach(([turmaNome]) => {
+    turmasOrdenadas.forEach(([turmaNome]) => {
       // Botão da turma
       const botaoTurma = document.createElement("button");
       botaoTurma.className = "accordion";
