@@ -17,7 +17,6 @@ async function buscaTurno(curso) {
 
     const dados = await res.json();
     botaoTurno(dados);
-    console.log(dados);
   } catch (error) {
     console.log("Erro no catch:", error);
   }
@@ -75,7 +74,6 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
         if (!res.ok) return console.log(res);
 
         const dados = await res.json();
-        console.log(dados);
         return Array.isArray(dados) ? dados : [dados];
       })
     );
@@ -228,19 +226,13 @@ function exibirAulasNaTurma(aulas, painel) {
       const divBotoes = document.createElement("div");
       divBotoes.className = "botoes-acoes";
 
-      const btnEditar = document.createElement("button");
-      btnEditar.setAttribute(
-        "onclick",
-        `openDialog(\'dialogAula\', \'idTitleAula\', \'${aula.idaula}\')`
-      );
-      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
-
       const btnExcluir = document.createElement("button");
-      btnExcluir.setAttribute(
-        "onclick",
-        `pedirConfirmarExclusao(this, \'${aula.idaula}\')`
-      );
       btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+      btnExcluir.onclick = () => pedirConfirmarExclusao(aula.idaula);
+
+      const btnEditar = document.createElement("button");
+      btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
+      btnEditar.onclick = () => abrirDialogAtualizarAula(aula);
 
       divBotoes.appendChild(btnEditar);
       divBotoes.appendChild(btnExcluir);
@@ -277,33 +269,36 @@ function exibirAulasNaTurma(aulas, painel) {
 }
 
 // Função para carregar dados do banco de dados para o formulário
-async function carregarDadosFormulario() {
+async function carregarDadosFormulario(sufixo = "") {
   try {
-    // Carregar dados usando as funções específicas
     const dadosDisciplinas = await buscarDisciplinas();
     const dadosProfessores = await buscarProfessores();
     const dadosSalas = await buscarSalas();
     const dadosHorarios = await buscarHorarios();
     const dadosTurmas = await buscarTurmas();
 
-    // Preencher selects
     preencherSelect(
-      "selectDisciplina",
+      `selectDisciplina${sufixo}`,
       dadosDisciplinas,
       "iddisciplina",
       "nome"
     );
-    preencherSelect("selectProfessor", dadosProfessores, "idprofessor", "nome");
-    preencherSelect("selectSala", dadosSalas, "numero", "nome");
     preencherSelect(
-      "selectHorario",
+      `selectProfessor${sufixo}`,
+      dadosProfessores,
+      "idprofessor",
+      "nome"
+    );
+    preencherSelect(`selectSala${sufixo}`, dadosSalas, "numero", "nome");
+    preencherSelect(
+      `selectHorario${sufixo}`,
       dadosHorarios,
       "idhorario",
       "horainicial",
       (item) =>
         `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`
     );
-    preencherSelect("selectTurma", dadosTurmas, "idturma", "nome");
+    preencherSelect(`selectTurma${sufixo}`, dadosTurmas, "idturma", "nome");
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
   }
@@ -342,6 +337,50 @@ function preencherSelect(
 async function abrirDialogNovaAula() {
   openDialog("dialogAula", "idTitleAula", "Nova Aula");
   await carregarDadosFormulario();
+}
+
+async function abrirDialogAtualizarAula(aula) {
+  // Aguarda os selects serem preenchidos
+  await carregarDadosFormulario("Update");
+
+  openDialog("dialogAulaUpdate", "idTitleAulaUpdate", "Atualizar Aula");
+
+  // Busca reversa pelos nomes e define o valor dos selects
+  setSelectByText("selectDisciplinaUpdate", aula.nomedisciplina);
+  setSelectByText("selectProfessorUpdate", aula.nomeprofessor);
+  setSelectByText("selectSalaUpdate", aula.nomesala);
+  setSelectByHorario("selectHorarioUpdate", aula.horainicial, aula.horafinal);
+  setSelectByText("selectTurmaUpdate", aula.nometurma);
+  setSelectByText("selectDiaUpdate", aula.diasemana); // Supondo que o dia esteja escrito como no select
+
+  const title = document.getElementById("idTitleAulaUpdate");
+  if (title) title.textContent += ` (${aula.idaula})`;
+}
+
+// Função para selecionar option com base no texto visível
+function setSelectByText(selectId, texto) {
+  const select = document.getElementById(selectId);
+  for (const option of select.options) {
+    if (option.textContent.trim() === texto.trim()) {
+      select.value = option.value;
+      break;
+    }
+  }
+}
+
+// Função especial para horário (com dois campos comparando)
+function setSelectByHorario(selectId, horainicial, horafinal) {
+  const select = document.getElementById(selectId);
+  const horarioFormatado = `${horainicial.slice(0, 5)} - ${horafinal.slice(
+    0,
+    5
+  )}`;
+  for (const option of select.options) {
+    if (option.textContent.trim() === horarioFormatado) {
+      select.value = option.value;
+      break;
+    }
+  }
 }
 
 async function submeterNovaAula(event) {
@@ -396,3 +435,68 @@ async function submeterNovaAula(event) {
     alert("Erro ao conectar com o servidor.");
   }
 }
+
+async function submeterAtualizacaoAula(event) {
+  event.preventDefault();
+
+  console.log("Função de atualização foi chamada");
+
+  const form = document.getElementById("formAtualizarAula");
+
+  // Pegue o ID da aula pelo título (ou guarde em um campo oculto no futuro)
+  const idTexto = document.getElementById("idTitleAulaUpdate").textContent;
+  const match = idTexto.match(/\((\d+)\)/); // extrai o número entre parênteses
+  const idAula = match ? parseInt(match[1]) : null;
+
+  if (!idAula) {
+    alert("ID da aula não encontrado.");
+    return;
+  }
+
+  const dadosAtualizados = {
+    turma: document.getElementById("selectTurmaUpdate").value,
+    disciplina: document.getElementById("selectDisciplinaUpdate").value,
+    professor: document.getElementById("selectProfessorUpdate").value,
+    sala: document.getElementById("selectSalaUpdate").value,
+    diaSemana: document.getElementById("selectDiaUpdate").value,
+    horario: document.getElementById("selectHorarioUpdate").value,
+  };
+
+  console.log(dadosAtualizados);
+
+  // Validação
+  if (Object.values(dadosAtualizados).some(isNaN)) {
+    alert("Preencha todos os campos corretamente.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `https://devflow-1sem.up.railway.app/secretary/update-aula/${idAula}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosAtualizados),
+      }
+    );
+
+    if (response.ok) {
+      alert("Aula atualizada com sucesso!");
+      closeDialog("dialogAulaUpdate");
+      form.reset();
+      location.reload();
+    } else {
+      const erro = await response.text();
+      console.error("Erro ao atualizar aula:", erro);
+      alert(`Erro ao atualizar aula: ${erro}`);
+    }
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    alert("Erro ao conectar com o servidor.");
+  }
+}
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const form = document.getElementById("formAtualizarAula");
+//   form.addEventListener("submit", submeterAtualizacaoAula);
+// });
