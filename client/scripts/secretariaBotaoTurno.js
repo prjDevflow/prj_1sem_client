@@ -273,15 +273,7 @@ async function carregarDadosFormulario() {
   try {
     // Carregar dados usando as funções específicas
     const dadosDisciplinas = await buscarDisciplinas();
-    console.log(
-      "carregarDadosFormulario: Disciplinas carregadas.",
-      dadosDisciplinas
-    );
     const dadosProfessores = await buscarProfessores();
-    console.log(
-      "carregarDadosFormulario: Professores carregados.",
-      dadosProfessores
-    );
     const dadosSalas = await buscarSalas();
     const dadosHorarios = await buscarHorarios();
     const dadosTurmas = await buscarTurmas();
@@ -316,9 +308,6 @@ function preencherSelect(
   textField,
   formatFunction = null
 ) {
-  console.log(
-    `preencherSelect: Preenchendo ${selectId} com ${dados.length} itens.`
-  );
   const select = document.getElementById(selectId);
   if (!select) {
     console.error(`Elemento com ID ${selectId} não encontrado.`);

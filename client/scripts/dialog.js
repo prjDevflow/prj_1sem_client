@@ -76,7 +76,7 @@ async function confirmarExclusao() {
 
     // Envia exclusão ao backend (ID na URL)
     const res = await fetch(
-      `https://devflow-1sem.up.railway.app/secretary/excluir-aula/${idAulaParaExcluir}`,
+      `https://devflow-1sem.up.railway.app/secretary/remove-aula/${idAulaParaExcluir}`,
       {
         method: "DELETE",
       }
@@ -85,7 +85,6 @@ async function confirmarExclusao() {
     if (!res.ok) {
       console.error("Erro ao excluir aula no servidor.");
     }
-    console.log(idAulaParaExcluir);
   } catch (error) {
     console.error("Erro ao excluir aula:", error);
   } finally {
