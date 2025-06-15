@@ -228,7 +228,8 @@ function exibirAulasNaTurma(aulas, painel) {
 
       const btnExcluir = document.createElement("button");
       btnExcluir.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-      btnExcluir.onclick = () => pedirConfirmarExclusao(aula.idaula);
+      btnExcluir.onclick = (event) =>
+        pedirConfirmarExclusao(event.currentTarget, aula.idaula);
 
       const btnEditar = document.createElement("button");
       btnEditar.innerHTML = `<i class="fa-solid fa-pen"></i>`;
