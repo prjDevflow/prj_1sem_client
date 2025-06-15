@@ -332,8 +332,8 @@ function preencherSelect(
 
 // Função para abrir o dialog e carregar dados
 async function abrirDialogNovaAula() {
-  await carregarDadosFormulario();
   openDialog("dialogAula", "idTitleAula", "Nova Aula");
+  await carregarDadosFormulario();
 }
 
 async function submeterNovaAula(event) {
