@@ -75,6 +75,7 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
         if (!res.ok) return console.log(res);
 
         const dados = await res.json();
+        console.log(dados);
         return Array.isArray(dados) ? dados : [dados];
       })
     );
@@ -90,8 +91,15 @@ async function carregarTurmasComBotoesDeDias(curso, turno) {
       }
     });
 
+    // Ordenar os nomes das turmas numericamente antes de exibir
+    const turmasOrdenadas = Object.entries(turmasUnicas).sort(([a], [b]) => {
+      const numA = parseInt(a); // extrai número do nome da turma (ex: "1 DSM" -> 1)
+      const numB = parseInt(b);
+      return numA - numB;
+    });
+
     // Criar UI para cada turma
-    Object.entries(turmasUnicas).forEach(([turmaNome]) => {
+    turmasOrdenadas.forEach(([turmaNome]) => {
       // Botão da turma
       const botaoTurma = document.createElement("button");
       botaoTurma.className = "accordion";
@@ -286,16 +294,15 @@ async function carregarDadosFormulario() {
       "nome"
     );
     preencherSelect("selectProfessor", dadosProfessores, "idprofessor", "nome");
-    preencherSelect("selectSala", dadosSalas, "numero", "numero");
+    preencherSelect("selectSala", dadosSalas, "numero", "nome");
     preencherSelect(
       "selectHorario",
       dadosHorarios,
-      "idhorario", // Changed from "horainicial" to "idhorario"
+      "idhorario",
       "horainicial",
       (item) =>
         `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`
     );
-    // Special handling for Turma to use idturma as value
     preencherSelect("selectTurma", dadosTurmas, "idturma", "nome");
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
@@ -323,7 +330,7 @@ function preencherSelect(
   // Adicionar novas opções
   dados.forEach((item) => {
     const option = document.createElement("option");
-    option.value = item[valueField]; // Use the specified valueField for the option's value
+    option.value = item[valueField]; // Usar ID quando disponível
     option.textContent = formatFunction
       ? formatFunction(item)
       : item[textField];
@@ -333,8 +340,8 @@ function preencherSelect(
 
 // Função para abrir o dialog e carregar dados
 async function abrirDialogNovaAula() {
-  await carregarDadosFormulario();
   openDialog("dialogAula", "idTitleAula", "Nova Aula");
+  await carregarDadosFormulario();
 }
 
 async function submeterNovaAula(event) {
@@ -357,8 +364,6 @@ async function submeterNovaAula(event) {
     Semana_idSemana: parseInt(document.getElementById("selectDia").value),
   };
 
-  console.log("Dados preparados para envio:", dadosAula);
-
   // Validar se todos os campos têm valores numéricos válidos
   if (Object.values(dadosAula).some(isNaN)) {
     alert("Por favor, preencha todos os campos corretamente.");
@@ -377,7 +382,6 @@ async function submeterNovaAula(event) {
 
     if (response.ok) {
       const resultado = await response.json();
-      console.log("Aula criada com sucesso!", resultado);
       alert("Aula criada com sucesso!");
       closeDialog("dialogAula");
       form.reset();
@@ -392,23 +396,3 @@ async function submeterNovaAula(event) {
     alert("Erro ao conectar com o servidor.");
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("carregado"); // Teste básico
-
-  // Carrega dados dos selects do formulário
-  carregarDadosFormulario();
-
-  // Adiciona o listener do formulário se ele estiver presente
-  const form = document.getElementById("formNovaAula");
-  if (form) {
-    form.addEventListener("submit", submeterNovaAula);
-    console.log("Listener de submit adicionado ao formNovaAula.");
-  } else {
-    console.warn("formNovaAula não encontrado no DOM.");
-  }
-});
-
-
-
-

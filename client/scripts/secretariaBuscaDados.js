@@ -1,7 +1,6 @@
 // Função para buscar disciplinas
 window.buscarDisciplinas = async function () {
   try {
-    console.log("Buscando disciplinas...");
     const response = await fetch(
       `https://devflow-1sem.up.railway.app/secretary/busca-disciplinas`,
       {
@@ -12,7 +11,6 @@ window.buscarDisciplinas = async function () {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Disciplinas recebidas:", data);
       return data;
     } else {
       console.error("Erro ao buscar disciplinas:", response.status);
@@ -27,7 +25,6 @@ window.buscarDisciplinas = async function () {
 // Função para buscar professores
 window.buscarProfessores = async function () {
   try {
-    console.log("Buscando professores...");
     const response = await fetch(
       `https://devflow-1sem.up.railway.app/secretary/busca-professores`,
       {
@@ -38,7 +35,6 @@ window.buscarProfessores = async function () {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Professores recebidos:", data);
       return data;
     } else {
       console.error("Erro ao buscar professores:", response.status);
@@ -53,7 +49,6 @@ window.buscarProfessores = async function () {
 // Função para buscar salas
 window.buscarSalas = async function () {
   try {
-    console.log("Buscando salas...");
     const response = await fetch(
       `https://devflow-1sem.up.railway.app/secretary/busca-salas`,
       {
@@ -64,7 +59,6 @@ window.buscarSalas = async function () {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Salas recebidas:", data);
       return data;
     } else {
       console.error("Erro ao buscar salas:", response.status);
@@ -79,7 +73,6 @@ window.buscarSalas = async function () {
 // Função para buscar horários
 window.buscarHorarios = async function () {
   try {
-    console.log("Buscando horários...");
     const response = await fetch(
       `https://devflow-1sem.up.railway.app/secretary/busca-horarios`,
       {
@@ -90,7 +83,6 @@ window.buscarHorarios = async function () {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Horários recebidos:", data);
       return data;
     } else {
       console.error("Erro ao buscar horários:", response.status);
@@ -105,7 +97,6 @@ window.buscarHorarios = async function () {
 // Função para buscar turmas
 window.buscarTurmas = async function () {
   try {
-    console.log("Buscando turmas...");
     const response = await fetch(
       `https://devflow-1sem.up.railway.app/secretary/busca-turmas`,
       {
@@ -116,7 +107,6 @@ window.buscarTurmas = async function () {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Turmas recebidas:", data);
       return data;
     } else {
       console.error("Erro ao buscar turmas:", response.status);
