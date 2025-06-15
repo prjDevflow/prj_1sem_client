@@ -286,16 +286,17 @@ async function carregarDadosFormulario() {
       "nome"
     );
     preencherSelect("selectProfessor", dadosProfessores, "idprofessor", "nome");
-    preencherSelect("selectSala", dadosSalas, "numero", "numero");
+    preencherSelect("selectSala", dadosSalas, "numero", "nome");
     preencherSelect(
       "selectHorario",
       dadosHorarios,
-      "horainicial",
+      "idhorario",
       "horainicial",
       (item) =>
         `${item.horainicial.slice(0, 5)} - ${item.horafinal.slice(0, 5)}`
     );
-    preencherSelect("selectTurma", dadosTurmas, "nome", "nome");
+
+    preencherSelect("selectTurma", dadosTurmas, "idturma", "nome");
   } catch (error) {
     console.error("Erro ao carregar dados do formulário:", error);
   }
@@ -322,7 +323,7 @@ function preencherSelect(
   // Adicionar novas opções
   dados.forEach((item) => {
     const option = document.createElement("option");
-    option.value = item.id || item[valueField]; // Usar ID quando disponível
+    option.value = item[valueField]; // Usar ID quando disponível
     option.textContent = formatFunction
       ? formatFunction(item)
       : item[textField];
@@ -356,8 +357,6 @@ async function submeterNovaAula(event) {
     Semana_idSemana: parseInt(document.getElementById("selectDia").value),
   };
 
-  console.log("Dados preparados para envio:", dadosAula);
-
   // Validar se todos os campos têm valores numéricos válidos
   if (Object.values(dadosAula).some(isNaN)) {
     alert("Por favor, preencha todos os campos corretamente.");
@@ -376,7 +375,6 @@ async function submeterNovaAula(event) {
 
     if (response.ok) {
       const resultado = await response.json();
-      console.log("Aula criada com sucesso!", resultado);
       alert("Aula criada com sucesso!");
       closeDialog("dialogAula");
       form.reset();
@@ -391,19 +389,3 @@ async function submeterNovaAula(event) {
     alert("Erro ao conectar com o servidor.");
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("carregado"); // Teste básico
-
-  // Carrega dados dos selects do formulário
-  carregarDadosFormulario();
-
-  // Adiciona o listener do formulário se ele estiver presente
-  const form = document.getElementById("formNovaAula");
-  if (form) {
-    form.addEventListener("submit", submeterNovaAula);
-    console.log("Listener de submit adicionado ao formNovaAula.");
-  } else {
-    console.warn("formNovaAula não encontrado no DOM.");
-  }
-});
