@@ -1,62 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Login | Fatec Jacareí</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="css" href="../styles/login.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <section class="containerLogin">
-      <div class="login">
-        <a onclick="loadContentPages(event, 'pages/main.html')"
-          ><i class="fa-solid fa-arrow-left-long fa-xl"></i
-        ></a>
-        <h2>Faça o seu login</h2>
-        <!-- erro -->
-        <small id="erroGeral" class="erro-msg"></small>
-        <form id="loginForm">
-          <!-- CAMPO EMAIL -->
-          <label for="usuario">Nome do usuário</label>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Fatec Jacareí</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/login.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <section class="containerLogin">
+    <div class="login">
+      <a onclick="loadContentPages(event, 'pages/main.html')">
+        <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+      </a>
+      <h2>Faça o seu login</h2>
+      <!-- erro geral -->
+      <small id="erroGeral" class="erro-msg"></small>
+      <form id="loginForm">
+        <!-- USUÁRIO -->
+        <label for="usuario">Nome do usuário</label>
+        <input
+          type="text"
+          id="usuario"
+          placeholder="Insira seu usuário"
+          required
+        />
+        <small id="erroUsuario" class="erro-msg"></small>
+
+        <!-- SENHA -->
+        <label for="senha">Senha:</label>
+        <div class="password-container">
           <input
-            type="text"
-            id="usuario"
-            placeholder="Insira seu usuário"
+            type="password"
+            id="senha"
+            placeholder="Digite sua senha"
             required
           />
-          <!-- erro -->
-          <small id="erroUsuario" class="erro-msg"></small>
-
-          <!-- CAMPO SENHA -->
-          <label for="senha">Senha:</label>
-          <div class="password-container">
-            <input
-              type="password"
-              id="senha"
-              placeholder="Digite sua senha"
-              required
-            />
-          </div>
-          <!-- erro -->
-          <small id="erroSenha" class="erro-msg"></small>
-
-          <button class="button-enviar" onclick="initLoginPage()">ENVIAR</button>
-          <!-- <button type="submit">ENVIAR</button> -->
-        </form>
-
-        <div class="obs">
-          <b>OBSERVAÇÃO:</b> Essa página é de uso exclusivo da Secretaria.
+          <!-- Toggle de visibilidade da senha -->
+          <i id="toggleSenha" class="fa fa-eye" style="cursor:pointer; margin-left:-30px;"></i>
         </div>
-        <a onclick="loadContentPages(event, 'pages/secretary.html')"
-          >secretaria</a
-        >
-      </div>
-    </section>
+        <small id="erroSenha" class="erro-msg"></small>
 
-    <script src="../scripts/login.js"></script>
-  </body>
+        <!-- BOTÃO SUBMIT -->
+        <button type="submit" class="button-enviar">ENVIAR</button>
+      </form>
+
+      <div class="obs">
+        <b>OBSERVAÇÃO:</b> Essa página é de uso exclusivo da Secretaria.
+      </div>
+    </div>
+  </section>
+
+  <script src="../scripts/login.js"></script>
+</body>
 </html>

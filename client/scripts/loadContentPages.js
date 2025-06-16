@@ -1,29 +1,21 @@
 const serverURL = "";
 
 function loadContentPages(event, urlPage) {
-  if (event) {
-    event.preventDefault();
-  }
-
+  if (event) event.preventDefault();
   localStorage.setItem("lastPage", urlPage);
 
   fetch(urlPage)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to load content");
-      }
-      return response.text();
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to load content");
+      return res.text();
     })
     .then((content) => {
-      const main = document.getElementById("mainContent");
-      main.innerHTML = content;
-
+      document.getElementById("mainContent").innerHTML = content;
       const header = document.querySelector("header");
       const footer = document.querySelector("footer");
-
       const hideLayout = ["login.html", "secretary.html"];
 
-      if (hideLayout.some((page) => urlPage.includes(page))) {
+      if (hideLayout.some((p) => urlPage.includes(p))) {
         header.style.display = "none";
         footer.style.display = "none";
       } else {
@@ -31,8 +23,16 @@ function loadContentPages(event, urlPage) {
         footer.style.display = "";
       }
 
-      // Carrega os scripts necessários
-      const scriptsToLoad = [
+      // Se for login.html, aguarda um pouco e inicializa
+      if (urlPage.includes("login.html")) {
+        setTimeout(() => {
+          initLoginPage();
+          console.log("initLoginPage executado.");
+        }, 100);
+      }
+
+      // Carrega scripts em sequência
+      const scripts = [
         "scripts/accordion.js",
         "scripts/baixarpdf.js",
         "scripts/btnFiltro.js",
@@ -46,64 +46,42 @@ function loadContentPages(event, urlPage) {
         "scripts/secretariaBotaoTurno.js",
         "scripts/secretariaBuscaDados.js",
       ];
-
-      loadScriptsSequentially(scriptsToLoad, () => {
-        // Reanexar o listener do formulário se estiver na página da secretaria
+      loadScriptsSequentially(scripts, () => {
         if (urlPage.includes("secretary.html")) {
-          const form = document.getElementById("formNovaAula");
-          if (form) {
-            form.addEventListener("submit", submeterNovaAula);
+          const formNova = document.getElementById("formNovaAula");
+          if (formNova) {
+            formNova.addEventListener("submit", submeterNovaAula);
             console.log("Listener reconectado ao formNovaAula.");
-          } else {
-            console.warn("formNovaAula não encontrado após carregar a página.");
           }
         }
-
-        // Inicializa filtros se for uma das páginas de curso
-        if (
-          urlPage.includes("dsm.html") ||
-          urlPage.includes("rh.html") ||
-          urlPage.includes("geo.html")
-        ) {
+        if (["dsm.html","rh.html","geo.html"].some(p => urlPage.includes(p))) {
           initCursoFilter();
         }
       });
 
-      // Carrega os estilos CSS necessários
-      const cssToLoad = [
-        "styles/curso.css",
-        "styles/maps.css",
-        "styles/btnMaps.css",
-        "styles/horarios.css",
-        "styles/secretary.css",
-      ];
-
-      cssToLoad.forEach((href) => {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = href;
-        document.head.appendChild(link);
-      });
+      // Carrega CSS
+      ["styles/curso.css", "styles/maps.css", "styles/btnMaps.css", "styles/horarios.css", "styles/secretary.css"]
+        .forEach((href) => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = href;
+          document.head.appendChild(link);
+        });
     })
-    .catch((error) =>
-      console.log("Erro ao carregar o conteúdo da página", error)
-    );
+    .catch((err) => console.log("Erro ao carregar a página", err));
 }
 
-function loadScriptsSequentially(scripts, callback, index = 0) {
-  if (index >= scripts.length) {
-    if (callback) callback();
-    return;
-  }
-  const script = document.createElement("script");
-  script.src = scripts[index];
-  script.onload = () => loadScriptsSequentially(scripts, callback, index + 1);
-  document.body.appendChild(script);
+function loadScriptsSequentially(scripts, callback, idx = 0) {
+  if (idx >= scripts.length) return callback && callback();
+  const s = document.createElement("script");
+  s.src = scripts[idx];
+  s.onload = () => loadScriptsSequentially(scripts, callback, idx + 1);
+  document.body.appendChild(s);
 }
 
-window.onload = function () {
-  const lastPage = localStorage.getItem("lastPage") || "pages/main.html";
-  loadContentPages(null, lastPage);
+window.onload = () => {
+  const last = localStorage.getItem("lastPage") || "pages/main.html";
+  loadContentPages(null, last);
 };
 
 function initLoginPage() {
@@ -112,42 +90,40 @@ function initLoginPage() {
   const senhaInput = document.getElementById("senha");
   const erroGeral = document.getElementById("erroGeral");
 
-  if (!form) return; // previne erro se o form não existir ainda
+  if (!form) {
+    console.warn("loginForm não encontrado.");
+    return;
+  }
+  if (toggleSenha && senhaInput) {
+    toggleSenha.addEventListener("click", () => {
+      senhaInput.type = senhaInput.type === "password" ? "text" : "password";
+      toggleSenha.classList.toggle("fa-eye-slash");
+    });
+  } else {
+    console.warn("toggleSenha ou senhaInput não encontrados — pulando toggle.");
+  }
 
-  toggleSenha.addEventListener("click", () => {
-    senhaInput.type = senhaInput.type === "password" ? "text" : "password";
-    toggleSenha.classList.toggle("fa-eye-slash");
-  });
-
-  form.addEventListener("submit", async function (e) {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     const usuario = document.getElementById("usuario").value.trim();
-    const senha = document.getElementById("senha").value.trim();
+    const senha = senhaInput.value.trim();
     erroGeral.textContent = "";
 
     try {
-      const response = await fetch(
-        `https://devflow-1sem.up.railway.app/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ usuario, senha }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
+      const res = await fetch(`https://devflow-1sem.up.railway.app/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, senha }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
         erroGeral.textContent = data.erro || "Erro ao fazer login.";
         return;
       }
-
-      // Sucesso no login
       console.log(data.mensagem);
       loadContentPages(null, "pages/secretary.html");
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       erroGeral.textContent = "Erro na conexão com o servidor.";
     }
   });
